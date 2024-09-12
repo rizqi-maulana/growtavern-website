@@ -61,6 +61,8 @@ function SignUp() {
       <form
         className="w-full h-screen fixed backdrop-blur-lg bg-black/50 z-[99] flex flex-col justify-center"
         onSubmit={HandleSignUp}
+        autoSave="off"
+        autoComplete="off"
       >
         <FormSignUp />
         {ShowSuccess && (
