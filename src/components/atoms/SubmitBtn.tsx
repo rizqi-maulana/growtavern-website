@@ -11,7 +11,11 @@ const SubmitBtn = () => {
 
   const { Name, Email, Password, Gender } = context;
 
-  const isDisabled = Name === undefined || Email === undefined || Password === undefined || Gender === undefined;
+  const isDisabled =
+    (Name === undefined || Name.trim().length === 0 || Name.includes(" ")) ||
+    (Email === undefined || Email.trim().length === 0 || Email.includes(" ")) ||
+    (Password === undefined || Password.trim().length === 0 || Password.includes(" ")) ||
+    Gender === undefined;
 
   const BottomGradient = () => {
     return (

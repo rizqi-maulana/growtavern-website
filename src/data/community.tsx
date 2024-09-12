@@ -19,7 +19,7 @@ export const CommunityData: CommunityItem[] = [
     title: 'WhatsApp',
     src: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022042/whatsapp_xwdh8w.webp',
     desc: 'Growtavern Whatsapp Group',
-    link: 'https://discord.gg/5JnqV5g',
+    link: 'https://chat.whatsapp.com/BeD4916aZaa57m5Fa1Itnc',
     color: '25D366'
   }
 ]

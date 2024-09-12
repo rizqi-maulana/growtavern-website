@@ -67,10 +67,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((data, index) => (
-            <div className="embla__slide flex justify-between" key={index}>
-              <div className="embla__slide__number relative flex md:block flex-col pt-5">
-                <Image src={data.image} alt="Slide" width={100} height={100} sizes='100vw' className='rounded-xl' />
-                <div className='h-max bg-black/50 w-full p-3 md:hidden block'>
+            <div className="embla__slide flex justify-between w-full" key={index}>
+              <div className="embla__slide__number relative flex md:block flex-col pt-5 md:w-[40%] w-full">
+                <div className='h-full grid place-items-center'>
+                  <Image src={data.image} alt="Slide" width={100} height={100} sizes='100vw' className='rounded-xl' />
+                </div>
+                <div className='h-max bg-black/50 w-full p-3 md:hidden block md:mt-0 mt-2'>
                   <h3 className='font-GothicBold text-base'>{data.title}</h3>
                   <p className='text-xs font-GothicLight'>
                     {data.desc}

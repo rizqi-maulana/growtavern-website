@@ -41,7 +41,7 @@ export function Header() {
             aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
             className="sm:hidden"
           />
-          <div className="flex items-center gap-5">
+          <Link href="/" className="flex items-center gap-5">
             <Image
               width={70}
               alt="GrowTavern"
@@ -49,7 +49,7 @@ export function Header() {
               sizes="100vw"
             />
             <h2 className="font-GothicExtraBold text-inherit md:block hidden">GrowTavern</h2>
-          </div>
+          </Link>
           <div className="bg-white w-[2px] h-[30px] rounded-full md:block hidden" />
 
           <div className="hidden sm:flex gap-4">

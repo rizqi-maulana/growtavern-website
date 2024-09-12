@@ -10,22 +10,17 @@ const Footer = () => {
           <h4 className="font-GothicBold text-base md:text-lg">Looking for</h4>
           <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/how-to-play">How to Play</Link>
           <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/community">Community</Link>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/store">Store</Link>
+          {/* <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/store">Store</Link> */}
           <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/auto-profit">Auto Profit</Link>
         </div>
         <div className="flex flex-col space-y-2">
           <h4 className="font-GothicBold text-base md:text-lg">Community</h4>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/discord">Discord</Link>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/twitter">Twitter</Link>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/telegram">Telegram</Link>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/reddit">Reddit</Link>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/medium">Medium</Link>
+          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="https://discord.gg/5JnqV5g">Discord</Link>
+          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="https://chat.whatsapp.com/BeD4916aZaa57m5Fa1Itnc">Whatsapp</Link>
         </div>
         <div className="flex flex-col space-y-2">
           <h4 className="font-GothicBold text-base md:text-lg">Help</h4>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/faq">FAQ</Link>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/terms-of-service">Terms of Service</Link>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/privacy-policy">Privacy Policy</Link>
+          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="https://discord.gg/5JnqV5g">Discord</Link>
         </div>
       </div>
     </footer>

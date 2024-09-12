@@ -35,7 +35,7 @@ const StaffContainer = () => {
         <>
           <StaffHeading text="Developer" icon={Developer} />
           {developers.map((user) => (
-            <StaffCard key={user.id} src={user.image} role={user.role} desc={user.name} />
+            <StaffCard key={user.id} src={user.image} position={user.position} role={user.role} desc={user.name} />
           ))}
         </>
       )}
