@@ -3,15 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f172a;
+  --foreground: #fff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  src: url("../assets/fonts/CenturyGothicPaneuropeanBold.ttf");
+  font-family: "GothicBold";
+}
+@font-face {
+  src: url("../assets/fonts/CenturyGothicPaneuropeanExtraBold.ttf");
+  font-family: "GothicExtraBold";
+}
+@font-face {
+  src: url("../assets/fonts/CenturyGothicPaneuropeanRegular.ttf");
+  font-family: "GothicRegular";
+}
+@font-face {
+  src: url("../assets/fonts/CenturyGothicPaneuropeanLight.ttf");
+  font-family: "GothicLight";
+}
+@font-face {
+  src: url("../assets/fonts/CenturyGothicPaneuropeanSemiBold.ttf");
+  font-family: "GothicSemiBold";
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -20,8 +38,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+header {
+  max-width: 100% !important;
 }

@@ -1,0 +1,120 @@
+"use client"
+import React, { useCallback, useEffect } from 'react'
+import { EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import { DotButton, useDotButton } from './EmblaCarouselDotButton'
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons
+} from './EmblaCarouselArrowButtons'
+import Image from 'next/image'
+
+interface SlidesProps {
+  image: string,
+  title: string,
+  desc: string
+}
+
+type PropType = {
+  slides: Array<SlidesProps>,
+  options?: EmblaOptionsType
+}
+
+const EmblaCarousel: React.FC<PropType> = (props) => {
+  const { slides, options } = props
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+    Autoplay({ playOnInit: false, delay: 3000 })
+  ])
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi)
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick
+  } = usePrevNextButtons(emblaApi)
+
+  const onButtonAutoplayClick = useCallback(
+    (callback: () => void) => {
+      const autoplay = emblaApi?.plugins()?.autoplay
+      if (!autoplay) return
+
+      const resetOrStop =
+        autoplay.options.stopOnInteraction === false
+          ? autoplay.reset
+          : autoplay.stop
+
+      resetOrStop()
+      callback()
+    },
+    [emblaApi]
+  )
+
+  useEffect(() => {
+    const autoplay = emblaApi?.plugins()?.autoplay
+    if (!autoplay) return
+
+    const playOrStop = autoplay.isPlaying() ? autoplay.stop : autoplay.play
+    playOrStop()
+  }, [emblaApi])
+
+
+
+  return (
+    <div className="embla md:w-[70%] w-full relative">
+      <div className="embla__viewport" ref={emblaRef}>
+        <div className="embla__container">
+          {slides.map((data, index) => (
+            <div className="embla__slide flex justify-between" key={index}>
+              <div className="embla__slide__number relative">
+                <Image src={data.image} alt="Slide" width={100} height={100} sizes='100vw' className='rounded-xl' />
+                <div className='absolute h-[40%] bg-black/50 bottom-0 w-full p-3 md:hidden block'>
+                  <h3 className='font-GothicBold text-base'>{data.title}</h3>
+                  <p className='text-xs font-GothicLight'>
+                    {data.desc}
+                  </p>
+                </div>
+              </div>
+              <div className='bg-[#1E293B] w-[500px] h-[230px] rounded-xl space-y-3 p-3 md:block hidden'>
+                <h3 className='font-GothicBold text-1xl'>{data.title}</h3>
+                <p className='text-sm font-GothicLight'>
+                  {data.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className='w-full justify-end md:flex hidden'>
+        <div className="embla__controls w-[500px]">
+          <div className="embla__buttons">
+            <PrevButton
+              onClick={() => onButtonAutoplayClick(onPrevButtonClick)}
+              disabled={prevBtnDisabled}
+            />
+            <NextButton
+              onClick={() => onButtonAutoplayClick(onNextButtonClick)}
+              disabled={nextBtnDisabled}
+            />
+          </div>
+          <div className="embla__dots">
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                onClick={() => onDotButtonClick(index)}
+                className={'embla__dot'.concat(
+                  index === selectedIndex ? ' embla__dot--selected' : ''
+                )}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default EmblaCarousel
