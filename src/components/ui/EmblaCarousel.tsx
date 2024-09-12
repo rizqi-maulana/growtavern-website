@@ -68,9 +68,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="embla__container">
           {slides.map((data, index) => (
             <div className="embla__slide flex justify-between" key={index}>
-              <div className="embla__slide__number relative">
+              <div className="embla__slide__number relative flex md:block flex-col pt-5">
                 <Image src={data.image} alt="Slide" width={100} height={100} sizes='100vw' className='rounded-xl' />
-                <div className='absolute h-[40%] bg-black/50 bottom-0 w-full p-3 md:hidden block'>
+                <div className='h-max bg-black/50 w-full p-3 md:hidden block'>
                   <h3 className='font-GothicBold text-base'>{data.title}</h3>
                   <p className='text-xs font-GothicLight'>
                     {data.desc}
