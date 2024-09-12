@@ -23,7 +23,7 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:1515/create/growid", {
+      const res = await fetch("http://143.110.178.133:1515/create/growid", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
