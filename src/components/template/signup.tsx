@@ -11,7 +11,6 @@ function SignUp() {
   const context = useContext(UserContext);
 
   if (!context) {
-    // Handle the error, maybe by throwing an error or returning early
     throw new Error("UserContext must be used within a UserProvider");
   }
 

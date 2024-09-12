@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useId, useRef, useState } from "react";
+import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/app/hook/use-outside-click";
 import { HowToPlayData } from "@/data/howtoplay";
+import toast, { Toaster } from 'react-hot-toast';
 
 export function HowToPlayCard() {
   const [active, setActive] = useState<(typeof HowToPlayData)[number] | boolean | null>(
@@ -11,6 +12,11 @@ export function HowToPlayCard() {
   );
   const ref = useRef<HTMLDivElement>(null);
   const id = useId();
+
+  const HandleCopy = useCallback(async (host: string) => {
+    navigator.clipboard.writeText(host);
+    toast.success('Copied to clipboard!')
+  }, [])
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -33,6 +39,7 @@ export function HowToPlayCard() {
 
   return (
     <>
+      <Toaster />
       <AnimatePresence>
         {active && typeof active === "object" && (
           <motion.div
@@ -94,16 +101,23 @@ export function HowToPlayCard() {
                     </motion.h3>
                   </div>
                   {
-                    active.File &&
-                    <motion.a
-                      layoutId={`button-${active.Title}-${id}`}
-                      href={active.File}
-                      download
-                      target="_blank"
-                      className="px-10 py-2 text-sm rounded-full font-GothicBold bg-white text-black cursor-pointer"
-                    >
-                      Get Host
-                    </motion.a>
+                    active.File ?
+                      <motion.a
+                        layoutId={`button-${active.Title}-${id}`}
+                        href={active.File}
+                        download
+                        target="_blank"
+                        className="px-10 py-2 text-sm rounded-full font-GothicBold bg-white text-black cursor-pointer"
+                      >
+                        Get Host
+                      </motion.a>
+
+                      :
+                      <button
+                        onClick={() => active?.Host && HandleCopy(active.Host)}
+                        className="px-10 py-2 text-sm rounded-full font-GothicBold bg-white text-black cursor-pointer"
+                      >Copy Host</button>
+
                   }
                 </div>
                 <div className="pt-4 relative px-4">
@@ -152,12 +166,12 @@ export function HowToPlayCard() {
                 >
                   {card.Title}
                 </motion.h3>
-                <motion.p
-                  layoutId={`Description-${card.Description}-${id}`}
+                <p
+                  // layoutId={`Description-${card.Description}-${id}`}
                   className="text-neutral-600 dark:text-neutral-400 text-left w-[80%]"
                 >
                   {card.Description}
-                </motion.p>
+                </p>
               </div>
             </div>
             <motion.button

@@ -4,6 +4,7 @@ interface HowToPlayItem {
   Description: string;
   Icon: string;
   Image: string;
+  Host?: string;
   File?: string;
   Content: string;
 }
@@ -14,6 +15,10 @@ export const HowToPlayData: HowToPlayItem[] = [
     Description: "Play on the GrowTavern Server with a Desktop Device",
     Icon: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022233/monitor_ws0x38.webp',
     Image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726023030/game-desktop_cw0c54.webp',
+    Host: `
+    143.110.178.133 www.growtopia1.com
+143.110.178.133 www.growtopia2.com
+    `,
     Content: `Play GrowTavern on PC
    1 - Press ⊞ Win+R (Windows Key + R) to open up the "Run" window.
 2 - Type in 
@@ -45,6 +50,9 @@ Enjoy !.`
     Description: "Play on the GrowTavern Server with a IOS Device",
     Icon: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022232/mac-os-logo_olbca9.webp',
     Image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726023034/Characters_wsvcpp.webp',
+    Host: `
+    www.growtopia1.com = 143.110.178.133
+www.growtopia2.com = 143.110.178.133`,
     Content: `Play GrowTavern on IOS
    1 - Download surge 5 on appstore 
 2 - Cick on " default " at the left top 

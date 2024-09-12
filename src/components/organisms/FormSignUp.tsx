@@ -5,6 +5,7 @@ import SignEmail from "../molecules/SignEmail";
 import SignGender from "../molecules/SignGender";
 import { useContext } from "react";
 import { UserContext } from "@/context";
+import SignVerifyPass from "../molecules/SignVerifyPass";
 
 const FormSignUp = () => {
   const context = useContext(UserContext);
@@ -28,6 +29,7 @@ const FormSignUp = () => {
         <SignName />
         <SignPass label="Create your Password" id="signuppass" />
       </div>
+      <SignVerifyPass />
       <SignEmail />
       <SignGender />
       <SubmitBtn />

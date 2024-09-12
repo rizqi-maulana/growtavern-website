@@ -9,12 +9,14 @@ const SubmitBtn = () => {
     throw new Error("SubmitBtn must be used within a UserContextProvider");
   }
 
-  const { Name, Email, Password, Gender } = context;
+  const { Name, Email, Password, Gender, VerifyPassword } = context;
 
   const isDisabled =
     (Name === undefined || Name.trim().length === 0 || Name.includes(" ")) ||
     (Email === undefined || Email.trim().length === 0 || Email.includes(" ")) ||
     (Password === undefined || Password.trim().length === 0 || Password.includes(" ")) ||
+    (VerifyPassword === undefined || VerifyPassword.trim().length === 0 || VerifyPassword.includes(" ")) ||
+    (Password !== VerifyPassword) ||
     Gender === undefined;
 
   const BottomGradient = () => {
