@@ -44,7 +44,7 @@ function SignUp() {
           setSignUpForm(false)
         }, 3000);
       }
-      if (data.type === "account_exist") {
+      if (data.type === "name_exist") {
         toast.error(data.message);
       }
       if (data.type === "server_error") {
