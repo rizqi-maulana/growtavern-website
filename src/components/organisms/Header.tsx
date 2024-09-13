@@ -3,10 +3,10 @@
 import { useState, useContext } from "react";
 import Image from "next/image";
 import { Navbar, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
-import Logo from '@/assets/image/Sadwdeafsds.png';
 import SignUp from "../template/signup";
 import { UserContext } from "@/context";
 import SignIn from "../template/signin";
+import { WebConfig } from "@/WebConfig";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -44,11 +44,11 @@ export function Header() {
           <Link href="/" className="flex items-center gap-5">
             <Image
               width={70}
+              height={70}
               alt="GrowTavern"
-              src={Logo}
+              src={WebConfig.logo}
               sizes="100vw"
             />
-            <h2 className="font-GothicExtraBold text-inherit xl:block hidden">GrowTavern</h2>
           </Link>
           <div className="bg-white w-[2px] h-[30px] rounded-full md:block hidden" />
 

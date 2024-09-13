@@ -15,7 +15,7 @@ const StaffCard = ({ src, role, desc, position }: Props) => {
     <div className="flex gap-5 bg-[#1E293B] w-full md:w-[400px] p-3 rounded-xl items-center">
       <StaffCardProfile src={src} role={role} />
       <div>
-        <StaffCardTitle role={`${position} ${role}`} />
+        <StaffCardTitle role={position ? `${position} ${role}` : role} />
         <StaffCardDesc desc={desc} role={role} />
       </div>
     </div>

@@ -1,15 +1,16 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import WordPullUp from "../magicui/word-pull-up";
 import clsx from "clsx";
+import { WebConfig } from "@/WebConfig";
 
 interface Props {
   title: string;
-  src?: string | StaticImageData,
+  logo?: boolean,
   desc: string,
   descPosition?: "center" | "right" | "left",
 }
 
-const MainHeaderText = ({ title, src, desc, descPosition }: Props) => {
+const MainHeaderText = ({ title, logo, desc, descPosition }: Props) => {
   return (
     <div className="z-10 relative">
       <div className={clsx('flex items-center', {
@@ -19,8 +20,8 @@ const MainHeaderText = ({ title, src, desc, descPosition }: Props) => {
       })}>
         <WordPullUp words={title} className="font-GothicExtraBold text-base xl:text-2xl" />
         {
-          src &&
-          <Image className="relative w-12 xl:w-20" src={src} width={100} height={100} alt={title} sizes="100vw" />
+          logo &&
+          <Image className="relative w-12 xl:w-20" src={WebConfig.logo} width={100} height={100} alt={title} sizes="100vw" />
         }
       </div>
       <div className="font-GothicRegular mt-1">
