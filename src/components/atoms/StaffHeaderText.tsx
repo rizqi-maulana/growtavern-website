@@ -11,10 +11,10 @@ const StaffHeaderText = ({ title, src, desc }: Props) => {
   return (
     <div className="z-10 relative">
       <div className="flex items-center">
-        <WordPullUp words={title} className="font-GothicExtraBold text-base md:text-2xl" />
-        <Image className="relative w-12 md:w-20" src={src} width={100} height={100} alt={title} sizes="100vw" />
+        <WordPullUp words={title} className="font-GothicExtraBold text-base xl:text-2xl" />
+        <Image className="relative w-12 xl:w-20" src={src} width={100} height={100} alt={title} sizes="100vw" />
       </div>
-      <p className="font-GothicRegular text-xs md:text-sm mt-1">{desc}</p>
+      <p className="xl:text-sm text-xs text-[12px] mt-3">{desc}</p>
     </div>
   );
 }

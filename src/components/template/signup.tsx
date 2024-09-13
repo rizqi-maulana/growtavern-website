@@ -16,11 +16,12 @@ function SignUp() {
 
   const { Name, Password, Email, Gender, setSignUpForm } = context;
   const [ShowSuccess, setShowSuccess] = useState<boolean>(false);
+  const [Loading, setLoading] = useState<boolean>(false);
 
   // Menangani pengiriman formulir
   const HandleSignUp = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setLoading(true)
     try {
       const res = await fetch("https://143.110.178.133/create/growid", {
         method: "POST",
@@ -52,6 +53,8 @@ function SignUp() {
       }
     } catch (error) {
       console.error("Error during signup:", error);
+    } finally {
+      setLoading(false)
     }
   }, [Name, Password, Email, Gender]);
 
@@ -64,7 +67,7 @@ function SignUp() {
         autoSave="off"
         autoComplete="off"
       >
-        <FormSignUp />
+        <FormSignUp Loading={Loading} />
         {ShowSuccess && (
           <Confetti
             ref={confettiRef}

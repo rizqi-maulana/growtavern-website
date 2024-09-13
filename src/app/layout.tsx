@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         <AppContext>
           <Header />
-          <div className="md:px-20 px-5">
+          <div className="xl:px-20 px-5">
             {children}
           </div>
         </AppContext>

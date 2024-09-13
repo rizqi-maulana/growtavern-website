@@ -140,7 +140,7 @@ export function HowToPlayCard() {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="mx-auto w-full gap-4 flex md:flex-row flex-col">
+      <ul className="mx-auto w-full gap-4 flex xl:flex-row flex-col">
         {HowToPlayData.map((card) => (
           <motion.div
             layoutId={`card-${card.Title}-${id}`}

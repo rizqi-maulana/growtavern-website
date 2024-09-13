@@ -48,7 +48,7 @@ export function Header() {
               src={Logo}
               sizes="100vw"
             />
-            <h2 className="font-GothicExtraBold text-inherit md:block hidden">GrowTavern</h2>
+            <h2 className="font-GothicExtraBold text-inherit xl:block hidden">GrowTavern</h2>
           </Link>
           <div className="bg-white w-[2px] h-[30px] rounded-full md:block hidden" />
 

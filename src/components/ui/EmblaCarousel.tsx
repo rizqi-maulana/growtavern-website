@@ -63,12 +63,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
 
   return (
-    <div className="embla md:w-[70%] w-full relative">
+    <div className="embla xl:w-[70%] w-full relative">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((data, index) => (
             <div className="embla__slide flex justify-between w-full" key={index}>
-              <div className="embla__slide__number relative flex md:block flex-col pt-5 md:w-[40%] w-full">
+              <div className="embla__slide__number relative flex lg:block flex-col pt-5 lg:w-[40%] w-full">
                 <div className='h-full grid place-items-center'>
                   <Image src={data.image} alt="Slide" width={100} height={100} sizes='100vw' className='rounded-xl' />
                 </div>

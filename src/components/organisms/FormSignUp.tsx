@@ -3,11 +3,17 @@ import SubmitBtn from "../atoms/SubmitBtn";
 import SignPass from "../molecules/SignPass";
 import SignEmail from "../molecules/SignEmail";
 import SignGender from "../molecules/SignGender";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "@/context";
 import SignVerifyPass from "../molecules/SignVerifyPass";
+import { bouncy } from 'ldrs'
 
-const FormSignUp = () => {
+
+interface FormSignUpProps {
+  Loading: boolean;
+}
+
+const FormSignUp = ({ Loading }: FormSignUpProps) => {
   const context = useContext(UserContext);
 
   // Handle the case where context might be undefined
@@ -15,6 +21,10 @@ const FormSignUp = () => {
     return <div>Error: UserContext is undefined</div>;
   }
   const { setSignUpForm } = context
+
+  useEffect(() => {
+    bouncy.register()
+  })
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#0F172A]">
       <div className="mb-5">
@@ -31,9 +41,24 @@ const FormSignUp = () => {
       </div>
       <SignVerifyPass />
       <SignEmail />
+      <div className="mb-4 bg-red-400 rounded-xl p-2">
+        <h3 className="text-sm">IMPORTANT!</h3>
+        <p className="text-xs font-GothicLight">enter your correct email, so that it can be used later for further updates.</p>
+      </div>
       <SignGender />
-      <SubmitBtn />
-      <button onClick={() => setSignUpForm(false)} className="w-full bg-[#0F172A] rounded-2xl p-2 mt-2 text-sm font-GothicBold text-white">
+      {
+        Loading ?
+          <div className="w-full grid place-content-center">
+            <l-bouncy
+              size="30"
+              speed="1.75"
+              color="white"
+            ></l-bouncy>
+          </div>
+          :
+          <SubmitBtn />
+      }
+      <button onClick={() => setSignUpForm(false)} className="w-full bg-[#0F172A] rounded-2xl p-2 text-sm font-GothicBold text-white">
         Close
       </button>
     </div>

@@ -33,7 +33,7 @@ const SubmitBtn = () => {
       style={{
         borderRadius: 10,
       }}
-      className={`bg-gradient-to-br relative group/btn w-full mt-5 text-white h-10 font-GothicSemiBold shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] ${isDisabled ? "cursor-not-allowed disabled:bg-slate-500 disabled:text-slate-300" : ""}`}
+      className={`bg-gradient-to-br relative group/btn w-full mb-4 text-white h-10 font-GothicSemiBold shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] ${isDisabled ? "cursor-not-allowed disabled:bg-slate-500 disabled:text-slate-300" : ""}`}
       type="submit"
       disabled={isDisabled}
     >

@@ -17,16 +17,16 @@ const MainHeaderText = ({ title, src, desc, descPosition }: Props) => {
         'justify-start': descPosition === "left",
         'justify-end': descPosition === "right",
       })}>
-        <WordPullUp words={title} className="font-GothicExtraBold text-base md:text-2xl" />
+        <WordPullUp words={title} className="font-GothicExtraBold text-base xl:text-2xl" />
         {
           src &&
-          <Image className="relative w-12 md:w-20" src={src} width={100} height={100} alt={title} sizes="100vw" />
+          <Image className="relative w-12 xl:w-20" src={src} width={100} height={100} alt={title} sizes="100vw" />
         }
       </div>
-      <div className="font-GothicRegular md:text-sm text-xs mt-1">
+      <div className="font-GothicRegular mt-1">
         {
           desc.split('\n').map((text: string, index: number) => (
-            <p key={index} className="md:text-sm text-[12px] mt-3">{text}</p>
+            <p key={index} className="xl:text-sm text-xs text-[12px] mt-3">{text}</p>
           ))
         }
       </div>

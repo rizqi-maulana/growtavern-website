@@ -12,7 +12,7 @@ const StaffContainer = () => {
   const developers = UserData.filter(user => user.role === "Developer");
 
   return (
-    <div className="flex flex-col md:h-[740px] w-[80%] mt-10 flex-wrap gap-5">
+    <div className="flex flex-col lg:h-[740px] w-full mt-10 flex-wrap gap-5">
       {owners.length > 0 && (
         <>
           <StaffHeading text="Owner" icon={OwnerIcon} />
