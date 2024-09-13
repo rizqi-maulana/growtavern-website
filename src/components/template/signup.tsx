@@ -56,7 +56,7 @@ function SignUp() {
     } finally {
       setLoading(false)
     }
-  }, [Name, Password, Email, Gender]);
+  }, [Name, Password, Email, Gender, setSignUpForm]);
 
   return (
     <>

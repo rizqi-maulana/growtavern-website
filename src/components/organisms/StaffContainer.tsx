@@ -6,7 +6,6 @@ import { UserData } from "@/data/user";
 import StaffCard from "../molecules/StaffCard";
 
 const StaffContainer = () => {
-  // Filter UserData berdasarkan role
   const owners = UserData.filter(user => user.role === "Owner");
   const coOwners = UserData.filter(user => user.role === "Co Owner");
   const developers = UserData.filter(user => user.role === "Developer");
