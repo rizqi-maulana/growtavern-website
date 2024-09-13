@@ -4,11 +4,10 @@ import { WebConfig } from "@/WebConfig";
 
 interface Props {
   title: string;
-  logo: boolean,
   desc: string
 }
 
-const StaffHeaderText = ({ title, logo, desc }: Props) => {
+const StaffHeaderText = ({ title, desc }: Props) => {
   return (
     <div className="z-10 relative">
       <div className="flex items-center">
