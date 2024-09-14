@@ -38,11 +38,11 @@ C:\Windows\System32\drivers\etc in the textbox.
     File: "/growtavern.txt",
     Content: `Play GrowTavern on Android
     • Download Virtual Host In Playstore
-• Download UBS TOPIA file at below
+• Download GrowTavern file at below
 • Open the Virtual Host and Click button HOSTS FILE
-• Choose host that name UBS TOPIA from download folder
+• Choose host that name GrowTavern from download folder
 • Click " Accept Connection " atau " Terima Koneksi " if you dont accept it yet
-• Done ! now you can start login growtopia to play UBS TOPIA
+• Done ! now you can start login growtopia to play GrowTavern
 Enjoy !.`
   },
   {
