@@ -101,16 +101,22 @@ export function HowToPlayCard() {
                     </motion.h3>
                   </div>
                   {
-                    active.File ?
-                      <motion.a
-                        layoutId={`button-${active.Title}-${id}`}
-                        href={active.File}
-                        download
-                        target="_blank"
-                        className="px-10 py-2 text-sm rounded-full font-GothicBold bg-white text-black cursor-pointer"
-                      >
-                        Get Host
-                      </motion.a>
+                    active.File && active.Host ?
+                      <div className="flex gap-2">
+                        <motion.a
+                          layoutId={`button-${active.Title}-${id}`}
+                          href={active.File}
+                          download
+                          target="_blank"
+                          className="px-10 py-2 text-sm rounded-full font-GothicBold bg-white text-black cursor-pointer"
+                        >
+                          Get Host
+                        </motion.a>
+                        <button
+                          onClick={() => active?.Host && HandleCopy(active.Host)}
+                          className="px-10 py-2 text-sm rounded-full font-GothicBold bg-white text-black cursor-pointer"
+                        >Copy Host</button>
+                      </div>
 
                       :
                       <button

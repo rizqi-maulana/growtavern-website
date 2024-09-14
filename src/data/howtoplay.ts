@@ -36,6 +36,11 @@ C:\Windows\System32\drivers\etc in the textbox.
     Icon: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022035/cell-phone_ukiys9.webp',
     Image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726023034/Characters_wsvcpp.webp',
     File: "/growtavern.txt",
+    Host: `143.110.178.133 growtopia1.com
+143.110.178.133 growtopia2.com
+143.110.178.133 www.growtopia1.com
+143.110.178.133 www.growtopia2.com
+143.110.178.133 RvLnd.here`,
     Content: `Play GrowTavern on Android
     • Download Virtual Host In Playstore
 • Download GrowTavern file at below
