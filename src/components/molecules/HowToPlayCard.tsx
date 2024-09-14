@@ -104,18 +104,22 @@ export function HowToPlayCard() {
                     active.File && active.Host ?
                       <div className="flex gap-2">
                         <motion.a
-                          layoutId={`button-${active.Title}-${id}`}
+                          layoutId={`button-${active.File}-${id}`}
                           href={active.File}
                           download
                           target="_blank"
                           className="px-10 py-2 text-sm rounded-full font-GothicBold bg-white text-black cursor-pointer"
                         >
-                          Get Host
+                          VHost
                         </motion.a>
-                        <button
-                          onClick={() => active?.Host && HandleCopy(active.Host)}
+                        <motion.a
+                          layoutId={`button-${active.Host}-${id}`}
+                          href={active.Host}
+                          target="_parent"
                           className="px-10 py-2 text-sm rounded-full font-GothicBold bg-white text-black cursor-pointer"
-                        >Copy Host</button>
+                        >
+                          PTunnel
+                        </motion.a>
                       </div>
 
                       :
