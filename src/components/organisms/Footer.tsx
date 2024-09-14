@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CommunityData } from "@/data/community";
 import { WebConfig } from "@/WebConfig";
 const Footer = () => {
   return (
@@ -15,12 +16,12 @@ const Footer = () => {
         </div>
         <div className="flex flex-col space-y-2">
           <h4 className="font-GothicBold text-base md:text-lg">Community</h4>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="https://discord.gg/5JnqV5g">Discord</Link>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="https://chat.whatsapp.com/BeD4916aZaa57m5Fa1Itnc">Whatsapp</Link>
+          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href={CommunityData[0].link}>Discord</Link>
+          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href={CommunityData[1].link}>Whatsapp</Link>
         </div>
         <div className="flex flex-col space-y-2">
           <h4 className="font-GothicBold text-base md:text-lg">Help</h4>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="https://discord.gg/5JnqV5g">Discord</Link>
+          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href={CommunityData[0].link}>Discord</Link>
         </div>
       </div>
     </footer>
