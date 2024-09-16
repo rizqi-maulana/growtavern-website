@@ -35,8 +35,8 @@ C:\Windows\System32\drivers\etc in the textbox.
     Description: "Play on the GrowTavern Server with a Desktop Device",
     Icon: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022035/cell-phone_ukiys9.webp',
     Image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726023034/Characters_wsvcpp.webp',
-    File: "/host/growtavern.txt",
-    Host: `/host/growtavern.txt`,
+    File: "/growtavern.txt",
+    Host: `/growtavern.txt`,
     Content: `Play GrowTavern on Android
     • Download Virtual Host In Playstore
 • Download GrowTavern file at below
