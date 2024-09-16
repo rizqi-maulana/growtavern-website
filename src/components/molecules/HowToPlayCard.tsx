@@ -112,14 +112,10 @@ export function HowToPlayCard() {
                         >
                           VHost
                         </motion.a>
-                        <motion.a
-                          layoutId={`Host-${active.Host}-${id}`}
-                          href={active.Host}
-                          target="_parent"
+                        <button
+                          onClick={() => active?.Host && HandleCopy(active.Host)}
                           className="px-10 py-2 text-sm rounded-full font-GothicBold bg-white text-black cursor-pointer"
-                        >
-                          PTunnel
-                        </motion.a>
+                        >PTunnel</button>
                       </div>
 
                       :
