@@ -9,9 +9,14 @@ interface BuyProps {
   name: string
 }
 
+
+interface Snap {
+  pay(token: string): void;
+}
+
 declare global {
   interface Window {
-    snap: any
+    snap: Snap
   }
 }
 
@@ -54,8 +59,8 @@ function BuyTemplate({ name }: BuyProps) {
         </div>
         <div>
           <div className="bg-[#4D6182] xl:w-[350px] w-full h-max p-4 rounded-xl grid gap-2">
-            <h2 className="text-xl xl:text-2xl font-GothicSemiBold">Don’t Have TavernCoin</h2>
-            <p className="xl:text-sm text-xs text-[12px]">If you haven't purchased TavernCoin, you can make a purchase with w-wallet without purchasing TavernCoin. Payment without TavernCoin uses QR Payment where you will be asked to Scan the QR to complete the Payment.</p>
+            <h2 className="text-xl xl:text-2xl font-GothicSemiBold">Don&apos;t Have TavernCoin</h2>
+            <p className="xl:text-sm text-xs text-[12px]">If you haven&apos;t purchased TavernCoin, you can make a purchase with w-wallet without purchasing TavernCoin. Payment without TavernCoin uses QR Payment where you will be asked to Scan the QR to complete the Payment.</p>
           </div>
           <button onClick={HandlePay}>Pay</button>
         </div>
