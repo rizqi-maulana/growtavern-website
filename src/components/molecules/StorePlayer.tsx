@@ -10,11 +10,12 @@ import { usePathname } from "next/navigation";
 import { StaticImageData } from "next/image";
 
 interface Other {
-  roles: string;
+  name: string;
   color: string;
   desc: string;
   image: string;
   href: string;
+  category: string
 }
 
 interface Role {
@@ -24,14 +25,17 @@ interface Role {
   image: string;
   desc: string;
   href: string;
+  category: string
 }
 
 interface Title {
-  roles: string;
+  title: string;
   color: string;
   desc: string;
   image: string;
   href: string;
+  category: string
+
 }
 const StorePlayer = () => {
   const pathname = usePathname()
@@ -42,7 +46,7 @@ const StorePlayer = () => {
         <div className="flex items-center gap-4 flex-wrap">
           {
             StoreData.roles.map((item: Role, index: number) => (
-              <LinkPreview url={`${pathname}/buy/${item.href}`} isStatic imageSrc={item.image} key={index} quality={100}>
+              <LinkPreview url={`${pathname}/buy/${item.href}?category=${item.category}`} isStatic imageSrc={item.image} key={index} quality={100}>
                 <StoreCard color={item.color} icon={item.icon} text={item.roles} />
               </LinkPreview>
             ))
@@ -63,8 +67,8 @@ const StorePlayer = () => {
         <div className="flex items-center gap-4 flex-wrap">
           {
             StoreData.titles.map((item: Title, index: number) => (
-              <LinkPreview url={`${pathname}/buy/${item.href}`} isStatic imageSrc={item.image} key={index}>
-                <StoreCard text={item.roles} color={item.color} />
+              <LinkPreview url={`${pathname}/buy/${item.href}?category=${item.category}`} isStatic imageSrc={item.image} key={index}>
+                <StoreCard text={item.title} color={item.color} />
               </LinkPreview>
             )
             )
@@ -77,8 +81,8 @@ const StorePlayer = () => {
         <div className="flex items-center gap-4 flex-wrap">
           {
             StoreData.other.map((item: Other, index: number) => (
-              <LinkPreview url={`${pathname}/buy/${item.href}`} isStatic imageSrc={item.image} key={index}>
-                <StoreCard text={item.roles} color={item.color} />
+              <LinkPreview url={`${pathname}/buy/${item.href}?category=${item.category}`} isStatic imageSrc={item.image} key={index}>
+                <StoreCard text={item.name} color={item.color} />
               </LinkPreview>
             )
             )

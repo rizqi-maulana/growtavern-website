@@ -16,9 +16,7 @@ interface UserContextProps {
   Gender: gender | undefined,
   setGender: React.Dispatch<React.SetStateAction<gender | undefined>>,
   VerifyPassword: string | undefined,
-  setVerifyPassword: React.Dispatch<React.SetStateAction<string | undefined>>,
-  StoreCat: string | undefined,
-  setStoreCat: React.Dispatch<React.SetStateAction<string | undefined>>
+  setVerifyPassword: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined)
@@ -36,10 +34,9 @@ const AppContext = ({ children }: AppContextProps) => {
   const [VerifyPassword, setVerifyPassword] = useState<string | undefined>(undefined);
   const [Email, setEmail] = useState<string | undefined>(undefined);
   const [Gender, setGender] = useState<gender | undefined>('man');
-  const [StoreCat, setStoreCat] = useState<string | undefined>('Items');
 
   return (
-    <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, StoreCat, setStoreCat }} >
+    <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword }} >
       {children}
     </UserContext.Provider >
   )

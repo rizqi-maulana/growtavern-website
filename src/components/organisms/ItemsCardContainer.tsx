@@ -7,6 +7,7 @@ const ItemsCardContainer = () => {
     image: string;
     desc: string;
     href: string;
+    category: string;
   }
   return (
     <div className="p-5 flex xl:flex-row flex-col items-center xl:gap-0 gap-10 justify-evenly">
@@ -18,6 +19,7 @@ const ItemsCardContainer = () => {
             image={item.image}
             desc={item.desc}
             href={item.href}
+            category={item.category}
           />
         ))
       }

@@ -2,14 +2,10 @@
 import SelectionItems from "../ui/SelectionItems";
 import ItemsCardContainer from "./ItemsCardContainer";
 import StorePlayer from "../molecules/StorePlayer";
-import { useContext } from "react";
-import { UserContext } from "@/context";
+import { useState } from "react";
 const StoreContainer = () => {
-  const context = useContext(UserContext)
-  if (context === undefined) {
-    throw new Error("UserContext is undefined");
-  }
-  const { StoreCat, setStoreCat } = context
+  const [StoreCat, setStoreCat] = useState<string | undefined>('Items');
+
   return (
     <section>
       <SelectionItems setStoreCat={setStoreCat} />

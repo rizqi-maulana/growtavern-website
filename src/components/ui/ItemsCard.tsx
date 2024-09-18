@@ -8,12 +8,13 @@ interface Props {
   image: string | StaticImageData;
   desc: string;
   href: string;
+  category: string
 }
 
-export default function ItemsCard({ title, image, desc, href }: Props) {
+export default function ItemsCard({ title, image, desc, href, category }: Props) {
   const pathname = usePathname()
   return (
-    <Link href={`${pathname}/buy/${href}`} key={title}>
+    <Link href={`${pathname}/buy/${href}?category=${category}`} key={title}>
       <Card className="py-4 bg-[#1E293B] lg:w-[500px] w-full">
         <CardHeader className="pb-0 pt-2 px-4 flex-col space-y-2 items-start">
           <p className="text-tiny uppercase font-bold">{title}</p>
