@@ -9,8 +9,8 @@ const Footer = () => {
       <div className="flex gap-10 w-max">
         <div className="flex flex-col space-y-2">
           <h4 className="font-GothicBold text-base md:text-lg">Looking for</h4>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/how-to-play">How to Play</Link>
-          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/community">Community</Link>
+          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/#howtoplay">How to Play</Link>
+          <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/#community">Community</Link>
           {/* <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/store">Store</Link> */}
           <Link className="font-GothicLight text-xs md:text-sm hover:underline" href="/auto-profit">Auto Profit</Link>
         </div>

@@ -1,3 +1,4 @@
+import BuyTemplate from "@/components/template/buy"
 interface BuyProps {
   params: {
     name: string
@@ -5,11 +6,11 @@ interface BuyProps {
 }
 
 function Buy({ params }: BuyProps) {
+  const decodeUrl = decodeURI(params.name)
+
   return (
-    <>
-      <h1>{params.name}</h1>
-    </>
-  );
+    <BuyTemplate name={decodeUrl} />
+  )
 }
 
 export default Buy;

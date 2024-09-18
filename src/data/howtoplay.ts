@@ -63,7 +63,7 @@ www.growtopia2.com = 209.38.18.117`,
 [Rule]
 FINAL,DIRECT
 [Host]
-www.growtopia1.com = 209.38.18.117
-www.growtopia2.com = 209.38.18.117`
+www.growtopia1.com=209.38.18.117
+www.growtopia2.com=209.38.18.117`
   },
 ]

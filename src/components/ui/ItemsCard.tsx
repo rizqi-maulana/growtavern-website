@@ -2,24 +2,31 @@ import React from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 interface Props {
-  src: string | StaticImageData;
+  title: string;
+  image: string | StaticImageData;
+  desc: string;
+  href: string;
 }
 
-export default function ItemsCard({ src }: Props) {
+export default function ItemsCard({ title, image, desc, href }: Props) {
+  const pathname = usePathname()
   return (
-    <Link href={'https://google.com'}>
-      <Card className="py-4 bg-[#1E293B] w-max">
+    <Link href={`${pathname}/buy/${href}`} key={title}>
+      <Card className="py-4 bg-[#1E293B] lg:w-[500px] w-full">
         <CardHeader className="pb-0 pt-2 px-4 flex-col space-y-2 items-start">
-          <p className="text-tiny uppercase font-bold">Bedrock</p>
-          <small className="font-GothicLight">Some Block :V</small>
+          <p className="text-tiny uppercase font-bold">{title}</p>
+          <small className="font-GothicLight text-xs">{desc}</small>
         </CardHeader>
-        <CardBody className="overflow-visible py-2">
+        <CardBody className="overflow-visible py-2 grid place-content-center">
           <Image
             alt="Card background"
             className="object-cover rounded-xl"
-            src={src}
-            width={270}
+            src={image}
+            width={100}
+            height={100}
+            sizes="100vw"
           />
         </CardBody>
         <CardFooter>

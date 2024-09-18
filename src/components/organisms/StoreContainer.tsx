@@ -1,12 +1,19 @@
-// import SelectionItems from "../ui/SelectionItems";
-// import ItemsCard from "../ui/ItemsCard";
+"use client"
+import SelectionItems from "../ui/SelectionItems";
+import ItemsCardContainer from "./ItemsCardContainer";
 import StorePlayer from "../molecules/StorePlayer";
+import { useState } from "react";
 const StoreContainer = () => {
+  const [value, setValue] = useState<string>('Items');
   return (
     <section>
-      {/* <SelectionItems /> */}
-      {/* <ItemsCard src={Images} /> */}
-      <StorePlayer />
+      <SelectionItems setValue={setValue} />
+      {
+        value === "Items" ?
+          <ItemsCardContainer />
+          :
+          <StorePlayer />
+      }
     </section>
   );
 }

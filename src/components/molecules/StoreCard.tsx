@@ -9,7 +9,7 @@ interface Props {
 
 const StoreCard = ({ icon, text, color }: Props) => {
   return (
-    <div className="flex items-center gap-3 border p-3 rounded-[10px] w-max md:w-[200px] justify-center" style={{ backgroundColor: color }}>
+    <div className="flex items-center gap-3 border lg:p-3 py-3 px-5 rounded-[10px] w-max md:w-[200px] justify-center" style={{ backgroundColor: color }}>
       {
         icon === "level" ?
           <FaAngleDoubleUp size={30} /> :

@@ -10,6 +10,7 @@ interface Item {
   image: string;
   desc: string;
   href: string;
+  special?: string[]
 }
 
 interface Role {
@@ -51,7 +52,18 @@ export const StoreData: StoreData = {
       title: "Diamond Pickaxe of Celestial Might",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726074579/Untitled-2_v9rabv.webp",
       desc: "Eclipsebane, the Diamond Pickaxe of Celestial Might Forged in a dying star's heart, Eclipsebane glows with celestial radiance. This enchanted pickaxe cleaves stone and ore with a single strike and mines blocks from two paces away, bending reality itself. Its legendary origins whisper of a blacksmith who channeled the heavens' power into mortal hands. Now, that power is yours to wield.",
-      href: "/#"
+      href: "Diamond Pickaxe of Celestial Might",
+      special: [
+        "Bisa Terbang",
+        "bisa mandi",
+        "bisa makan"
+      ]
+    },
+    {
+      title: "Diamond Pickaxe of Celestial Mights",
+      image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726074579/Untitled-2_v9rabv.webp",
+      desc: "Eclipsebane, the Diamond Pickaxe of Celestial Might Forged in a dying star's heart, Eclipsebane glows with celestial radiance. This enchanted pickaxe cleaves stone and ore with a single strike and mines blocks from two paces away, bending reality itself. Its legendary origins whisper of a blacksmith who channeled the heavens' power into mortal hands. Now, that power is yours to wield.",
+      href: "Diamond Pickaxe of Celestial Might"
     }
   ],
   roles: [
