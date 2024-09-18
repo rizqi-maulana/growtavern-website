@@ -1,11 +1,11 @@
 "use client"
 
 import { StoreData } from "@/data/store";
-import { useCallback, useEffect, useMemo, useContext } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import Image from "next/image";
 import StoreModal from "@/components/organisms/StoreModal";
 import { v4 as uuidv4 } from 'uuid';
-import { UserContext } from "@/context";
+// import { UserContext } from "@/context";
 
 interface BuyProps {
   name: string
@@ -23,11 +23,11 @@ declare global {
 }
 
 function BuyTemplate({ name }: BuyProps) {
-  const context = useContext(UserContext)
-  if (context === undefined) {
-    throw new Error("UserContext is undefined");
-  }
-  const { StoreCat } = context
+  // const context = useContext(UserContext)
+  // if (context === undefined) {
+  //   throw new Error("UserContext is undefined");
+  // }
+  // const { StoreCat } = context
   const data = useMemo(() => {
     return StoreData.items.find(item => item.title === name)
   }, [name])
@@ -62,22 +62,22 @@ function BuyTemplate({ name }: BuyProps) {
     return formdata
   }
 
-  const FuncPurchaseRoles = async () => {
-    const formdata = new FormData();
-    const PurchaseItem = StoreData.items.find(item => item.title === name);
-    formdata.append('order_id', uuidv4() as string);
+  // const FuncPurchaseRoles = async () => {
+  //   const formdata = new FormData();
+  //   const PurchaseItem = StoreData.items.find(item => item.title === name);
+  //   formdata.append('order_id', uuidv4() as string);
 
-    const price = PurchaseItem?.price?.toString();
-    if (price) {
-      formdata.append('gross_amount', price);
-    } else {
-      console.error("Price is undefined for the selected item.");
-      return;
-    }
+  //   const price = PurchaseItem?.price?.toString();
+  //   if (price) {
+  //     formdata.append('gross_amount', price);
+  //   } else {
+  //     console.error("Price is undefined for the selected item.");
+  //     return;
+  //   }
 
-    formdata.append('email', "budi.pra@example.com");
-    return formdata
-  }
+  //   formdata.append('email', "budi.pra@example.com");
+  //   return formdata
+  // }
 
 
 

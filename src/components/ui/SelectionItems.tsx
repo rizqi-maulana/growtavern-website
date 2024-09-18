@@ -3,7 +3,7 @@ import { Select, SelectItem } from "@nextui-org/react";
 import { StoreItems } from "@/data/items";
 
 interface Props {
-  setStoreCat: React.Dispatch<React.SetStateAction<string>>;
+  setStoreCat: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export default function SelectionItems({ setStoreCat }: Props) {
