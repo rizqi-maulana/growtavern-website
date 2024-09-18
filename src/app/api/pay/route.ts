@@ -1,6 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import midtransClient from 'midtrans-client'
-export const POST = async () => {
+export const POST = async (req: NextRequest) => {
+  const formdata = await req.formData();
+  const email = formdata.get('email')
+  const order_id = formdata.get('order_id')
+  const gross_amount = formdata.get('gross_amount')
   // Create Snap API instance
   const snap = new midtransClient.Snap({
     // Set to true if you want Production Environment (accept real transaction).
@@ -10,17 +14,14 @@ export const POST = async () => {
 
   const parameter = {
     "transaction_details": {
-      "order_id": "YOUR-ORDERID-1234563",
-      "gross_amount": 10000
+      order_id,
+      gross_amount
     },
     "credit_card": {
       "secure": true
     },
     "customer_details": {
-      "first_name": "budi",
-      "last_name": "pratama",
-      "email": "budi.pra@example.com",
-      "phone": "08111222333"
+      email
     }
   };
 

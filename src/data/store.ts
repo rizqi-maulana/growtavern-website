@@ -11,6 +11,7 @@ interface Item {
   desc: string;
   href: string;
   special?: string[]
+  price: number
 }
 
 interface Role {
@@ -20,6 +21,7 @@ interface Role {
   image: string;
   desc: string;
   href: string;
+  price: number
 }
 
 interface Title {
@@ -57,23 +59,26 @@ export const StoreData: StoreData = {
         "Bisa Terbang",
         "bisa mandi",
         "bisa makan"
-      ]
+      ],
+      price: 500000
     },
     {
       title: "Diamond Pickaxe of Celestial Mights",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726074579/Untitled-2_v9rabv.webp",
       desc: "Eclipsebane, the Diamond Pickaxe of Celestial Might Forged in a dying star's heart, Eclipsebane glows with celestial radiance. This enchanted pickaxe cleaves stone and ore with a single strike and mines blocks from two paces away, bending reality itself. Its legendary origins whisper of a blacksmith who channeled the heavens' power into mortal hands. Now, that power is yours to wield.",
-      href: "Diamond Pickaxe of Celestial Might"
+      href: "Diamond Pickaxe of Celestial Might",
+      price: 500000
     }
   ],
   roles: [
     {
-      roles: "Resller",
+      roles: "Reseller",
       color: "#F7931A",
       icon: Reseller,
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726062431/Screenshot_2024-09-11_214648_oyi5s8.webp",
       desc: "maulana",
       href: "#",
+      price: 500000
     },
     {
       roles: "Super Developer",
@@ -81,7 +86,8 @@ export const StoreData: StoreData = {
       icon: SDeveloper,
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061664/Screenshot_2024-09-11_205340_a3yqb4.webp",
       desc: "The highest authority in the game, responsible for full control over the server, including server maintenance, critical updates, game mechanics, and administrative decisions. They have unlimited access to all systems, tools, and in-game commands.",
-      href: "/buy/super-developer",
+      href: "super developer",
+      price: 250000
     },
     {
       roles: "Developer",
@@ -89,7 +95,8 @@ export const StoreData: StoreData = {
       icon: Developer,
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061664/Screenshot_2024-09-11_205252_f5sfpn.webp",
       desc: "Responsible for creating, testing, and implementing new features and updates within the game. They manage content creation, bug fixes, and ensure the game runs smoothly, with access to high-level tools and administrative commands.",
-      href: "/Developer",
+      href: "Developer",
+      price: 200000
     },
     {
       roles: "Moderator",
@@ -97,7 +104,8 @@ export const StoreData: StoreData = {
       icon: Mod,
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061663/Screenshot_2024-09-11_205221_tfygys.webp",
       desc: "A community overseer tasked with enforcing server rules, managing player behavior, and handling disputes. They can mute, ban, and kick players to maintain a fair and safe gaming environment, with limited administrative access.",
-      href: "/Moderator",
+      href: "Moderator",
+      price: 100000
     },
     {
       roles: "Vip",
@@ -105,7 +113,8 @@ export const StoreData: StoreData = {
       icon: Vip,
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061367/Screenshot_2024-09-11_205121_tsapaz.webp",
       desc: "A privileged role granted to special players, offering exclusive perks like access to unique items, commands, or areas in the game. VIPs do not have administrative power but enjoy benefits unavailable to regular players.",
-      href: "/Vip",
+      href: "Vip",
+      price: 50000
     },
   ],
   level: 5,

@@ -1,9 +1,11 @@
 "use client"
 
 import { StoreData } from "@/data/store";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useContext } from "react";
 import Image from "next/image";
 import StoreModal from "@/components/organisms/StoreModal";
+import { v4 as uuidv4 } from 'uuid';
+import { UserContext } from "@/context";
 
 interface BuyProps {
   name: string
@@ -21,22 +23,63 @@ declare global {
 }
 
 function BuyTemplate({ name }: BuyProps) {
+  const context = useContext(UserContext)
+  if (context === undefined) {
+    throw new Error("UserContext is undefined");
+  }
+  const { StoreCat } = context
   const data = useMemo(() => {
     return StoreData.items.find(item => item.title === name)
   }, [name])
 
   const HandlePay = useCallback(async () => {
+    const formdata = await FuncPurchaseItem()
     const res = await fetch('/api/pay', {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    const data = await res.json()
+      body: formdata,
+    });
+
+    const data = await res.json();
     if (data.token) {
       window.snap.pay(data.token);
     }
-  }, [])
+  }, [name]);
+
+  const FuncPurchaseItem = async () => {
+    const formdata = new FormData();
+    const PurchaseItem = StoreData.items.find(item => item.title === name);
+    formdata.append('order_id', uuidv4() as string);
+
+    const price = PurchaseItem?.price?.toString();
+    if (price) {
+      formdata.append('gross_amount', price);
+    } else {
+      console.error("Price is undefined for the selected item.");
+      return;
+    }
+
+    formdata.append('email', "budi.pra@example.com");
+    return formdata
+  }
+
+  const FuncPurchaseRoles = async () => {
+    const formdata = new FormData();
+    const PurchaseItem = StoreData.items.find(item => item.title === name);
+    formdata.append('order_id', uuidv4() as string);
+
+    const price = PurchaseItem?.price?.toString();
+    if (price) {
+      formdata.append('gross_amount', price);
+    } else {
+      console.error("Price is undefined for the selected item.");
+      return;
+    }
+
+    formdata.append('email', "budi.pra@example.com");
+    return formdata
+  }
+
+
 
   useEffect(() => {
     const script = document.createElement('script')
