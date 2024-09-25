@@ -2,7 +2,6 @@
 const nextConfig = {
   output: "standalone",
   images: {
-    domains: ["api.microlink.io"],
     remotePatterns: [
       {
         protocol: "https",

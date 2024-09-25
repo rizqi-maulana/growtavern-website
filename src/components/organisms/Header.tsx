@@ -24,11 +24,11 @@ export function Header() {
   const { SignUpForm, setSignUpForm, SignInForm, setSignInForm } = context;
 
   const menuItems = [
-    { title: "How to Play", href: '/#howtoplay' },
-    { title: "Community", href: '/#community' },
+    { title: "How to Play", href: '#howtoplay' },
+    { title: "Community", href: '#community' },
     // { title: "Store", href: 'store' },
     { title: "Staff", href: 'staff' },
-    { title: "Auto Profit", href: '/auto-profit' },
+    { title: "Auto Profit", href: 'auto-profit' },
   ];
 
   return (
