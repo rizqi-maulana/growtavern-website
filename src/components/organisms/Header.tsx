@@ -55,7 +55,7 @@ export function Header() {
           <div className="hidden sm:flex gap-4">
             {menuItems.map((item, index) => (
               <NavbarItem key={index}>
-                <Link className="font-GothicBold text-sm" color="foreground" href={item.href}>
+                <Link className="font-GothicBold text-sm" color="foreground" href={`/${item.href}`}>
                   {item.title}
                 </Link>
               </NavbarItem>
@@ -64,7 +64,7 @@ export function Header() {
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex">
-            <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max cursor-not-allowed" onClick={() => setSignInForm(false)}>
+            <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => setSignInForm(true)}>
               SIGN IN
             </Button>
           </NavbarItem>

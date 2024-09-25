@@ -57,7 +57,7 @@ const StoreModal = ({ special }: Props) => {
                   rotate: 0,
                   zIndex: 100,
                 }}
-                className="rounded-xl -mr-4 mt-4 p-1 bg-neutral-800 border-neutral-700 border  flex-shrink-0 overflow-hidden"
+                className="rounded-xl -mr-4 mt-4 p-1 bg-[#1E293B] border-neutral-700 border  flex-shrink-0 overflow-hidden"
               >
                 <Image
                   src={image}

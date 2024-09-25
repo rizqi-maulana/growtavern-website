@@ -44,9 +44,8 @@ function BuyTemplate({ name }: BuyProps) {
     return null
   }
   const data = useMemo(() => {
-    setLoaded(!Loaded)
     return StoreCategory()
-  }, [Loaded, StoreCategory])
+  }, [StoreCategory])
   const HandlePay = useCallback(async () => {
     const formdata = await FuncPurchaseItem()
     const res = await fetch('/api/pay', {
@@ -100,6 +99,7 @@ function BuyTemplate({ name }: BuyProps) {
     script.setAttribute('data-client-key', 'SB-Mid-client-FzN0SMkj0ZifwdwI')
     script.async = true
     document.body.appendChild(script)
+    setLoaded(!Loaded)
     return () => {
       document.body.removeChild(script)
     }
@@ -116,7 +116,7 @@ function BuyTemplate({ name }: BuyProps) {
           })}>
             {
               category === "items" &&
-              <Image src={data?.image as string} alt={Heading} width={100} height={100} quality={100} sizes="100vw" className="relative z-10" />
+              <Image src={data?.image as string} alt={Heading} width={300} height={300} quality={100} sizes="100vw" className="relative z-10 w-full h-full" />
             }
             {
               data?.image &&
