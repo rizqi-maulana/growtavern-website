@@ -14,7 +14,7 @@ export default function SelectionItems({ setStoreCat }: Props) {
         label="Search for an Items"
         placeholder="Select an item"
         className="max-w-xs text-white"
-        defaultSelectedKeys={["Items"]}
+        defaultSelectedKeys={["Player"]}
         onChange={({ target }) => setStoreCat(target.value as string)}
       >
         {StoreItems.map((items) => (

@@ -70,7 +70,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             <div className="embla__slide flex justify-between w-full" key={index}>
               <div className="embla__slide__number relative flex lg:block flex-col pt-5 lg:w-[40%] w-full">
                 <div className='h-full grid place-items-center'>
-                  <Image src={data.image} alt="Slide" width={100} height={100} sizes='100vw' className='rounded-xl' />
+                  <Image src={data.image} alt="Slide" width={500} height={500} sizes='100vw' className='rounded-xl' />
                 </div>
                 <div className='h-max bg-black/50 w-full p-3 md:hidden block md:mt-0 mt-2'>
                   <h3 className='font-GothicBold text-base'>{data.title}</h3>

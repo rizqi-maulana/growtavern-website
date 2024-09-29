@@ -10,7 +10,7 @@ const StoreContainer = () => {
     <section>
       <SelectionItems setStoreCat={setStoreCat} />
       {
-        StoreCat === "Items" ?
+        StoreCat === "Player" ?
           <ItemsCardContainer />
           :
           <StorePlayer />

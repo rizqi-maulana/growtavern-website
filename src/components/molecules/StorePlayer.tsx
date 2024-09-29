@@ -8,6 +8,7 @@ import Title from '@/assets/image/title.png'
 import { LinkPreview } from "../ui/link-preview";
 import { usePathname } from "next/navigation";
 import { StaticImageData } from "next/image";
+import Link from "next/link";
 
 interface Other {
   name: string;
@@ -59,11 +60,13 @@ const StorePlayer = () => {
           <StoreHeading text="Level" />
           <FaAngleDoubleUp color="#00FFE0" size={20} />
         </div>
-        <StoreCard icon="level" text="Level" color="#00FFE0" />
+        <Link href={`${pathname}/buy/level`}>
+          <StoreCard icon="level" text="Level" color="#00FFE0" />
+        </Link>
       </div>
 
       <div className="mt-10">
-        <StoreHeading text="Level" icon={Title} />
+        <StoreHeading text="Title" icon={Title} />
         <div className="flex items-center gap-4 flex-wrap">
           {
             StoreData.titles.map((item: Title, index: number) => (
