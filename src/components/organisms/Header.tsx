@@ -26,8 +26,8 @@ export function Header() {
   const menuItems = [
     { title: "How to Play", href: '#howtoplay' },
     { title: "Community", href: '#community' },
-    { title: "Store", href: 'store' },
-    // { title: "Staff", href: 'staff' },
+    // { title: "Store", href: 'store' },
+    { title: "Staff", href: 'staff' },
     { title: "Auto Profit", href: 'auto-profit' },
   ];
 
