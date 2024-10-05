@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useContext, useCallback, useRef, FormEvent } from "react";
+import { useState, useContext, useCallback, useRef, FormEvent, useEffect } from "react";
 import { UserContext } from "@/context";
 import FormSignUp from "../organisms/FormSignUp";
 import Confetti, { ConfettiRef } from "../magicui/confetti ";
 import toast, { Toaster } from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 function SignUp() {
   const confettiRef = useRef<ConfettiRef>(null);
@@ -18,10 +19,24 @@ function SignUp() {
   const [ShowSuccess, setShowSuccess] = useState<boolean>(false);
   const [Loading, setLoading] = useState<boolean>(false);
 
-  // Menangani pengiriman formulir
+  useEffect(() => {
+    const isAccountCreated = Cookies.get('account_created');
+    if (isAccountCreated) {
+      const creationDate = new Date(isAccountCreated);
+      const now = new Date();
+      const oneMonthLater = new Date(creationDate);
+      oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+
+      if (now < oneMonthLater) {
+        toast.error("Please wait 1 month for you to create an account.");
+        setSignUpForm(false);
+      }
+    }
+  }, [setSignUpForm]);
+
   const HandleSignUp = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     try {
       const res = await fetch("https://api.growtavern.site:1515/create/growid", {
         method: "POST",
@@ -35,14 +50,15 @@ function SignUp() {
           gender: Gender
         }),
       });
-      const data = await res.json()
+      const data = await res.json();
 
       if (data.type === "account_created") {
+        Cookies.set('account_created', new Date().toISOString(), { expires: 30 });
         toast.success(data.message);
         await setShowSuccess(true);
         await confettiRef.current?.fire();
         setTimeout(() => {
-          setSignUpForm(false)
+          setSignUpForm(false);
         }, 3000);
       }
       if (data.type === "name_exist") {
@@ -57,7 +73,7 @@ function SignUp() {
     } catch (error) {
       console.error("Error during signup:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }, [Name, Password, Email, Gender, setSignUpForm]);
 
@@ -67,7 +83,6 @@ function SignUp() {
       <form
         className="w-full h-screen fixed backdrop-blur-lg bg-black/50 z-[99] flex flex-col justify-center"
         onSubmit={HandleSignUp}
-        autoSave="off"
         autoComplete="off"
       >
         <FormSignUp Loading={Loading} />
