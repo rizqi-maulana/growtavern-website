@@ -23,14 +23,13 @@ function SignUp() {
     const isAccountCreated = Cookies.get('account_created');
     if (isAccountCreated) {
       const creationDate = new Date(isAccountCreated);
-      // const now = new Date();
+      const now = new Date();
       const oneMonthLater = new Date(creationDate);
       oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
-      Cookies.remove('account_created')
-      // if (now < oneMonthLater) {
-      //   toast.error("Please wait 1 month for you to create an account.");
-      //   setSignUpForm(false);
-      // }
+      if (now < oneMonthLater) {
+        toast.error("Please wait 1 month for you to create an account.");
+        setSignUpForm(false);
+      }
     }
   }, [setSignUpForm]);
 

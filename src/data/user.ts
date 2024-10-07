@@ -43,7 +43,7 @@ export const UserData: Array<User> = [
     name: ".mdfka",
     role: "Developer",
     position: "Game",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022037/dega_fqwkhy.webp',
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1728316865/WhatsApp_Image_2024-10-07_at_23.45.10_5cd6bd73_bvxhj9.webp',
   },
 
 ]

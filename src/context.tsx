@@ -56,6 +56,7 @@ const AppContext = ({ children }: AppContextProps) => {
         const name = localStorage.getItem("log");
         if (name) {
           const res = await fetch("https://api.growtavern.site:1515/player/validate", {
+            // const res = await fetch("http://localhost:1515/player/validate", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
