@@ -94,7 +94,7 @@ function BuyTemplate({ name }: BuyProps) {
     } else if (pathname.includes('vip')) {
       return 1
     }
-  }, [pathname])
+  }, [])
 
 
 
@@ -206,7 +206,7 @@ function BuyTemplate({ name }: BuyProps) {
     return () => {
       document.body.removeChild(script)
     }
-  }, [Loaded])
+  }, [])
 
   return (
     <>
