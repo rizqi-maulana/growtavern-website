@@ -1,4 +1,4 @@
-import Reseller from '@/assets/image/bitcoin.png'
+// import Reseller from '@/assets/image/bitcoin.png'
 import SDeveloper from '@/assets/image/sdev.png'
 import Developer from '@/assets/image/dev.png'
 import Mod from '@/assets/image/mod.png'

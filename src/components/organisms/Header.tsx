@@ -15,17 +15,17 @@ export function Header() {
   const context = useContext(UserContext);
 
   if (!context) {
-    return <div>Error: UserContext tidak terdefinisi</div>;
+    throw new Error("UserContext must be used within a UserProvider");
   }
-
   const { SignUpForm, setSignUpForm, SignInForm, setSignInForm, IsLoggedIn, setIsLoggedIn } = context;
-
   const HandleLogout = useCallback(async () => {
     setIsLoggedIn(false)
     if (typeof window !== "undefined") {
       localStorage.clear()
     }
-  }, [])
+  }, [setIsLoggedIn])
+
+
 
   const menuItems = [
     { title: "How to Play", href: '#howtoplay' },

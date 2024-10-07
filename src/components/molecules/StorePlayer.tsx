@@ -4,20 +4,20 @@ import StoreHeading from "../molecules/StoreHeading";
 import RolesImage from '@/assets/image/roles.png'
 import { StoreData } from "@/data/store";
 import { FaAngleDoubleUp } from "react-icons/fa";
-import Title from '@/assets/image/title.png'
+// import Title from '@/assets/image/title.png'
 import { LinkPreview } from "../ui/link-preview";
 import { usePathname } from "next/navigation";
 import { StaticImageData } from "next/image";
 import Link from "next/link";
 
-interface Other {
-  name: string;
-  color: string;
-  desc: string;
-  image: string;
-  href: string;
-  category: string
-}
+// interface Other {
+//   name: string;
+//   color: string;
+//   desc: string;
+//   image: string;
+//   href: string;
+//   category: string
+// }
 
 interface Role {
   roles: string;
@@ -30,15 +30,15 @@ interface Role {
   category: string
 }
 
-interface Title {
-  title: string;
-  color: string;
-  desc: string;
-  image: string;
-  href: string;
-  category: string
+// interface Title {
+//   title: string;
+//   color: string;
+//   desc: string;
+//   image: string;
+//   href: string;
+//   category: string
+// }
 
-}
 const StorePlayer = () => {
   const pathname = usePathname()
   return (

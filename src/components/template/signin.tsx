@@ -14,40 +14,7 @@ function SignIn() {
   }
 
   const { Email, Password, setSignInForm, setPlayerData } = context;
-  const HandleLogin = useCallback(async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      // const res = await fetch("https://api.growtavern.site:1515/player/login", {
-      const res = await fetch("https://api.growtavern.site:1515/player/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: Email,
-          pass: Password,
-        }),
-      });
-      const dataserver = await res.json();
-      if (dataserver.type === "success") {
-        toast.success(dataserver.message);
-        setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level, adminlevel: dataserver.data.adminlevel });
-        if (typeof window !== "undefined") {
-          localStorage.setItem("log", dataserver.data.name);
-        }
-        setTimeout(() => {
-          setSignInForm(false);
-          driverObj.drive();
-        }, 3000);
-      } else {
-        toast.error(dataserver.message);
-      }
-    } catch (error) {
-      console.error("Error during signup:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [Email, Password, setSignInForm]);
+
   const driverObj = driver({
     popoverClass: 'driverjs-theme',
     allowClose: false,
@@ -86,6 +53,41 @@ function SignIn() {
       }
     ]
   });
+  const HandleLogin = useCallback(async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      // const res = await fetch("https://api.growtavern.site:1515/player/login", {
+      const res = await fetch("https://api.growtavern.site:1515/player/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: Email,
+          pass: Password,
+        }),
+      });
+      const dataserver = await res.json();
+      if (dataserver.type === "success") {
+        toast.success(dataserver.message);
+        setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level, adminlevel: dataserver.data.adminlevel });
+        if (typeof window !== "undefined") {
+          localStorage.setItem("log", dataserver.data.name);
+        }
+        setTimeout(() => {
+          setSignInForm(false);
+          driverObj.drive();
+        }, 3000);
+      } else {
+        toast.error(dataserver.message);
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [Email, Password, setSignInForm, driverObj, setPlayerData]);
+
   return (
     <>
       <Toaster />

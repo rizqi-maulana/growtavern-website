@@ -82,7 +82,7 @@ function BuyTemplate({ name }: BuyProps) {
   }
   const data = useMemo(() => {
     return StoreCategory()
-  }, [StoreCategory])
+  }, [])
 
   const AdminLevel = useMemo(() => {
     if (pathname.includes('Developer')) {
@@ -94,9 +94,26 @@ function BuyTemplate({ name }: BuyProps) {
     } else if (pathname.includes('vip')) {
       return 1
     }
-  }, [])
+  }, [pathname])
+
+
 
   const HandlePay = useCallback(async () => {
+    const FuncPurchaseItem = async () => {
+      const formdata = new FormData();
+      const PurchaseItem = StoreCategory()
+      formdata.append('order_id', uuidv4() as string);
+      const price = PurchaseItem?.price?.toString();
+      if (price) {
+        formdata.append('gross_amount', price);
+      } else {
+        console.error("Price is undefined for the selected item.");
+        return;
+      }
+
+      formdata.append('email', PlayerData?.email as string);
+      return formdata
+    }
     if (IsLoggedIn === false) {
       setSignInForm(true)
     } else {
@@ -120,7 +137,7 @@ function BuyTemplate({ name }: BuyProps) {
           formdata.append('level', Level.toString())
         }
         window.snap.pay(token, {
-          onSuccess: async function (result) {
+          onSuccess: async function () {
             if (category === "roles") {
               const res = await fetch("https://api.growtavern.site:1515/buy/roles", {
                 method: "POST",
@@ -155,23 +172,9 @@ function BuyTemplate({ name }: BuyProps) {
         });
       }
     }
-  }, [name, IsLoggedIn]);
+  }, [name, IsLoggedIn, AdminLevel, Level, PlayerData, category, setSignInForm]);
 
-  const FuncPurchaseItem = async () => {
-    const formdata = new FormData();
-    const PurchaseItem = StoreCategory()
-    formdata.append('order_id', uuidv4() as string);
-    const price = PurchaseItem?.price?.toString();
-    if (price) {
-      formdata.append('gross_amount', price);
-    } else {
-      console.error("Price is undefined for the selected item.");
-      return;
-    }
 
-    formdata.append('email', PlayerData?.email as string);
-    return formdata
-  }
   const Heading = useMemo(() => {
     if (category === "items" && data && 'title' in data) {
       return data.title;
@@ -203,7 +206,7 @@ function BuyTemplate({ name }: BuyProps) {
     return () => {
       document.body.removeChild(script)
     }
-  }, [])
+  }, [Loaded])
 
   return (
     <>

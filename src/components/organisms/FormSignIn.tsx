@@ -1,4 +1,4 @@
-import SignName from "../molecules/SignName";
+// import SignName from "../molecules/SignName";
 import SubmitBtn from "../atoms/SubmitBtn";
 import SignPass from "../molecules/SignPass";
 import SignEmail from "../molecules/SignEmail";
@@ -11,19 +11,19 @@ interface FormSignInProps {
 }
 
 const FormSignIn = ({ Loading }: FormSignInProps) => {
-  const context = useContext(UserContext);
+  useEffect(() => {
+    if (typeof window !== "undefined" && bouncy) {
+      bouncy.register()
+    }
+  }, [])
 
+  const context = useContext(UserContext);
   // Handle the case where context might be undefined
   if (!context) {
     return <div>Error: UserContext is undefined</div>;
   }
   const { setSignInForm } = context
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && bouncy) {
-      bouncy.register()
-    }
-  }, [])
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#0F172A]">
       <div className="mb-5">
