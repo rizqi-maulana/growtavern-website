@@ -41,3 +41,66 @@ body {
 header {
   max-width: 100% !important;
 }
+
+.driver-popover.driverjs-theme {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title,
+.driver-popover.driverjs-theme .driver-popover-description,
+.driver-popover.driverjs-theme .driver-popover-progress-text {
+  color: #ffffff;
+}
+
+.driver-popover.driverjs-theme button {
+  flex: 1;
+  text-align: center;
+  text-shadow: none;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.driver-popover.driverjs-theme button:hover {
+  background-color: #ffffff;
+  color: #000;
+  border: 2px solid #000; /* Border berubah saat hover */
+}
+
+.driver-popover.driverjs-theme .driver-popover-navigation-btns {
+  justify-content: space-between;
+  gap: 3px;
+}
+
+.driver-popover.driverjs-theme .driver-popover-close-btn {
+  color: #9b9b9b;
+}
+
+.driver-popover.driverjs-theme .driver-popover-close-btn:hover {
+  color: #ffffff;
+}
+
+.driver-popover.driverjs-theme
+  .driver-popover-arrow-side-left.driver-popover-arrow {
+  border-left-color: #1e293b;
+}
+
+.driver-popover.driverjs-theme
+  .driver-popover-arrow-side-right.driver-popover-arrow {
+  border-right-color: #1e293b;
+}
+
+.driver-popover.driverjs-theme
+  .driver-popover-arrow-side-top.driver-popover-arrow {
+  border-top-color: #1e293b;
+}
+
+.driver-popover.driverjs-theme
+  .driver-popover-arrow-side-bottom.driver-popover-arrow {
+  border-bottom-color: #1e293b;
+}

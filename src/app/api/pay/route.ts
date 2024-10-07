@@ -5,10 +5,8 @@ export const POST = async (req: NextRequest) => {
   const email = formdata.get('email')
   const order_id = formdata.get('order_id')
   const gross_amount = formdata.get('gross_amount')
-  // Create Snap API instance
   const snap = new midtransClient.Snap({
-    // Set to true if you want Production Environment (accept real transaction).
-    isProduction: false,
+    isProduction: true,
     serverKey: 'SB-Mid-server-g6o4cDm1kVlk6Sqe71gflMp0'
   });
 

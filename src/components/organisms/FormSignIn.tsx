@@ -2,10 +2,15 @@ import SignName from "../molecules/SignName";
 import SubmitBtn from "../atoms/SubmitBtn";
 import SignPass from "../molecules/SignPass";
 import SignEmail from "../molecules/SignEmail";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "@/context";
+import { bouncy } from "ldrs";
 
-const FormSignIn = () => {
+interface FormSignInProps {
+  Loading: boolean;
+}
+
+const FormSignIn = ({ Loading }: FormSignInProps) => {
   const context = useContext(UserContext);
 
   // Handle the case where context might be undefined
@@ -13,6 +18,12 @@ const FormSignIn = () => {
     return <div>Error: UserContext is undefined</div>;
   }
   const { setSignInForm } = context
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && bouncy) {
+      bouncy.register()
+    }
+  }, [])
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#0F172A]">
       <div className="mb-5">
@@ -23,12 +34,20 @@ const FormSignIn = () => {
           Log in and shop Now!
         </p>
       </div>
-      <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-        <SignName />
-        <SignPass label="Enter your Password" id="signinpass" />
-      </div>
       <SignEmail />
-      <SubmitBtn />
+      <SignPass label="Enter your Password" id="signinpass" />
+      {
+        Loading ?
+          <div className="w-full grid place-content-center">
+            <l-bouncy
+              size="30"
+              speed="1.75"
+              color="white"
+            ></l-bouncy>
+          </div>
+          :
+          <SubmitBtn className="mt-4" Title="Sign In" />
+      }
       <button onClick={() => setSignInForm(false)} className="w-full bg-[#0F172A] rounded-2xl p-2 mt-2 text-sm font-GothicBold text-white">
         Close
       </button>

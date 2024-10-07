@@ -4,13 +4,13 @@ import ItemsCardContainer from "./ItemsCardContainer";
 import StorePlayer from "../molecules/StorePlayer";
 import { useState } from "react";
 const StoreContainer = () => {
-  const [StoreCat, setStoreCat] = useState<string | undefined>('Items');
+  const [StoreCat, setStoreCat] = useState<string | undefined>('Player');
 
   return (
     <section>
-      <SelectionItems setStoreCat={setStoreCat} />
+      {/* <SelectionItems setStoreCat={setStoreCat} /> */}
       {
-        StoreCat === "Player" ?
+        StoreCat === "Items" ?
           <ItemsCardContainer />
           :
           <StorePlayer />

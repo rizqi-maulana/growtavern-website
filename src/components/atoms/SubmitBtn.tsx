@@ -1,7 +1,13 @@
 import { UserContext } from "@/context";
 import { useContext } from "react";
 
-const SubmitBtn = () => {
+interface ButtonProps {
+  className?: string;
+  isDisabled?: boolean;
+  Title: string
+}
+
+const SubmitBtn = ({ className, isDisabled, Title }: ButtonProps) => {
   const context = useContext(UserContext);
 
   // Ensure context is defined
@@ -9,15 +15,8 @@ const SubmitBtn = () => {
     throw new Error("SubmitBtn must be used within a UserContextProvider");
   }
 
-  const { Name, Email, Password, Gender, VerifyPassword } = context;
 
-  const isDisabled =
-    (Name === undefined || Name.trim().length === 0 || Name.includes(" ")) ||
-    (Email === undefined || Email.trim().length === 0 || Email.includes(" ")) ||
-    (Password === undefined || Password.trim().length === 0 || Password.includes(" ")) ||
-    (VerifyPassword === undefined || VerifyPassword.trim().length === 0 || VerifyPassword.includes(" ")) ||
-    (Password !== VerifyPassword) ||
-    Gender === undefined;
+
 
   const BottomGradient = () => {
     return (
@@ -33,11 +32,11 @@ const SubmitBtn = () => {
       style={{
         borderRadius: 10,
       }}
-      className={`bg-gradient-to-br relative group/btn w-full mb-4 text-white h-10 font-GothicSemiBold shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] ${isDisabled ? "cursor-not-allowed disabled:bg-slate-500 disabled:text-slate-300" : ""}`}
+      className={`${className} bg-gradient-to-br relative group/btn w-full mb-4 text-white h-10 font-GothicSemiBold shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] ${isDisabled ? "cursor-not-allowed disabled:bg-slate-500 disabled:text-slate-300" : ""}`}
       type="submit"
       disabled={isDisabled}
     >
-      Sign up &rarr;
+      {Title} &rarr;
       <BottomGradient />
     </button>
   );

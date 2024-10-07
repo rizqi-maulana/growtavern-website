@@ -1,6 +1,15 @@
 "use client"
-import { createContext, useState } from "react";
+import React, { createContext, Fragment, useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import Loading from "./components/template/Loading";
 type gender = "man" | "woman"
+
+interface PlayerDataProps {
+  name: string;
+  email: string;
+  level: string,
+  adminlevel: number;
+}
 
 interface UserContextProps {
   SignUpForm: boolean
@@ -17,6 +26,10 @@ interface UserContextProps {
   setGender: React.Dispatch<React.SetStateAction<gender | undefined>>,
   VerifyPassword: string | undefined,
   setVerifyPassword: React.Dispatch<React.SetStateAction<string | undefined>>
+  PlayerData: PlayerDataProps | undefined,
+  setPlayerData: React.Dispatch<React.SetStateAction<PlayerDataProps | undefined>>
+  IsLoggedIn: boolean,
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined)
@@ -27,6 +40,8 @@ interface AppContextProps {
 
 
 const AppContext = ({ children }: AppContextProps) => {
+  const [PlayerData, setPlayerData] = useState<PlayerDataProps | undefined>(undefined);
+  const [IsLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [SignUpForm, setSignUpForm] = useState<boolean>(false);
   const [SignInForm, setSignInForm] = useState<boolean>(false);
   const [Name, setName] = useState<string | undefined>(undefined);
@@ -35,10 +50,41 @@ const AppContext = ({ children }: AppContextProps) => {
   const [Email, setEmail] = useState<string | undefined>(undefined);
   const [Gender, setGender] = useState<gender | undefined>('man');
 
+  useEffect(() => {
+    const CheckLogin = async () => {
+      if (typeof window !== "undefined") {
+        const name = localStorage.getItem("log");
+        if (name) {
+          const res = await fetch("https://api.growtavern.site:1515/player/validate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name
+            }),
+          })
+          const dataserver = await res.json()
+          if (dataserver.type === 'success') {
+            setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level, adminlevel: dataserver.data.adminlevel })
+            setIsLoggedIn(true)
+          } else {
+            toast.error(dataserver.message)
+          }
+        }
+      }
+    }
+    CheckLogin()
+  }, [])
+
   return (
-    <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword }} >
-      {children}
-    </UserContext.Provider >
+    <Fragment>
+      <Toaster />
+      <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, IsLoggedIn, setIsLoggedIn }} >
+        <Loading />
+        {children}
+      </UserContext.Provider >
+    </Fragment>
   )
 }
 export default AppContext;

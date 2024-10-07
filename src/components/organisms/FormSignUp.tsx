@@ -26,7 +26,15 @@ const FormSignUp = ({ Loading }: FormSignUpProps) => {
   if (!context) {
     return <div>Error: UserContext is undefined</div>;
   }
-  const { setSignUpForm } = context
+  const { setSignUpForm, Name, Email, Password, VerifyPassword, Gender } = context
+
+  const isDisabled =
+    (Name === undefined || Name.trim().length === 0 || Name.includes(" ")) ||
+    (Email === undefined || Email.trim().length === 0 || Email.includes(" ")) ||
+    (Password === undefined || Password.trim().length === 0 || Password.includes(" ")) ||
+    (VerifyPassword === undefined || VerifyPassword.trim().length === 0 || VerifyPassword.includes(" ")) ||
+    (Password !== VerifyPassword) ||
+    Gender === undefined;
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#0F172A]">
@@ -59,7 +67,7 @@ const FormSignUp = ({ Loading }: FormSignUpProps) => {
             ></l-bouncy>
           </div>
           :
-          <SubmitBtn />
+          <SubmitBtn isDisabled={isDisabled} Title="Sign up" />
       }
       <button onClick={() => setSignUpForm(false)} className="w-full bg-[#0F172A] rounded-2xl p-2 text-sm font-GothicBold text-white">
         Close

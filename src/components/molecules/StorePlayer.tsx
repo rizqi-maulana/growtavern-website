@@ -25,6 +25,7 @@ interface Role {
   icon: string | StaticImageData;
   image: string;
   desc: string;
+  commands: string;
   href: string;
   category: string
 }
@@ -41,7 +42,7 @@ interface Title {
 const StorePlayer = () => {
   const pathname = usePathname()
   return (
-    <section>
+    <section className="element-2">
       <div className="mt-10">
         <StoreHeading text="Roles" icon={RolesImage} />
         <div className="flex items-center gap-4 flex-wrap">
@@ -60,12 +61,12 @@ const StorePlayer = () => {
           <StoreHeading text="Level" />
           <FaAngleDoubleUp color="#00FFE0" size={20} />
         </div>
-        <Link href={`${pathname}/buy/level`}>
+        <Link href={`${pathname}/buy/level?category=level`}>
           <StoreCard icon="level" text="Level" color="#00FFE0" />
         </Link>
       </div>
 
-      <div className="mt-10">
+      {/* <div className="mt-10">
         <StoreHeading text="Title" icon={Title} />
         <div className="flex items-center gap-4 flex-wrap">
           {
@@ -77,9 +78,9 @@ const StorePlayer = () => {
             )
           }
         </div>
-      </div>
+      </div> */}
 
-      <div className="mt-10">
+      {/* <div className="mt-10">
         <StoreHeading text="Other" icon={Title} />
         <div className="flex items-center gap-4 flex-wrap">
           {
@@ -91,7 +92,7 @@ const StorePlayer = () => {
             )
           }
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
