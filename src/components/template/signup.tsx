@@ -23,13 +23,14 @@ function SignUp() {
     const isAccountCreated = Cookies.get('account_created');
     if (isAccountCreated) {
       const creationDate = new Date(isAccountCreated);
-      const now = new Date();
+      // const now = new Date();
       const oneMonthLater = new Date(creationDate);
       oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
-      if (now < oneMonthLater) {
-        toast.error("Please wait 1 week for you to create an account.");
-        setSignUpForm(false);
-      }
+      Cookies.remove('account_created');
+      // if (now < oneMonthLater) {
+      //   toast.error("Please wait 1 month for you to create an account.");
+      //   setSignUpForm(false);
+      // }
     }
   }, [setSignUpForm]);
 
@@ -52,7 +53,7 @@ function SignUp() {
       const data = await res.json();
 
       if (data.type === "account_created") {
-        Cookies.set('account_created', new Date().toISOString(), { expires: 7 });
+        Cookies.set('account_created', new Date().toISOString(), { expires: 30 });
         toast.success(data.message);
         await setShowSuccess(true);
         await confettiRef.current?.fire();
