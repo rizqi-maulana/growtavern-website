@@ -110,7 +110,7 @@ export const StoreData: StoreData = {
       desc: "The highest authority in the game, responsible for full control over the server, including server maintenance, critical updates, game mechanics, and administrative decisions. They have unlimited access to all systems, tools, and in-game commands.",
       commands: "help,proxy,pay,troll,cheer,freezeworld,msb,dsb,stream,tapeworld,news,modfly,reloadworld,resetworld,trashall,skin,onehit,mute,curse,unmute,uncurse,rainbow,info,summon,ghost,hide,unequip,nuke,warpto,invis,mc,nick,valentine,v,vsb,surgerys,warp,inventory,rwarp,chatcolor,search,find,kickall,syncroles,hidestatus,online,msg,status,mods,sb,sdb,top,ignore,cheats,time,home,sethome,gethome,who,me,radio,mods,uba,r,go,hub,rgo,pull,kick,ban,wave,dance,love,sleep,facepalm,fp,smh,yes,no,omg,idk,shrug,trade,furious,rolleyes,unaccess,report,rate,foldarms,fa,stubborn,fold,fc,gc,gwarp,guild",
       href: "Super Developer",
-      price: 250000,
+      price: 200000,
       category: "roles"
 
     },
@@ -122,7 +122,7 @@ export const StoreData: StoreData = {
       desc: "Responsible for creating, testing, and implementing new features and updates within the game. They manage content creation, bug fixes, and ensure the game runs smoothly, with access to high-level tools and administrative commands.",
       commands: "help,proxy,pay,troll,kit,cheer,skin,onehit,msb,dsb,stream,mute,news,curse,unmute,uncurse,rainbow,info,summon,ghost,hide,unequip,nuke,warpto,invis,mc,nick,valentine,v,vsb,surgerys,warp,inventory,rwarp,chatcolor,search,find,kickall,syncroles,hidestatus,online,msg,status,mods,sb,sdb,top,ignore,cheats,time,home,sethome,gethome,who,me,radio,mods,uba,r,go,hub,rgo,pull,kick,ban,wave,dance,love,sleep,facepalm,fp,smh,yes,no,omg,idk,shrug,trade,furious,rolleyes,unaccess,report,rate,foldarms,fa,stubborn,fold,fc,gc,gwarp,guild",
       href: "Developer",
-      price: 200000,
+      price: 150000,
       category: "roles"
 
     },
@@ -134,7 +134,7 @@ export const StoreData: StoreData = {
       desc: "A community overseer tasked with enforcing server rules, managing player behavior, and handling disputes. They can mute, ban, and kick players to maintain a fair and safe gaming environment, with limited administrative access.",
       commands: "help,proxy,pay,kit,troll,cheer,rainbow,stream,msb,info,news,summon,ghost,hide,unequip,nuke,warpto,invis,mc,nick,valentine,v,vsb,surgerys,warp,inventory,rwarp,chatcolor,search,find,kickall,syncroles,hidestatus,online,msg,status,mods,sb,sdb,top,ignore,cheats,time,home,sethome,gethome,who,me,radio,mods,uba,r,go,hub,rgo,pull,kick,ban,wave,dance,love,sleep,facepalm,fp,smh,yes,no,omg,idk,shrug,trade,furious,rolleyes,unaccess,report,rate,foldarms,fa,stubborn,fold,fc,gc,gwarp,guild",
       href: "Moderator",
-      price: 100000,
+      price: 50000,
       category: "roles"
 
     },
