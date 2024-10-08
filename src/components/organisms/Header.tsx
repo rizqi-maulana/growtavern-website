@@ -67,7 +67,7 @@ export function Header() {
           </div>
         </NavbarContent>
         <NavbarContent justify="end">
-          <NavbarItem className={clsx({
+          {/* <NavbarItem className={clsx({
             'hidden': IsLoggedIn
           })}>
             {
@@ -80,17 +80,17 @@ export function Header() {
                   SIGN IN
                 </Button>
             }
-          </NavbarItem>
+          </NavbarItem> */}
           <NavbarItem className={clsx({
             'hidden': IsLoggedIn
           })}>
             {
               IsLoggedIn ?
-                <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max xl:hidden" onClick={() => HandleLogout()}>
+                <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => HandleLogout()}>
                   SIGN OUT
                 </Button>
                 :
-                <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max xl:hidden" onClick={() => setSignInForm(true)}>
+                <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => setSignInForm(true)}>
                   SIGN IN
                 </Button>
             }
