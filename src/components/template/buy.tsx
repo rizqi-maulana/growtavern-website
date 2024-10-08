@@ -199,7 +199,7 @@ function BuyTemplate({ name }: BuyProps) {
   useEffect(() => {
     const script = document.createElement('script')
     script.src = "https://app.midtrans.com/snap/snap.js"
-    script.setAttribute('data-client-key', 'SB-Mid-client-FzN0SMkj0ZifwdwI')
+    script.setAttribute('data-client-key', 'Mid-client-1hMh_5qrnjKQxJ0o')
     script.async = true
     document.body.appendChild(script)
     setLoaded(!Loaded)
