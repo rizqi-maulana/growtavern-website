@@ -5,7 +5,7 @@ import RolesImage from '@/assets/image/roles.png'
 import { StoreData } from "@/data/store";
 import { FaAngleDoubleUp } from "react-icons/fa";
 // import Title from '@/assets/image/title.png'
-import { LinkPreview } from "../ui/link-preview";
+// import { LinkPreview } from "../ui/link-preview";
 import { usePathname } from "next/navigation";
 import { StaticImageData } from "next/image";
 import Link from "next/link";
@@ -48,9 +48,11 @@ const StorePlayer = () => {
         <div className="flex items-center gap-4 flex-wrap">
           {
             StoreData.roles.map((item: Role, index: number) => (
-              <LinkPreview url={`${pathname}/buy/${item.href}?category=${item.category}`} isStatic imageSrc={item.image} key={index} quality={100}>
+              // <LinkPreview url={`${pathname}/buy/${item.href}?category=${item.category}`} isStatic imageSrc={item.image} key={index} quality={100}>
+              <Link key={index} href={`${pathname}/buy/${item.href}?category=${item.category}`}>
                 <StoreCard color={item.color} icon={item.icon} text={item.roles} />
-              </LinkPreview>
+              </Link>
+              // </LinkPreview>
             ))
           }
         </div>

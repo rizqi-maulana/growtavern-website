@@ -8,7 +8,8 @@ export const POST = async (req: NextRequest) => {
   const adminlevel = await formdata.get('adminlevel') as string
   try {
     if (type === "roles") {
-      const res = await fetch("https://api.growtavern.site:1515/buy/roles", {
+      // const res = await fetch("https://api.growtavern.site:1515/buy/roles", {
+      const res = await fetch("http://localhost:1515/buy/roles", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,7 +26,8 @@ export const POST = async (req: NextRequest) => {
         message: 'sukes'
       })
     } else if (type === "level") {
-      const res = await fetch("https://api.growtavern.site:1515/buy/level", {
+      // const res = await fetch("https://api.growtavern.site:1515/buy/level", {
+      const res = await fetch("http://localhost:1515/buy/level", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -8,6 +8,7 @@ import { UserContext } from "@/context";
 import SignIn from "../template/signin";
 import { WebConfig } from "@/WebConfig";
 import clsx from "clsx";
+// import HeaderProfile from "./HeaderProfile";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -17,7 +18,7 @@ export function Header() {
   if (!context) {
     throw new Error("UserContext must be used within a UserProvider");
   }
-  const { SignUpForm, setSignUpForm, SignInForm, setSignInForm, IsLoggedIn, setIsLoggedIn } = context;
+  const { SignUpForm, SignInForm, setSignInForm, IsLoggedIn, setIsLoggedIn } = context;
   const HandleLogout = useCallback(async () => {
     setIsLoggedIn(false)
     if (typeof window !== "undefined") {
@@ -94,18 +95,23 @@ export function Header() {
                   SIGN IN
                 </Button>
             }
-            <Button onClick={() => setSignUpForm(!SignUpForm)} className="bg-[#179BE6] text-white font-GothicBold" variant="flat">
+            {/* <Button onClick={() => setSignUpForm(!SignUpForm)} className="bg-[#179BE6] text-white font-GothicBold" variant="flat">
               SIGN UP
-            </Button>
+            </Button> */}
           </NavbarItem>
           <NavbarItem className={clsx({
             'hidden': !IsLoggedIn
           })}>
             {
               IsLoggedIn &&
-              <Button className="bg-danger text-white w-max" onClick={() => HandleLogout()}>
-                SIGN OUT
-              </Button>
+              (
+                <div className="flex items-center gap-3">
+                  {/* <HeaderProfile /> */}
+                  <Button className="bg-danger text-white w-max" onClick={() => HandleLogout()}>
+                    SIGN OUT
+                  </Button>
+                </div>
+              )
             }
           </NavbarItem>
         </NavbarContent>

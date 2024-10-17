@@ -56,8 +56,8 @@ function SignIn() {
   const HandleLogin = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://api.growtavern.site:1515/player/login", {
-        // const res = await fetch("http://localhost:1515/player/login", {
+      // const res = await fetch("https://api.growtavern.site:1515/player/login", {
+      const res = await fetch("http://localhost:1515/player/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ function SignIn() {
       const dataserver = await res.json();
       if (dataserver.type === "success") {
         toast.success(dataserver.message);
-        setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level, adminlevel: dataserver.data.adminlevel });
+        setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level, adminlevel: dataserver.data.adminlevel, inventory: dataserver.data.inventory });
         if (typeof window !== "undefined") {
           localStorage.setItem("log", dataserver.data.name);
         }

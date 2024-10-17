@@ -3,6 +3,7 @@ import Footer from "@/components/organisms/Footer";
 import AppContext from "@/context";
 import './globals.css'
 import '../assets/css/embla.css'
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen">
+      <body className="min-h-screen dark">
         <AppContext>
           <Header />
           <div className="xl:px-20 px-5">

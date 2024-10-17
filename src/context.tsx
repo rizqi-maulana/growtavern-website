@@ -9,6 +9,7 @@ interface PlayerDataProps {
   email: string;
   level: string,
   adminlevel: number;
+  inventory: number[]
 }
 
 interface UserContextProps {
@@ -55,8 +56,8 @@ const AppContext = ({ children }: AppContextProps) => {
       if (typeof window !== "undefined") {
         const name = localStorage.getItem("log");
         if (name) {
-          const res = await fetch("https://api.growtavern.site:1515/player/validate", {
-            // const res = await fetch("http://localhost:1515/player/validate", {
+          // const res = await fetch("https://api.growtavern.site:1515/player/validate", {
+          const res = await fetch("http://localhost:1515/player/validate", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -67,7 +68,7 @@ const AppContext = ({ children }: AppContextProps) => {
           })
           const dataserver = await res.json()
           if (dataserver.type === 'success') {
-            setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level, adminlevel: dataserver.data.adminlevel })
+            setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level, adminlevel: dataserver.data.adminlevel, inventory: dataserver.data.inventory })
             setIsLoggedIn(true)
           } else {
             toast.error(dataserver.message)
