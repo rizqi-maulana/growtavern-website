@@ -139,8 +139,8 @@ function BuyTemplate({ name }: BuyProps) {
         window.snap.pay(token, {
           onSuccess: async function () {
             if (category === "roles") {
-              // const res = await fetch("https://api.growtavern.site:1515/buy/roles", {
-              const res = await fetch("http://localhost:1515/buy/roles", {
+              const res = await fetch("https://api.growtavern.site:1515/buy/roles", {
+                // const res = await fetch("http://localhost:1515/buy/roles", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

@@ -8,7 +8,7 @@ import { UserContext } from "@/context";
 import SignIn from "../template/signin";
 import { WebConfig } from "@/WebConfig";
 import clsx from "clsx";
-// import HeaderProfile from "./HeaderProfile";
+import HeaderProfile from "./HeaderProfile";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -106,7 +106,7 @@ export function Header() {
               IsLoggedIn &&
               (
                 <div className="flex items-center gap-3">
-                  {/* <HeaderProfile /> */}
+                  <HeaderProfile />
                   <Button className="bg-danger text-white w-max" onClick={() => HandleLogout()}>
                     SIGN OUT
                   </Button>
