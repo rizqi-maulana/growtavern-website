@@ -18,7 +18,7 @@ export function Header() {
   if (!context) {
     throw new Error("UserContext must be used within a UserProvider");
   }
-  const { SignUpForm, SignInForm, setSignInForm, IsLoggedIn, setIsLoggedIn } = context;
+  const { SignUpForm, SignInForm, setSignInForm, IsLoggedIn, setIsLoggedIn, setSignUpForm } = context;
   const HandleLogout = useCallback(async () => {
     setIsLoggedIn(false)
     if (typeof window !== "undefined") {
@@ -95,9 +95,9 @@ export function Header() {
                   SIGN IN
                 </Button>
             }
-            {/* <Button onClick={() => setSignUpForm(!SignUpForm)} className="bg-[#179BE6] text-white font-GothicBold" variant="flat">
+            <Button onClick={() => setSignUpForm(!SignUpForm)} className="bg-[#179BE6] text-white font-GothicBold" variant="flat">
               SIGN UP
-            </Button> */}
+            </Button>
           </NavbarItem>
           <NavbarItem className={clsx({
             'hidden': !IsLoggedIn
