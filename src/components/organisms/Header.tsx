@@ -31,7 +31,7 @@ export function Header() {
   const menuItems = [
     { title: "How to Play", href: '#howtoplay' },
     { title: "Community", href: '#community' },
-    { title: "Store", href: 'store' },
+    // { title: "Store", href: 'store' },
     { title: "Staff", href: 'staff' },
     { title: "Auto Profit", href: 'auto-profit' },
   ];
@@ -85,7 +85,7 @@ export function Header() {
           <NavbarItem className={clsx({
             'hidden': IsLoggedIn
           })}>
-            {
+            {/* {
               IsLoggedIn ?
                 <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => HandleLogout()}>
                   SIGN OUT
@@ -94,7 +94,7 @@ export function Header() {
                 <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => setSignInForm(true)}>
                   SIGN IN
                 </Button>
-            }
+            } */}
             <Button onClick={() => setSignUpForm(!SignUpForm)} className="bg-[#179BE6] text-white font-GothicBold" variant="flat">
               SIGN UP
             </Button>
