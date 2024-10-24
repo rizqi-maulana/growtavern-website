@@ -18,7 +18,7 @@ export function Header() {
   if (!context) {
     throw new Error("UserContext must be used within a UserProvider");
   }
-  const { SignUpForm, SignInForm, setSignInForm, IsLoggedIn, setIsLoggedIn, setSignUpForm } = context;
+  const { SignUpForm, SignInForm, IsLoggedIn, setIsLoggedIn, setSignUpForm } = context;
   const HandleLogout = useCallback(async () => {
     setIsLoggedIn(false)
     if (typeof window !== "undefined") {
