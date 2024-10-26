@@ -18,7 +18,7 @@ export const HowToPlayData: HowToPlayItem[] = [
     Host: `
     143.198.207.170 www.growtopia1.com
 143.198.207.170 www.growtopia2.com
-    `,
+`,
     Content: `Play GrowTavern on PC
    1 - Press ⊞ Win+R (Windows Key + R) to open up the "Run" window.
 2 - Type in 
