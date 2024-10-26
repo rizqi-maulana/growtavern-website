@@ -16,8 +16,8 @@ export const HowToPlayData: HowToPlayItem[] = [
     Icon: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022233/monitor_ws0x38.webp',
     Image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726023030/game-desktop_cw0c54.webp',
     Host: `
-    139.59.65.54 www.growtopia1.com
-139.59.65.54 www.growtopia2.com
+    143.198.207.170 www.growtopia1.com
+143.198.207.170 www.growtopia2.com
     `,
     Content: `Play GrowTavern on PC
    1 - Press ⊞ Win+R (Windows Key + R) to open up the "Run" window.
@@ -26,8 +26,8 @@ C:\Windows\System32\drivers\etc in the textbox.
 3 - Find file named hosts.
 4 - Right-click on "hosts" file and edit it with Notepad/text editor.
 5 - Add in the IP:
-139.59.65.54 www.growtopia1.com
-139.59.65.54 www.growtopia2.com
+143.198.207.170 www.growtopia1.com
+143.198.207.170 www.growtopia2.com
 6 - Save the file.`
   },
   {
@@ -52,8 +52,8 @@ Enjoy !.`
     Icon: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022232/mac-os-logo_olbca9.webp',
     Image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726023034/Characters_wsvcpp.webp',
     Host: `
-    www.growtopia1.com = 139.59.65.54
-www.growtopia2.com = 139.59.65.54`,
+    www.growtopia1.com = 143.198.207.170
+www.growtopia2.com = 143.198.207.170`,
     Content: `Play GrowTavern on IOS
    1 - Download surge 5 on appstore 
 2 - Cick on " default " at the left top 
@@ -63,7 +63,7 @@ www.growtopia2.com = 139.59.65.54`,
 [Rule]
 FINAL,DIRECT
 [Host]
-www.growtopia1.com=139.59.65.54
-www.growtopia2.com=139.59.65.54`
+www.growtopia1.com=143.198.207.170
+www.growtopia2.com=143.198.207.170`
   },
 ]
