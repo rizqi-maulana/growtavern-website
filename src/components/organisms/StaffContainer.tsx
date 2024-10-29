@@ -11,33 +11,37 @@ const StaffContainer = () => {
   const developers = UserData.filter(user => user.role === "Developer");
 
   return (
-    <div className="flex flex-col lg:h-[740px] w-full mt-10 flex-wrap gap-5">
-      {owners.length > 0 && (
-        <>
-          <StaffHeading text="Owner" icon={OwnerIcon} />
-          {owners.map((user) => (
-            <StaffCard key={user.id} src={user.image} role={user.role} desc={user.name} />
-          ))}
-        </>
-      )}
+    <div className="flex items-start w-3/4 mt-10 justify-between">
+      <div className="flex flex-col gap-5">
+        {owners.length > 0 && (
+          <>
+            <StaffHeading text="Owner" icon={OwnerIcon} />
+            {owners.map((user) => (
+              <StaffCard key={user.id} src={user.image} role={user.role} desc={user.name} />
+            ))}
+          </>
+        )}
 
-      {coOwners.length > 0 && (
-        <>
-          <StaffHeading text="Co Owner" icon={CoOwner} />
-          {coOwners.map((user) => (
-            <StaffCard key={user.id} src={user.image} role={user.role} desc={user.name} />
-          ))}
-        </>
-      )}
+        {coOwners.length > 0 && (
+          <>
+            <StaffHeading text="Co Owner" icon={CoOwner} />
+            {coOwners.map((user) => (
+              <StaffCard key={user.id} src={user.image} role={user.role} desc={user.name} />
+            ))}
+          </>
+        )}
+      </div>
+      <div className="flex flex-col gap-5">
+        {developers.length > 0 && (
+          <>
+            <StaffHeading text="Developer" icon={Developer} />
+            {developers.map((user) => (
+              <StaffCard key={user.id} src={user.image} position={user.position} role={user.role} desc={user.name} />
+            ))}
+          </>
+        )}
+      </div>
 
-      {developers.length > 0 && (
-        <>
-          <StaffHeading text="Developer" icon={Developer} />
-          {developers.map((user) => (
-            <StaffCard key={user.id} src={user.image} position={user.position} role={user.role} desc={user.name} />
-          ))}
-        </>
-      )}
     </div>
   );
 }

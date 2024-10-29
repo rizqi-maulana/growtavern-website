@@ -9,34 +9,22 @@ interface User {
 export const UserData: Array<User> = [
   {
     id: 1,
-    name: "dfozzonly",
+    name: "rio_mondragon",
     role: "Owner",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022038/dava_jf4z3u.webp',
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730215774/WhatsApp_Image_2024-10-29_at_23.29.02_d26371ae_maxnwb.webp',
   },
   {
     id: 2,
-    name: "nopaldzaky",
+    name: "poyyyzz",
     role: "Co Owner",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022039/nopal_xzfwld.webp',
-  },
-  {
-    id: 3,
-    name: "Levan",
-    role: "Co Owner",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022840/levan_vajmtj.webp',
-  },
-  {
-    id: 4,
-    name: "Ano",
-    role: "Co Owner",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726069173/WhatsApp_Image_2024-09-09_at_16.10.39_63004b98_t7nxry.webp',
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730215511/WhatsApp_Image_2024-10-29_at_23.13.31_98288332_fgppe7.webp',
   },
   {
     id: 5,
-    name: "Maulanya",
+    name: "maulanya",
     role: "Developer",
     position: "Website",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022839/maulana_e8lddz.webp',
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730219088/WhatsApp_Image_2024-10-30_at_00.22.26_a26246c5_vy7m2w.webp',
   },
   {
     id: 6,
