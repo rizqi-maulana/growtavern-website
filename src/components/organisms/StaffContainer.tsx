@@ -11,8 +11,8 @@ const StaffContainer = () => {
   const developers = UserData.filter(user => user.role === "Developer");
 
   return (
-    <div className="flex items-start w-3/4 mt-10 justify-between">
-      <div className="flex flex-col gap-5">
+    <div className="flex flex-col md:flex-row items-start w-full md:w-3/4 mt-10 justify-between">
+      <div className="flex flex-col gap-5 w-full">
         {owners.length > 0 && (
           <>
             <StaffHeading text="Owner" icon={OwnerIcon} />
@@ -31,7 +31,7 @@ const StaffContainer = () => {
           </>
         )}
       </div>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 w-full">
         {developers.length > 0 && (
           <>
             <StaffHeading text="Developer" icon={Developer} />
