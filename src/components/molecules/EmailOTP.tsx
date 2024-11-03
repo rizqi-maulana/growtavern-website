@@ -68,7 +68,7 @@ const PhoneOTP = () => {
         <Label htmlFor="email">Verify OTP</Label>
         <Input onChange={(e) => setOtpCode(e.target.value)} id="email" placeholder="16**" type="text" readOnly={Click} />
         {
-          Email !== "undefined" ?
+          Email?.length === 0 ?
             <ButtonSendOTP Title="Get OTP" HandleSendOTP={HandleSendOTP} />
             :
             <ButtonSendVerifyOTP Title="Verify OTP" HandleVerifyOTP={HandleVerifyOTP} />
