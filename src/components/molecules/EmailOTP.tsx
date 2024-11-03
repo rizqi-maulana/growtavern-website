@@ -11,26 +11,24 @@ import toast, { Toaster } from "react-hot-toast";
 const EmailOTP = () => {
   const context = useContext(UserContext);
   const [Click, setClick] = useState<boolean>(true);
+  const supabase = createClient();
 
   // Handle the case where context might be undefined
   if (!context) {
-    return <div>Error: UserContext is undefined</div>;
+    throw new Error("UserContext is undefined");
   }
 
   const { setOtpCode, OtpCode, Email, setVerifyEmail } = context;
 
-  const supabase = createClient();
-
   const HandleSendOTP = useCallback(async () => {
-    const { data, error } = await supabase.auth.signInWithOtp({
+    await supabase.auth.signInWithOtp({
       email: Email as string,
       options: {
         // set this to false if you do not want the user to be automatically signed up
         shouldCreateUser: false,
       },
     })
-    console.log(data, error)
-    toast.success('Check you email...')
+    toast.success('we have sent you an email')
     setClick(false)
 
   }, [Email])

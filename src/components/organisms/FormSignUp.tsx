@@ -10,7 +10,6 @@ import { UserContext } from "@/context";
 import SignVerifyPass from "../molecules/SignVerifyPass";
 import EmailOTP from "../molecules/EmailOTP";
 import { bouncy } from 'ldrs'
-import ButtonSendOTP from "../atoms/ButtonSendOTP";
 
 
 interface FormSignUpProps {
