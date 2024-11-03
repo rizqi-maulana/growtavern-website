@@ -25,7 +25,7 @@ const EmailOTP = () => {
       email: Email as string,
       options: {
         // set this to false if you do not want the user to be automatically signed up
-        shouldCreateUser: false,
+        shouldCreateUser: true,
       },
     })
     toast.success('we have sent you an email')
