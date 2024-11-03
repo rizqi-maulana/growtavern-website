@@ -21,7 +21,7 @@ const EmailOTP = () => {
   const { setOtpCode, OtpCode, Email, setVerifyEmail } = context;
 
   const HandleSendOTP = useCallback(async () => {
-    await supabase.auth.signInWithOtp({
+    const { data, error } = await supabase.auth.signInWithOtp({
       email: Email as string,
       options: {
         // set this to false if you do not want the user to be automatically signed up
@@ -30,7 +30,10 @@ const EmailOTP = () => {
     })
     toast.success('we have sent you an email')
     setClick(false)
-
+    if (error)
+      console.log(error)
+    else
+      console.log(data)
   }, [Email])
 
   const HandleVerifyOTP = useCallback(async () => {
