@@ -55,7 +55,7 @@ const PhoneOTP = () => {
       if (session.user.role) {
         setVerifyEmail(true)
         setClick(true)
-        toast.success('Number Verified')
+        toast.success('Email Verified')
       }
     } else {
       toast.error('TOKEN Expired')
