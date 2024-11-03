@@ -8,7 +8,9 @@ import SignGender from "../molecules/SignGender";
 import { useContext, useEffect } from "react";
 import { UserContext } from "@/context";
 import SignVerifyPass from "../molecules/SignVerifyPass";
+import EmailOTP from "../molecules/EmailOTP";
 import { bouncy } from 'ldrs'
+import ButtonSendOTP from "../atoms/ButtonSendOTP";
 
 
 interface FormSignUpProps {
@@ -26,7 +28,7 @@ const FormSignUp = ({ Loading }: FormSignUpProps) => {
   if (!context) {
     return <div>Error: UserContext is undefined</div>;
   }
-  const { setSignUpForm, Name, Email, Password, VerifyPassword, Gender } = context
+  const { setSignUpForm, Name, Email, Password, VerifyPassword, Gender, VerifyEmail } = context
 
   const isDisabled =
     (Name === undefined || Name.trim().length === 0 || Name.includes(" ")) ||
@@ -34,10 +36,10 @@ const FormSignUp = ({ Loading }: FormSignUpProps) => {
     (Password === undefined || Password.trim().length === 0 || Password.includes(" ")) ||
     (VerifyPassword === undefined || VerifyPassword.trim().length === 0 || VerifyPassword.includes(" ")) ||
     (Password !== VerifyPassword) ||
-    Gender === undefined;
+    (Gender === undefined) || VerifyEmail === false;
 
   return (
-    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#0F172A]">
+    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-[#0F172A] overflow-auto">
       <div className="mb-5">
         <h2 className="font-GothicBold text-xl text-neutral-200">
           Create your account
@@ -52,6 +54,7 @@ const FormSignUp = ({ Loading }: FormSignUpProps) => {
       </div>
       <SignVerifyPass />
       <SignEmail />
+      <EmailOTP />
       <div className="mb-4 bg-red-400 rounded-xl p-2">
         <h3 className="text-sm">IMPORTANT!</h3>
         <p className="text-xs font-GothicLight">enter your correct email, so that it can be used later for further updates.</p>

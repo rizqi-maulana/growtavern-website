@@ -31,6 +31,10 @@ interface UserContextProps {
   setPlayerData: React.Dispatch<React.SetStateAction<PlayerDataProps | undefined>>
   IsLoggedIn: boolean,
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
+  OtpCode: string | undefined,
+  setOtpCode: React.Dispatch<React.SetStateAction<string | undefined>>
+  VerifyEmail: boolean,
+  setVerifyEmail: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined)
@@ -50,6 +54,8 @@ const AppContext = ({ children }: AppContextProps) => {
   const [VerifyPassword, setVerifyPassword] = useState<string | undefined>(undefined);
   const [Email, setEmail] = useState<string | undefined>(undefined);
   const [Gender, setGender] = useState<gender | undefined>('man');
+  const [OtpCode, setOtpCode] = useState<string | undefined>(undefined)
+  const [VerifyEmail, setVerifyEmail] = useState<boolean>(false)
 
   useEffect(() => {
     const CheckLogin = async () => {
@@ -82,7 +88,7 @@ const AppContext = ({ children }: AppContextProps) => {
   return (
     <Fragment>
       <Toaster />
-      <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, IsLoggedIn, setIsLoggedIn }} >
+      <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, IsLoggedIn, setIsLoggedIn, OtpCode, setOtpCode, VerifyEmail, setVerifyEmail }} >
         <Loading />
         {children}
       </UserContext.Provider >

@@ -12,6 +12,7 @@
     "@nextui-org/react": "^2.4.8",
     "@radix-ui/react-hover-card": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
+    "@supabase/ssr": "^0.5.1",
     "@types/canvas-confetti": "^1.6.4",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.0",
