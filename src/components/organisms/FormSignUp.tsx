@@ -47,18 +47,18 @@ const FormSignUp = ({ Loading }: FormSignUpProps) => {
           Join us now, create your account and start playing!
         </p>
       </div>
-      <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-        <SignName />
+      <SignName />
+      <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 my-4">
         <SignPass label="Create your Password" id="signuppass" />
+        <SignVerifyPass />
       </div>
-      <SignVerifyPass />
+      <SignGender />
       <SignEmail />
       <EmailOTP />
       <div className="mb-4 bg-red-400 rounded-xl p-2">
         <h3 className="text-sm">IMPORTANT!</h3>
         <p className="text-xs font-GothicLight">enter your correct email, so that it can be used later for further updates.</p>
       </div>
-      <SignGender />
       {
         Loading ?
           <div className="w-full grid place-content-center">

@@ -14,7 +14,7 @@ const SignEmail = () => {
 
   const { setEmail } = context;
   return (
-    <LabelInputContainer className="my-4">
+    <LabelInputContainer>
       <Label htmlFor="email">Enter Your Email</Label>
       <Input onChange={(e) => setEmail(e.target.value)} id="email" placeholder="yourname@gmail.com" type="email" />
     </LabelInputContainer>

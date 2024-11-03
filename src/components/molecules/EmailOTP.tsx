@@ -8,7 +8,7 @@ import { createClient } from "@/utils/supabase/client";
 import ButtonSendVerifyOTP from "../atoms/ButtonSendVerifyOTP ";
 import toast, { Toaster } from "react-hot-toast";
 
-const EmailOTP = () => {
+const PhoneOTP = () => {
   const context = useContext(UserContext);
   const [Click, setClick] = useState<boolean>(true);
   const supabase = createClient();
@@ -28,12 +28,14 @@ const EmailOTP = () => {
         shouldCreateUser: true,
       },
     })
-    toast.success('we have sent you an email')
     setClick(false)
-    if (error)
+    if (error) {
       console.log(error)
+      toast.error(error.message)
+    }
     else
-      console.log(data)
+      toast.success('We have sent you the otp code to your email.')
+    console.log(data)
   }, [Email])
 
   const HandleVerifyOTP = useCallback(async () => {
@@ -53,28 +55,27 @@ const EmailOTP = () => {
       if (session.user.role) {
         setVerifyEmail(true)
         setClick(true)
-        toast.success('Email Verified')
+        toast.success('Number Verified')
       }
     } else {
       toast.error('TOKEN Expired')
     }
   }, [Email, OtpCode])
-
   return (
     <>
       <Toaster />
       <LabelInputContainer className="my-4">
-        <Label htmlFor="email">Verify Otp</Label>
+        <Label htmlFor="email">Verify OTP</Label>
         <Input onChange={(e) => setOtpCode(e.target.value)} id="email" placeholder="16**" type="text" readOnly={Click} />
         {
-          OtpCode == undefined ?
-            <ButtonSendOTP Title="Send Otp" HandleSendOTP={HandleSendOTP} />
+          Email !== "undefined" ?
+            <ButtonSendOTP Title="Get OTP" HandleSendOTP={HandleSendOTP} />
             :
-            <ButtonSendVerifyOTP Title="Verify Otp" HandleVerifyOTP={HandleVerifyOTP} />
+            <ButtonSendVerifyOTP Title="Verify OTP" HandleVerifyOTP={HandleVerifyOTP} />
         }
       </LabelInputContainer>
     </>
   );
 }
 
-export default EmailOTP;
+export default PhoneOTP;
