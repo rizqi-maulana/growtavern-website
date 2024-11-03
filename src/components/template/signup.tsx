@@ -37,8 +37,8 @@ function SignUp() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("https://api.growtavern.site:1515/create/growid", {
-        // const res = await fetch("http://localhost:1515/create/growid", {
+      // const res = await fetch("https://api.growtavern.site:1515/create/growid", {
+      const res = await fetch("http://localhost:1515/create/growid", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
