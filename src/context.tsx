@@ -1,7 +1,7 @@
 "use client"
 import React, { createContext, Fragment, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import Loading from "./components/template/Loading";
+// import Loading from "./components/template/Loading";
 type gender = "man" | "woman"
 
 interface PlayerDataProps {
@@ -89,7 +89,7 @@ const AppContext = ({ children }: AppContextProps) => {
     <Fragment>
       <Toaster />
       <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, IsLoggedIn, setIsLoggedIn, OtpCode, setOtpCode, VerifyEmail, setVerifyEmail }} >
-        <Loading />
+        {/* <Loading /> */}
         {children}
       </UserContext.Provider >
     </Fragment>

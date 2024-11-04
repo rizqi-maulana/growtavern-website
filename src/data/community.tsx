@@ -12,7 +12,7 @@ export const CommunityData: CommunityItem[] = [
     title: 'Discord',
     src: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022038/discord_bzonuf.webp',
     desc: 'Growtavern Discord Server',
-    link: 'https://discord.gg/HnDsWK67sV',
+    link: 'https://discord.gg/growtavern',
     color: '7289DA'
   },
   {
