@@ -68,10 +68,10 @@ const PhoneOTP = () => {
         <Label htmlFor="email">Verify OTP</Label>
         <Input onChange={(e) => setOtpCode(e.target.value)} id="email" placeholder="16**" type="text" readOnly={Click} maxLength={6} />
         {
-          OtpCode?.length !== 6 ?
+          Click ?
             <ButtonSendOTP Title="Get OTP" HandleSendOTP={HandleSendOTP} />
             :
-            <ButtonSendVerifyOTP Title="Verify OTP" HandleVerifyOTP={HandleVerifyOTP} />
+            <ButtonSendVerifyOTP isDisabled={OtpCode?.length !== 6} Title="Verify OTP" HandleVerifyOTP={HandleVerifyOTP} />
         }
       </LabelInputContainer>
     </>
