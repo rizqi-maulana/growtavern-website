@@ -40,5 +40,12 @@ export const UserData: Array<User> = [
     position: "DevOps",
     image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730254189/WhatsApp_Image_2024-10-30_at_00.59.48_da95104d_cn9nz0.webp',
   },
+  {
+    id: 6,
+    name: ".fa1ss",
+    role: "Staff",
+    position: "Staff",
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730871685/WhatsApp_Image_2024-10-30_at_00.45.20_86d6d981_vqypw8.webp',
+  },
 
 ]
