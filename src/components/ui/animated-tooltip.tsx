@@ -12,8 +12,8 @@ interface Item {
   id: number;
   name: string;
   role: string;
-  position?: string; // Make position optional
   image: string;
+  position?: string;
 }
 
 export const AnimatedTooltip = ({

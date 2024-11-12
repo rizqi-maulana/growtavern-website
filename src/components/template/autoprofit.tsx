@@ -5,7 +5,7 @@ const AutoProfitTemplate = () => {
       <p>Ready to maximize your earnings and rule the world of Growtavern? Discover multiple ways to profit, from classic farming to exciting events. Here’s how you can start building your wealth:</p>
 
       <h2>1. Farming</h2>
-      <p>Growtavern’s farming system is your ticket to easy, reliable profits. Plant, grow, and harvest to get those gems piling up. Farming is an essential strategy for all players—whether you're a beginner or a seasoned pro, it's a must-try method for steady growth.</p>
+      <p>Growtavern’s farming system is your ticket to easy, reliable profits. Plant, grow, and harvest to get those gems piling up. Farming is an essential strategy for all players—whether you&apos;re a beginner or a seasoned pro, it&apos;s a must-try method for steady growth.</p>
 
       <h2>2. Gacha</h2>
       <p>Test your luck and potentially score big rewards with the Gacha! By investing a little, you have the chance to win rare items that can be traded or sold for profit. Fortune favors the bold—try your hand at Gacha and see what treasures await!</p>
