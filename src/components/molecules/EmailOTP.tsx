@@ -2,16 +2,20 @@ import { Input } from "../atoms/input";
 import { Label } from "../atoms/label";
 import { LabelInputContainer } from "../atoms/LabelInputContainer";
 import { UserContext } from "@/context";
-import { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import ButtonSendOTP from "../atoms/ButtonSendOTP";
 import { createClient } from "@/utils/supabase/client";
 import ButtonSendVerifyOTP from "../atoms/ButtonSendVerifyOTP ";
 import toast, { Toaster } from "react-hot-toast";
 import clsx from "clsx";
 
-const PhoneOTP = () => {
+interface Props {
+  Click: boolean
+  setClick: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const PhoneOTP = ({ Click, setClick }: Props) => {
   const context = useContext(UserContext);
-  const [Click, setClick] = useState<boolean>(true);
   const [CountDown, setCountDown] = useState<number>(() => {
     // Initialize countdown from localStorage if available
     return typeof window !== "undefined"

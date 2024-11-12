@@ -5,7 +5,7 @@ import SubmitBtn from "../atoms/SubmitBtn";
 import SignPass from "../molecules/SignPass";
 import SignEmail from "../molecules/SignEmail";
 import SignGender from "../molecules/SignGender";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context";
 import SignVerifyPass from "../molecules/SignVerifyPass";
 import EmailOTP from "../molecules/EmailOTP";
@@ -17,6 +17,7 @@ interface FormSignUpProps {
 }
 
 const FormSignUp = ({ Loading }: FormSignUpProps) => {
+  const [Click, setClick] = useState<boolean>(true);
   const context = useContext(UserContext);
   useEffect(() => {
     if (typeof window !== "undefined" && bouncy) {
@@ -53,8 +54,8 @@ const FormSignUp = ({ Loading }: FormSignUpProps) => {
         <SignVerifyPass />
       </div>
       <SignGender />
-      <SignEmail />
-      <EmailOTP />
+      <SignEmail Click={Click} />
+      <EmailOTP Click={Click} setClick={setClick} />
       <div className="mb-4 bg-red-400 rounded-xl p-2">
         <h3 className="text-sm">IMPORTANT!</h3>
         <p className="text-xs font-GothicLight">enter your correct email, so that it can be used later for further updates.</p>
