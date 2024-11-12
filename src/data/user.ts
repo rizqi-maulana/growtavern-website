@@ -1,5 +1,5 @@
 interface User {
-  id: number;
+  id?: number;
   name: string;
   role: string;
   image: string;
@@ -23,8 +23,8 @@ export const UserData: Array<User> = [
     id: 3,
     name: "maulanya",
     role: "Developer",
-    position: "Website",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730219088/WhatsApp_Image_2024-10-30_at_00.22.26_a26246c5_vy7m2w.webp',
+    position: "Full stack",
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1731382265/picture_wforzu.webp',
   },
   {
     id: 4,
@@ -35,17 +35,29 @@ export const UserData: Array<User> = [
   },
   {
     id: 5,
+    name: "tianvan",
+    role: "Developer",
+    position: "Game",
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1731380651/WhatsApp_Image_2024-11-12_at_10.59.11_e6416a27_xe3xrx.webp',
+  },
+  {
+    id: 6,
     name: "yormanz",
     role: "Developer",
     position: "DevOps",
     image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730254189/WhatsApp_Image_2024-10-30_at_00.59.48_da95104d_cn9nz0.webp',
   },
   {
-    id: 6,
-    name: "_dikaa",
-    role: "Staff",
-    position: "Staff",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730871685/WhatsApp_Image_2024-10-30_at_00.45.20_86d6d981_vqypw8.webp',
+    id: 7,
+    name: "qyystore",
+    role: "Designer",
+    position: "Graphics",
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1731380654/WhatsApp_Image_2024-11-11_at_20.28.57_8a604c14_uveo9f.webp',
   },
+  // {
+  //   name: "_dikaa",
+  //   role: "Staff",
+  //   image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730871685/WhatsApp_Image_2024-10-30_at_00.45.20_86d6d981_vqypw8.webp',
+  // },
 
 ]

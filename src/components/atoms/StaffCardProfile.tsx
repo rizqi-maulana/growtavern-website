@@ -7,6 +7,7 @@ const StaffCardProfile = ({ src, role }: { src: string | StaticImageData, role: 
         'border-[#F9D203]': role === 'Owner',
         'border-[#FF00C7]': role === 'Co Owner',
         'border-[#0094FF]': role === 'Developer',
+        'border-[#03f9eb]': role === 'Designer',
       })} />
     </>
   );
