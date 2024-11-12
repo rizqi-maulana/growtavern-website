@@ -81,7 +81,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               <div className="embla__slide flex justify-between w-full" key={index}>
                 <div className="relative flex lg:block flex-col pt-5 lg:w-[40%] w-full">
                   {
-                    data.video && <button className='absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center rounded-xl cursor-pointer' onClick={() => setShowVideoModal(true)}>
+                    data.video && <button className='absolute top-0 left-0 w-full lg:h-full h-[230px] bg-black/50 flex items-center justify-center rounded-xl cursor-pointer' onClick={() => setShowVideoModal(true)}>
                       <FaPlayCircle size={50} />
                     </button>
                   }

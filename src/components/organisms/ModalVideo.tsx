@@ -24,9 +24,9 @@ const ModalVideo = ({ onCLose }: Props) => {
 
   return (
     <div className="w-full h-screen fixed top-0 left-0 backdrop-blur-lg bg-black/50 z-[99] flex items-center justify-center">
-      <div className="w-3/5 h-3/5 bg-[#0F172A] p-8 rounded-xl">
+      <div className="lg:w-3/5 lg:h-3/5 w-full h-max bg-[#0F172A] lg:p-8 p-2 rounded-xl">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold">Spring Clash</h1>
+          <h1 className="lg:text-3xl text-xl font-bold">Spring Clash</h1>
           <button onClick={() => onCLose(false)}>
             <CgCloseO size={30} />
           </button>
