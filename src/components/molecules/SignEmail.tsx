@@ -5,7 +5,7 @@ import { UserContext } from "@/context";
 import { useContext } from "react";
 
 interface props {
-  Click: boolean;
+  Click?: boolean;
 }
 
 const SignEmail = ({ Click }: props) => {
