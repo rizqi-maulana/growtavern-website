@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { CommunityData } from "@/data/community";
 import { WebConfig } from "@/WebConfig";
-import ModalRecovery from "./ModalRecovery";
+// import ModalRecovery from "./ModalRecovery";
 const Footer = () => {
   return (
     <>
-      <ModalRecovery />
+      {/* <ModalRecovery /> */}
       <footer className="flex flex-col md:flex-row items-center justify-between w-full py-5 md:py-8 px-32 mx-auto mt-20 md:mt-24 border-t border-white">
         <Image src={WebConfig.logo} alt="FooterImage" width={100} height={100} sizes="100vw" className="h-40 w-40 md:h-52 md:w-52 rounded-lg object-contain" />
         <div className="flex gap-10 w-max">
