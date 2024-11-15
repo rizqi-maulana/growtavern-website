@@ -34,8 +34,8 @@ export default function RootLayout({
           <div className="xl:px-20 px-5">
             {children}
           </div>
+          <Footer />
         </AppContext>
-        <Footer />
       </body>
     </html>
   );

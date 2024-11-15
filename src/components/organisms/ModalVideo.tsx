@@ -19,7 +19,6 @@ const ModalVideo = ({ onCLose }: Props) => {
         video.current.pause()
       }
     }
-    console.log('keren')
   }, [play])
 
   return (

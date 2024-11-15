@@ -1,5 +1,5 @@
-143.198.207.170 growtopia1.com
-143.198.207.170 growtopia2.com
-143.198.207.170 www.growtopia1.com
-143.198.207.170 www.growtopia2.com
-143.198.207.170 RvLnd.here
+178.128.21.229 growtopia1.com
+178.128.21.229 growtopia2.com
+178.128.21.229 www.growtopia1.com
+178.128.21.229 www.growtopia2.com
+178.128.21.229 RvLnd.here
