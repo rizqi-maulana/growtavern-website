@@ -58,6 +58,7 @@ const PhoneOTP = ({ Click, setClick }: Props) => {
     }
     setClick(false);
     toast.success('We have sent you the OTP code to your email.');
+    console.log(data)
     // Uncomment the above Supabase code when needed
   }, [Email, CountDown, setClick]);
 
