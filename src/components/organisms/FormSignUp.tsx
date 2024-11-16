@@ -54,7 +54,7 @@ const FormSignUp = ({ Loading }: FormSignUpProps) => {
         <SignVerifyPass />
       </div>
       <SignGender />
-      <SignEmail Click={Click} />
+      <SignEmail Click={!Click} />
       <EmailOTP Click={Click} setClick={setClick} />
       <div className="mb-4 bg-red-400 rounded-xl p-2">
         <h3 className="text-sm">IMPORTANT!</h3>
