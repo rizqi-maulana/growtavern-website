@@ -51,7 +51,6 @@ const PhoneOTP = ({ Click, setClick }: Props) => {
         shouldCreateUser: true,
       },
     })
-    setClick(false)
     if (error) {
       console.log(error)
       toast.error(error.message)
@@ -59,9 +58,8 @@ const PhoneOTP = ({ Click, setClick }: Props) => {
     }
     setClick(false);
     toast.success('We have sent you the OTP code to your email.');
-    console.log(data)
     // Uncomment the above Supabase code when needed
-  }, [Email, CountDown]);
+  }, [Email, CountDown, setClick]);
 
   useEffect(() => {
     // Only set interval if CountDown is greater than 0
@@ -76,6 +74,9 @@ const PhoneOTP = ({ Click, setClick }: Props) => {
 
       // Clear interval when component unmounts or CountDown changes
       return () => clearInterval(intervalId);
+    } else {
+      localStorage.removeItem('CountDown');
+      setClick(true);
     }
   }, [CountDown]);
 
