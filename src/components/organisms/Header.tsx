@@ -9,6 +9,7 @@ import SignIn from "../template/signin";
 import { WebConfig } from "@/WebConfig";
 import clsx from "clsx";
 import HeaderProfile from "./HeaderProfile";
+import ModalRecovery from "./ModalRecovery";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -18,7 +19,7 @@ export function Header() {
   if (!context) {
     throw new Error("UserContext must be used within a UserProvider");
   }
-  const { SignUpForm, SignInForm, IsLoggedIn, setIsLoggedIn, setSignUpForm } = context;
+  const { SignUpForm, SignInForm, IsLoggedIn, setIsLoggedIn, setSignUpForm, RecoveryPass } = context;
   const HandleLogout = useCallback(async () => {
     setIsLoggedIn(false)
     if (typeof window !== "undefined") {
@@ -40,6 +41,7 @@ export function Header() {
     <>
       {SignUpForm && <SignUp />}
       {SignInForm && <SignIn />}
+      {RecoveryPass && <ModalRecovery />}
       <Navbar onMenuOpenChange={setIsMenuOpen}>
         <NavbarContent>
           <NavbarMenuToggle

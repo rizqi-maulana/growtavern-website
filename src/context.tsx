@@ -35,6 +35,9 @@ interface UserContextProps {
   setOtpCode: React.Dispatch<React.SetStateAction<string | undefined>>
   VerifyEmail: boolean,
   setVerifyEmail: React.Dispatch<React.SetStateAction<boolean>>
+  RecoveryPass: boolean,
+  setRecoveryPass: React.Dispatch<React.SetStateAction<boolean>>
+
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined)
@@ -46,6 +49,7 @@ interface AppContextProps {
 
 const AppContext = ({ children }: AppContextProps) => {
   const [PlayerData, setPlayerData] = useState<PlayerDataProps | undefined>(undefined);
+  const [RecoveryPass, setRecoveryPass] = useState<boolean>(false);
   const [IsLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [SignUpForm, setSignUpForm] = useState<boolean>(false);
   const [SignInForm, setSignInForm] = useState<boolean>(false);
@@ -88,7 +92,7 @@ const AppContext = ({ children }: AppContextProps) => {
   return (
     <Fragment>
       <Toaster />
-      <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, IsLoggedIn, setIsLoggedIn, OtpCode, setOtpCode, VerifyEmail, setVerifyEmail }} >
+      <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, IsLoggedIn, setIsLoggedIn, OtpCode, setOtpCode, VerifyEmail, setVerifyEmail, RecoveryPass, setRecoveryPass }} >
         {/* <Loading /> */}
         {children}
       </UserContext.Provider >

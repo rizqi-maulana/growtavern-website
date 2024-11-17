@@ -13,7 +13,7 @@ const SignEmail = ({ Click }: props) => {
 
   // Handle the case where context might be undefined
   if (!context) {
-    return <div>Error: UserContext is undefined</div>;
+    throw new Error("UserContext is undefined");
   }
 
   const { setEmail } = context;
