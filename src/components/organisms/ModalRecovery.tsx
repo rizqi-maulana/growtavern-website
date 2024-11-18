@@ -20,35 +20,25 @@ function ModalRecovery() {
   const { Email, Name, setRecoveryPass } = context;
 
   const HandleRecovery = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (Name && Email) {
+    event.preventDefault()
+    if (Name && Email)
       await PlayerValidate(Name, Email).then(async (res) => {
-        const resdata = JSON.parse(res);
-        if (resdata.type === "success") {
-          const response = await fetch("api/recovery", {
+        const resdata = JSON.parse(res)
+        if (resdata.type === 'success') {
+          const formdata = new FormData()
+          formdata.append('Email', Email)
+          formdata.append('Name', Name)
+          formdata.append('token', resdata.token)
+          await fetch('/api/passrecovery', {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              name: Name,
-              email: Email,
-              token: resdata.token,
-            }),
-          });
-
-          if (response.ok) {
-            toast.success("Password recovery email sent successfully!");
-          } else {
-            const errorData = await response.json();
-            toast.error(errorData.message || "Failed to send email");
-          }
+            body: formdata
+          })
         }
-      });
-    }
-  }, [Name, Email]);
-
-
+      })
+  }, [Email, Name])
 
   const PlayerValidate = async (name: string, email: string) => {
     const res = await fetch(`https://api.growtavern.site:1515/player/passwordrecovery`, {
