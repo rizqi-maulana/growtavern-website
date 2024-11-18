@@ -25,7 +25,7 @@ function ModalRecovery() {
       await PlayerValidate(Name, Email).then(async (res) => {
         const resdata = JSON.parse(res);
         if (resdata.type === "success") {
-          const response = await fetch("/api/recovery", {
+          const response = await fetch("api/recovery", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
