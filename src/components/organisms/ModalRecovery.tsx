@@ -11,7 +11,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 function ModalRecovery() {
   const context = useContext(UserContext);
-  const [onSubmit, setOnSubmit] = useState<boolean>(true)
+  const [onSubmit, setOnSubmit] = useState<boolean>(false)
 
   if (!context) {
     throw new Error('UserContext is undefined')
@@ -22,26 +22,28 @@ function ModalRecovery() {
   const HandleRecovery = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (Name && Email)
-      await PlayerValidate(Name, Email).then(async (res) => {
-        const resdata = JSON.parse(res)
-        if (resdata.type === 'success') {
-          const formdata = new FormData();
-          await formdata.append('token', resdata.token)
-          await formdata.append('name', Name)
-          await formdata.append('email', Email)
-          await fetch('/api/passrecovery', {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: formdata
-          })
-        }
-      })
+      await PlayerValidate(Name, Email)
+        .then(async (res) => {
+          const resdata = JSON.parse(res)
+          if (resdata.type === 'success') {
+            const formdata = new FormData();
+            await formdata.append('token', resdata.token)
+            await formdata.append('name', Name)
+            await formdata.append('email', Email)
+            await fetch('/api/passrecovery', {
+              method: "POST",
+              // headers: {
+              //   "Content-Type": "application/json",
+              // },
+              body: formdata
+            })
+          }
+        })
   }, [Email, Name])
 
   const PlayerValidate = async (name: string, email: string) => {
-    const res = await fetch(`https://api.growtavern.site:1515/player/passwordrecovery`, {
+    // const res = await fetch(`https://api.growtavern.site:1515/player/passwordrecovery`, {
+    const res = await fetch(`http://localhost:1515/player/passwordrecovery`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
