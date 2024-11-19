@@ -6,7 +6,7 @@ export const POST = async (req: NextRequest) => {
   const name = formdata.get('name')
   const email = formdata.get('email')
 
-  let htmlcontent = `
+  const htmlcontent = `
   <html>
 <head>
 <title>Password Change Request</title>
