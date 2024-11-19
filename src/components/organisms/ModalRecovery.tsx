@@ -11,7 +11,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 function ModalRecovery() {
   const context = useContext(UserContext);
-  const [onSubmit, setOnSubmit] = useState<boolean>(false)
+  const [onSubmit, setOnSubmit] = useState<boolean>(true)
 
   if (!context) {
     throw new Error('UserContext is undefined')
@@ -42,8 +42,8 @@ function ModalRecovery() {
   }, [Email, Name])
 
   const PlayerValidate = async (name: string, email: string) => {
-    // const res = await fetch(`https://api.growtavern.site:1515/player/passwordrecovery`, {
-    const res = await fetch(`http://localhost:1515/player/passwordrecovery`, {
+    const res = await fetch(`https://api.growtavern.site:1515/player/passwordrecovery`, {
+      // const res = await fetch(`http://localhost:1515/player/passwordrecovery`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
