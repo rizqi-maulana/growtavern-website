@@ -9,15 +9,15 @@ interface User {
 export const UserData: Array<User> = [
   {
     id: 1,
-    name: "rio_mondragon",
+    name: "vinskeeper",
     role: "Owner",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730215774/WhatsApp_Image_2024-10-29_at_23.29.02_d26371ae_maxnwb.webp',
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1732503660/WhatsApp_Image_2024-11-25_at_07.32.00_d39dd569_j6tqdm.webp',
   },
   {
     id: 2,
-    name: "poyyyzz",
+    name: "zeldriss2861",
     role: "Co Owner",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1730215511/WhatsApp_Image_2024-10-29_at_23.13.31_98288332_fgppe7.webp',
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1732503660/WhatsApp_Image_2024-11-22_at_08.17.00_ee245c1b_kaykzs.webp',
   },
   {
     id: 3,

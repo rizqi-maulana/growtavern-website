@@ -1,16 +1,16 @@
 "use client"
 
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import RecoveryTemp from "@/components/template/recovery";
 import React, { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 function Recovery() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const token = searchParams.get('token')
+  // const searchParams = useSearchParams()
+  // const token = searchParams.get('token')
+  const [token, setToken] = useState<string>("");
   const [NewPassword, setNewPassword] = useState<string>('');
   const [ConfirmPass, setConfirmPass] = useState<string>('');
+  const [EnableRecovery, setEnableRecovery] = useState<boolean>(false)
   const [EnableSend, setEnableSend] = useState<boolean>(true)
   const HandleChange = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -36,6 +36,13 @@ function Recovery() {
   }, [NewPassword, token, ConfirmPass])
 
   useEffect(() => {
+    // Ambil token dari URL menggunakan URLSearchParams
+    const searchParams = new URLSearchParams(window.location.search);
+    const tokenParam = searchParams.get("token") || ""; // Handle token jika tidak ada
+    setToken(tokenParam);
+  }, []);
+
+  useEffect(() => {
     const ValidateToken = async () => {
       const res = await fetch('https://api.growtavern.site:1515/player/validate/recovery/token', {
         // const res = await fetch('http://localhost:1515/player/validate/recovery/token', {
@@ -49,7 +56,10 @@ function Recovery() {
       })
       const resdata = await res.json()
       if (resdata.type === "error") {
-        router.push('/recovery/404')
+        setEnableRecovery(false)
+      }
+      if (resdata.type === "success") {
+        setEnableRecovery(true)
       }
     }
     ValidateToken()
@@ -59,13 +69,16 @@ function Recovery() {
     setEnableSend(false)
   }, [EnableSend])
 
-  if (!token) {
-    router.push('/')
-  }
-
   return (
     <>
       <Toaster />
+      {
+        !EnableRecovery && (
+          <div className="text-white font-sans fixed w-full h-full backdrop-blur-sm bg-[#0f172a] top-0 left-0 z-10 grid place-items-center">
+            <h1 className="text-2xl font-bold">Unable to Access this page</h1>
+          </div>
+        )
+      }
       <form onSubmit={HandleChange}>
         <RecoveryTemp HandleCaptcha={HandleCaptcha} setNewPassword={setNewPassword} EnableSend={EnableSend} setConfirmPass={setConfirmPass} />
       </form>
