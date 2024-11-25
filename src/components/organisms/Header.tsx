@@ -10,7 +10,6 @@ import { WebConfig } from "@/WebConfig";
 import clsx from "clsx";
 import HeaderProfile from "./HeaderProfile";
 import ModalRecovery from "./ModalRecovery";
-import EmailTemplate from "../ui/EmailTemplate";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -43,7 +42,6 @@ export function Header() {
       {SignUpForm && <SignUp />}
       {SignInForm && <SignIn />}
       {RecoveryPass && <ModalRecovery />}
-      <EmailTemplate token="daydga" name="daudhaw" />
       <Navbar onMenuOpenChange={setIsMenuOpen}>
         <NavbarContent>
           <NavbarMenuToggle
