@@ -11,7 +11,7 @@ export const UserData: Array<User> = [
     id: 1,
     name: "vinskeeper",
     role: "Owner",
-    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1732503660/WhatsApp_Image_2024-11-25_at_07.32.00_d39dd569_j6tqdm.webp',
+    image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1732517874/WhatsApp_Image_2024-11-25_at_14.09.09_aca2893d_jdh0aq.webp',
   },
   {
     id: 2,

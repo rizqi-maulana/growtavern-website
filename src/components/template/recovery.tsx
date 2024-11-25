@@ -24,9 +24,9 @@ const RecoveryTemp = ({ setNewPassword, HandleCaptcha, setConfirmPass, EnableSen
             src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1731855467/Proyek_Baru_68_D032486_susktp.webp"
           />
         </div>
-        <div className="text-center p-8 pb-0 ">
-          <h1 className="text-4xl font-bold mb-4">GROWTAVERN PASSWORD RECOVERY</h1>
-          <b className="text-lg mb-4">
+        <div className="text-center lg:p-8 pb-0 mt-5 lg:mt-0">
+          <h1 className="lg:text-4xl text-xl font-bold mb-4">GROWTAVERN PASSWORD RECOVERY</h1>
+          <b className="lg:text-lg text-xs mb-4">
             Enter in your new Growtopia password.
             Your password must contain 8 to 18 characters, 1 letter, 1 number and 1 special character: @#!$^&*.,
           </b>

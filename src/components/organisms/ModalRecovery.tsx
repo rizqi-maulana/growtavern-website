@@ -37,6 +37,7 @@ function ModalRecovery() {
               // },
               body: formdata
             })
+            setRecoveryPass(false)
           }
         })
   }, [Email, Name])
@@ -75,11 +76,11 @@ function ModalRecovery() {
     <>
       <Toaster />
       <div className="w-full h-screen fixed top-0 left-0 backdrop-blur-lg bg-black/50 z-[99] flex items-center justify-center">
-        <div className="w-3/5 h-max bg-[#0F172A] lg:p-8 p-2 rounded-xl">
+        <div className="lg:w-3/5 w-full h-max bg-[#0F172A] lg:p-8 p-2 rounded-xl">
           <h1 className="text-center text-3xl font-bold">
             <Image src={WebConfig.logo} width={100} height={100} className="w-12 xl:w-20 absolute top-0 object-cover blur-sm z-0" alt="BannerImage" sizes="100vw" />
             Password Recovery</h1>
-          <p className="text-sm mt-2 font-semibold bg-[#1E293B] py-1 px-3 rounded-xl">
+          <p className="lg:text-sm text-xs mt-2 font-semibold bg-[#1E293B] py-1 px-3 rounded-xl">
             Enter in your GrowTavern data and you can reset your password. ( You&lsquo;ll have to check your email and click the URL we send, so if your email address wasn&lsquo;t entered correctly when you made your GrowID, this won&lsquo;t work )</p>
           <form className="mt-8 grid gap-2" onSubmit={HandleRecovery}>
             <SignName />

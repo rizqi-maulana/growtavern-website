@@ -3,8 +3,10 @@
 // import { useSearchParams } from "next/navigation";
 import RecoveryTemp from "@/components/template/recovery";
 import React, { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 function Recovery() {
+  const router = useRouter()
   // const searchParams = useSearchParams()
   // const token = searchParams.get('token')
   const [token, setToken] = useState<string>("");
@@ -29,6 +31,7 @@ function Recovery() {
       const resdata = await res.json()
       if (resdata.type === "success") {
         await toast.success(resdata.message)
+        router.push('/')
       } else {
         await toast.error(resdata.message)
       }
