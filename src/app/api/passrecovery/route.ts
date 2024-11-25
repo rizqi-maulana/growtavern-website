@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 import EmailTemplate from "@/components/ui/EmailTemplate";
 import { Resend } from 'resend';
 
