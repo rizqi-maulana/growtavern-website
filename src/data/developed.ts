@@ -17,11 +17,6 @@ interface Item {
 
 export const DevelopedData: Item[] = [
   {
-    title: "Growtopia x Minecraft Custom Items",
-    image: Mining,
-    desc: "This is a custom set of items created for our Growtopia private server, blending the styles of Growtopia and Minecraft. It features various tools, chests, ores, and crafting materials inspired by Minecraft, but designed with a Growtopia aesthetic. These items enhance the gameplay experience by introducing new mechanics and visuals unique to our server, offering players a creative and immersive fusion of two popular games."
-  },
-  {
     title: "Royal Winter",
     image: winter,
     desc: "WinterFest is an annual event that is held during late December, lasting for two weeks. During WinterFest, the world GROWCH is inhabited by an NPC named Growch. When enough Winter Gifts are given to him, a few WinterFest items will be unlocked, thus making Growch happy and restricting gifts to be given to him for several hours."
@@ -34,13 +29,31 @@ export const DevelopedData: Item[] = [
   {
     title: "Gacha",
     image: banner1,
-    desc: "Players can visit the Growch in worlds GROWCH1, GROWCH2, etc, similar to GROWGANOTH. Winter Gifts also spawn in worlds, depending on the number of people in the world. During this time, the world select music changes."
-  },
+    desc: `The gacha system in GrowTavern uses a pity system to reduce the uncertainty of getting a high rarity item:
+<br/>
+- 4-star Items: Players are guaranteed to get one after rolling 10 times
+<br/>
+- 5-star Items: Players are guaranteed to get one after rolling 90 times
+<br/>
+- Soft pity: Starts around the 75th roll 
+<br/>
+<br/>
+The pity system is a luck mitigation model that guarantees a drop after a certain number of unsuccessful pulls.
+`},
   {
     title: "Gacha",
     image: banner2,
-    desc: "Players can visit the Growch in worlds GROWCH1, GROWCH2, etc, similar to GROWGANOTH. Winter Gifts also spawn in worlds, depending on the number of people in the world. During this time, the world select music changes."
-  },
+    desc: `The gacha system in GrowTavern uses a pity system to reduce the uncertainty of getting a high rarity item:
+<br/>
+- 4-star Items: Players are guaranteed to get one after rolling 10 times
+<br/>
+- 5-star Items: Players are guaranteed to get one after rolling 90 times
+<br/>
+- Soft pity: Starts around the 75th roll 
+<br/>
+<br/>
+The pity system is a luck mitigation model that guarantees a drop after a certain number of unsuccessful pulls.
+`},
   {
     title: "Spring Clash",
     image: videobanner,

@@ -90,16 +90,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   {/* </div> */}
                   <div className='h-max bg-black/50 w-full p-3 md:hidden block md:mt-0 mt-2'>
                     <h3 className='font-GothicBold text-base'>{data.title}</h3>
-                    <p className='text-xs font-GothicLight'>
-                      {data.desc}
-                    </p>
+                    <p className='text-xs font-GothicLight' dangerouslySetInnerHTML={{ __html: data.desc }}></p>
                   </div>
                 </div>
                 <div className='bg-[#1E293B] w-[500px] h-[230px] rounded-xl space-y-3 p-3 md:block hidden'>
                   <h3 className='font-GothicBold text-1xl'>{data.title}</h3>
-                  <p className='text-sm font-GothicLight'>
-                    {data.desc}
-                  </p>
+                  <p className='text-sm font-GothicLight' dangerouslySetInnerHTML={{ __html: data.desc }}></p>
                 </div>
               </div>
             ))}
