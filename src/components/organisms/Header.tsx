@@ -123,7 +123,7 @@ export function Header() {
               <Link
                 color="foreground"
                 className="w-full"
-                href={item.href}
+                href={`/${item.href}`}
                 size="lg"
               >
                 {item.title}
