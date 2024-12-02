@@ -15,7 +15,7 @@ export const UserData: Array<User> = [
   },
   {
     id: 2,
-    name: "zeldriss2861",
+    name: "zeldrisreal",
     role: "Co Owner",
     image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1732503660/WhatsApp_Image_2024-11-22_at_08.17.00_ee245c1b_kaykzs.webp',
   },
