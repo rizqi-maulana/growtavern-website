@@ -15,7 +15,7 @@ function SignUp() {
     throw new Error("UserContext must be used within a UserProvider");
   }
 
-  const { Name, Password, Email, Gender, setSignUpForm } = context;
+  const { Name, Password, Email, Gender, setSignUpForm, OtpCode } = context;
   const [ShowSuccess, setShowSuccess] = useState<boolean>(false);
   const [Loading, setLoading] = useState<boolean>(false);
 
@@ -31,14 +31,15 @@ function SignUp() {
         setSignUpForm(false);
       }
     }
+    Cookies.remove('account_created');
   }, [setSignUpForm]);
 
   const HandleSignUp = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("https://api.growtavern.site:1515/create/growid", {
-        // const res = await fetch("http://localhost:1515/create/growid", {
+      // const res = await fetch("https://api.growtavern.site:1515/create/growid", {
+      const res = await fetch("http://localhost:1515/create/growid", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,13 +48,14 @@ function SignUp() {
           name: Name,
           pass: Password,
           email: Email,
-          gender: Gender
+          gender: Gender,
+          otp: OtpCode
         }),
       });
       const data = await res.json();
 
       if (data.type === "account_created") {
-        Cookies.set('account_created', new Date().toISOString(), { expires: 30 });
+        // Cookies.set('account_created', new Date().toISOString(), { expires: 30 });
         toast.success(data.message);
         await setShowSuccess(true);
         await confettiRef.current?.fire();
@@ -75,7 +77,7 @@ function SignUp() {
     } finally {
       setLoading(false);
     }
-  }, [Name, Password, Email, Gender, setSignUpForm]);
+  }, [Name, Password, Email, Gender, setSignUpForm, OtpCode]);
 
   return (
     <>

@@ -54,12 +54,11 @@ interface Other {
   desc: string;
   image: string;
   href: string;
-  price?: number
+  price: number
   items?: {
     title: string;
     image: string;
-    price: number;
-    amount: number
+    price: number
   }[]
   category: string
 }
@@ -107,7 +106,7 @@ export const StoreData: StoreData = {
       desc: "The highest authority in the game, responsible for full control over the server, including server maintenance, critical updates, game mechanics, and administrative decisions. They have unlimited access to all systems, tools, and in-game commands.",
       commands: "warpto,destructo,noclip,fixworld,searchuser,summon,freeze,info,p,warp,banworld,nuke,mute,curse,unmute,uncurse,hide,radio2,togglemods,skin,invis,copyset,msb,m,magic,nohands,nobody,unequip,warn,dropall,eff,pban,color,checkid,find,nick,freezeall,ghost,fakeban,fakewarn,fl,banall,1hit,pullall,dsummon,logs,setmag,setmagseed,scan,gsm,setvend,clearvend,clearmag,clearmagseed,blacklist,ggems,glevel,online,saveworld,spk,asb,removedrop,spl,rpl,growall,infoex,banrid,banip",
       href: "Developer",
-      price: 250000,
+      price: 200000,
       category: "roles"
 
     },
@@ -130,7 +129,7 @@ export const StoreData: StoreData = {
       desc: "Responsible for creating, testing, and implementing new features and updates within the game. They manage content creation, bug fixes, and ensure the game runs smoothly, with access to high-level tools and administrative commands.",
       commands: "warpto,destructo,noclip,fixworld,searchuser,summon,freeze,info,p,warp,banworld,nuke,mute,curse,unmute,uncurse,hide,radio2,togglemods,skin,invis,copyset,msb,m,magic,nohands,nobody,unequip,warn,dropall,eff,pban,color,checkid,find,nick,freezeall,ghost,fakeban,fakewarn,fl,banall,1hit,pullall,dsummon,logs,setmag,setmagseed,scan,gsm,setvend,clearvend,clearmag,clearmagseed,blacklist,ggems,glevel,online,saveworld,spk,asb,removedrop,spl,rpl,growall,infoex,banrid,banip,reset,takeworld,osb,unsafeedit,weather,clearworld,spawnevent,ggxp,gtoken,gseal,reset_rolequest,verifycsn,removereqcsn,ipcheck,removelogs",
       href: "Owner",
-      price: 350000,
+      price: 150000,
       category: "roles"
     },
     {
@@ -139,9 +138,9 @@ export const StoreData: StoreData = {
       icon: Developer,
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733063964/cheater-banner_h4cvpu.webp",
       desc: "Responsible for creating, testing, and implementing new features and updates within the game. They manage content creation, bug fixes, and ensure the game runs smoothly, with access to high-level tools and administrative commands.",
-      commands: "/cheats /c <cheater chat>",
+      commands: "help,proxy,pay,troll,kit,cheer,skin,onehit,msb,dsb,stream,mute,news,curse,unmute,uncurse,rainbow,info,summon,ghost,hide,unequip,nuke,warpto,invis,mc,nick,valentine,v,vsb,surgerys,warp,inventory,rwarp,chatcolor,search,find,kickall,syncroles,hidestatus,online,msg,status,mods,sb,sdb,top,ignore,cheats,time,home,sethome,gethome,who,me,radio,mods,uba,r,go,hub,rgo,pull,kick,ban,wave,dance,love,sleep,facepalm,fp,smh,yes,no,omg,idk,shrug,trade,furious,rolleyes,unaccess,report,rate,foldarms,fa,stubborn,fold,fc,gc,gwarp,guild",
       href: "Cheater",
-      price: 15000,
+      price: 150000,
       category: "roles"
     },
     {
@@ -164,7 +163,7 @@ export const StoreData: StoreData = {
       desc: "A privileged role granted to special players, offering exclusive perks like access to unique items, commands, or areas in the game. VIPs do not have administrative power but enjoy benefits unavailable to regular players.",
       commands: "help,proxy,pay,kit,troll,cheer,rainbow,stream,valentine,news,v,vsb,surgerys,warp,inventory,rwarp,chatcolor,search,find,kickall,syncroles,hidestatus,online,msg,status,mods,sb,sdb,top,ignore,cheats,time,home,sethome,gethome,who,me,radio,mods,uba,r,go,hub,rgo,pull,kick,ban,wave,dance,love,sleep,facepalm,fp,smh,yes,no,omg,idk,shrug,trade,furious,rolleyes,unaccess,report,rate,foldarms,fa,stubborn,fold,fc,gc,gwarp,guild",
       href: "VIP",
-      price: 15000,
+      price: 50000,
       category: "roles"
     },
   ],
@@ -181,7 +180,7 @@ export const StoreData: StoreData = {
       desc: "maulana",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061665/Screenshot_2024-09-11_205604_k8hvvv.webp",
       href: "DrTitle",
-      price: 20000,
+      price: 500000,
       category: "titles"
     },
     {
@@ -190,7 +189,7 @@ export const StoreData: StoreData = {
       desc: "maulana",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061665/Screenshot_2024-09-11_205802_jrgb4a.webp",
       href: "Grow4Good",
-      price: 15000,
+      price: 500000,
       category: "titles"
 
 
@@ -201,7 +200,7 @@ export const StoreData: StoreData = {
       desc: "maulana",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061665/Screenshot_2024-09-11_205843_srcj8w.webp",
       href: "Legendary of Legend",
-      price: 25000,
+      price: 500000,
       category: "titles"
 
 
@@ -212,7 +211,7 @@ export const StoreData: StoreData = {
       desc: "maulana",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061665/Screenshot_2024-09-11_205818_dz3zaw.webp",
       href: "Mentor",
-      price: 20000,
+      price: 500000,
       category: "titles"
 
 
@@ -235,48 +234,42 @@ export const StoreData: StoreData = {
       desc: "Welcome to the Gems purchase page on the GrowTavern private server! Here, you’ll find various Gems packages to enhance your gameplay. Whether you need a small boost or a massive amount, we offer packages tailored to your needs.",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733063963/hems-banner_djz36n.webp",
       href: "Gems",
+      price: 5000,
       items: [
         {
           title: "5.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067978/gems-5k_znlxz4.webp",
-          price: 500,
-          amount: 5000
+          price: 5000
         },
         {
           title: "10.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067915/gems-10k_zl48bt.webp",
-          price: 1000,
-          amount: 10000
+          price: 5000
         },
         {
           title: "50.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067918/gems-50k_thutas.webp",
-          price: 5000,
-          amount: 50000
+          price: 5000
         },
         {
           title: "100.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067914/gems-100k_iahvsz.webp",
-          price: 10000,
-          amount: 100000
+          price: 5000
         },
         {
           title: "500.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067917/gems-500k_utrf6y.webp",
-          price: 50000,
-          amount: 500000
+          price: 5000
         },
         {
           title: "1.000.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067918/gems-1jt_zjv1n6.webp",
-          price: 100000,
-          amount: 1000000
+          price: 5000
         },
         {
           title: "500.000.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067922/gems-500jt_pdye7h.webp",
-          price: 5000,
-          amount: 5000000
+          price: 5000
         },
       ],
       category: "other"

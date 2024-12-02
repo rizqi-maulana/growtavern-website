@@ -5,7 +5,7 @@ import { UserContext } from "@/context";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import ButtonSendOTP from "../atoms/ButtonSendOTP";
 import { createClient } from "@/utils/supabase/client";
-import ButtonSendVerifyOTP from "../atoms/ButtonSendVerifyOTP ";
+// import ButtonSendVerifyOTP from "../atoms/ButtonSendVerifyOTP ";
 import toast, { Toaster } from "react-hot-toast";
 import clsx from "clsx";
 
@@ -29,7 +29,8 @@ const PhoneOTP = ({ Click, setClick }: Props) => {
     throw new Error("UserContext is undefined");
   }
 
-  const { setOtpCode, OtpCode, Email, setVerifyEmail } = context;
+  // const { setOtpCode, OtpCode, Email, setVerifyEmail } = context;
+  const { setOtpCode, Email } = context;
 
   const HandleSendOTP = useCallback(async () => {
     if (Email === undefined || Email.trim().length === 0 || Email.includes(" ")) {
@@ -81,30 +82,30 @@ const PhoneOTP = ({ Click, setClick }: Props) => {
     }
   }, [CountDown]);
 
-  const HandleVerifyOTP = useCallback(async () => {
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.verifyOtp({
-      email: Email as string,
-      token: OtpCode as string,
-      type: 'email',
-    });
+  // const HandleVerifyOTP = useCallback(async () => {
+  //   const {
+  //     data: { session },
+  //     error,
+  //   } = await supabase.auth.verifyOtp({
+  //     email: Email as string,
+  //     token: OtpCode as string,
+  //     type: 'email',
+  //   });
 
-    if (error) {
-      console.error(error);
-      toast.error('Invalid OTP code');
-      return;
-    }
+  //   if (error) {
+  //     console.error(error);
+  //     toast.error('Invalid OTP code');
+  //     return;
+  //   }
 
-    if (session) {
-      setVerifyEmail(true);
-      setClick(true);
-      toast.success('Email Verified');
-    } else {
-      toast.error('TOKEN Expired');
-    }
-  }, [Email, OtpCode, setVerifyEmail]);
+  //   if (session) {
+  //     setVerifyEmail(true);
+  //     setClick(true);
+  //     toast.success('Email Verified');
+  //   } else {
+  //     toast.error('TOKEN Expired');
+  //   }
+  // }, [Email, OtpCode, setVerifyEmail]);
 
   return (
     <>
@@ -125,11 +126,11 @@ const PhoneOTP = ({ Click, setClick }: Props) => {
           readOnly={Click}
           maxLength={6}
         />
-        {Click ? (
-          <ButtonSendOTP Title="Get OTP" HandleSendOTP={HandleSendOTP} />
-        ) : (
+        {/* {Click ? ( */}
+        <ButtonSendOTP isDisabled={CountDown > 0} Title="Get OTP" HandleSendOTP={HandleSendOTP} />
+        {/* ) : (
           <ButtonSendVerifyOTP isDisabled={OtpCode?.length !== 6} Title="Verify OTP" HandleVerifyOTP={HandleVerifyOTP} />
-        )}
+        )} */}
       </LabelInputContainer>
     </>
   );

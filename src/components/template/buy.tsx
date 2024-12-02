@@ -7,9 +7,10 @@ import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
 import StoreModal from "@/components/organisms/StoreModal";
 import { v4 as uuidv4 } from 'uuid';
-import { Skeleton } from "@nextui-org/react";
+// import { Skeleton } from "@nextui-org/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
+import { AnimatedGradientText } from "../ui/animated-gradient-text";
 
 interface BuyProps {
   name: string
@@ -60,11 +61,12 @@ function BuyTemplate({ name }: BuyProps) {
   const searchParams = useSearchParams()
   const [Loaded, setLoaded] = useState<boolean>(false)
   const [Level, setLevel] = useState<number>(0)
+  const [GemsAmount, setGemsAmount] = useState<{ id: number, amount: number }>({ id: 0, amount: 0 })
   const category = searchParams.get('category')
   const StoreCategory = () => {
-    if (pathname.includes('level')) {
-      return StoreData.level
-    }
+    // if (pathname.includes('level')) {
+    //   return StoreData.other.find(item => item.name === name)
+    // }
     if (category === "items") {
       return StoreData.items.find(item => item.title === name)
     }
@@ -83,6 +85,7 @@ function BuyTemplate({ name }: BuyProps) {
   const data = useMemo(() => {
     return StoreCategory()
   }, [])
+
 
   const AdminLevel = useMemo(() => {
     if (pathname.includes('Developer')) {
@@ -166,6 +169,20 @@ function BuyTemplate({ name }: BuyProps) {
               })
               const reqdata = await res.json()
               toast.success(reqdata)
+            } else if (category === "gems") {
+              // const res = await fetch("https://api.growtavern.site:1515/buy/gems", {
+              const res = await fetch("http://localhost:1515/buy/gems", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  name,
+                  amount: GemsAmount.amount
+                }),
+              })
+              const reqdata = await res.json()
+              toast.success(reqdata)
             }
           },
           onPending: function (result) { console.log('pending'); console.log(result); },
@@ -175,6 +192,12 @@ function BuyTemplate({ name }: BuyProps) {
       }
     }
   }, [name, IsLoggedIn, AdminLevel, Level, PlayerData, category, setSignInForm]);
+
+
+  const HandleSelectAmount = useCallback(async (id: number, amount: number) => {
+    console.log(id, amount)
+    await setGemsAmount({ id, amount })
+  }, [GemsAmount])
 
 
   const Heading = useMemo(() => {
@@ -190,9 +213,9 @@ function BuyTemplate({ name }: BuyProps) {
     if (category === "other" && data && 'name' in data) {
       return data.name;
     }
-    if (category === 'level') {
-      return 'Level';
-    }
+    // if (category === 'level') {
+    //   return 'Level';
+    // }
     return '';
   }, [category, data]);
 
@@ -215,7 +238,7 @@ function BuyTemplate({ name }: BuyProps) {
       <Toaster />
       <section className="mt-10">
         <div className="flex items-start xl:flex-row flex-col gap-5 justify-between">
-          <Skeleton isLoaded={Loaded} className={clsx('!overflow-hidden xl:h-72 h-max xl:w-[70%] w-full border element-3 border-white rounded-xl grid place-content-center relative', {
+          {/* <Skeleton isLoaded={Loaded} className={clsx('!overflow-hidden xl:h-72 h-max xl:w-[70%] w-full border element-3 border-white rounded-xl grid place-content-center relative', {
             'border-none': Loaded
           })}>
             <div className={clsx('overflow-hidden h-72  w-screen border border-white rounded-xl grid place-content-center relative', {
@@ -236,7 +259,21 @@ function BuyTemplate({ name }: BuyProps) {
                 <div className="bg-gradient-to-t from-[#FFD700]/50 to-transparent h-1/2 w-full absolute bottom-0" />
               }
             </div>
-          </Skeleton>
+          </Skeleton> */}
+          {
+            category === "items" &&
+            <Image src={data?.image as string} alt={Heading} width={300} height={300} quality={100} sizes="100vw" className="relative z-10 w-full h-full" />
+          }
+          {
+            data?.image &&
+            <Image src={category === "items" ? "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726555717/WM_P_d2apdd.webp" : data?.image} alt={Heading} width={100} height={100} quality={100} sizes="100vw" className={clsx('h-max xl:w-[70%] w-full element-3 rounded-xl grid place-content-center relative', {
+              '!object-contain !relative': category !== "items"
+            })} />
+          }
+          {
+            category === "items" &&
+            <div className="bg-gradient-to-t from-[#FFD700]/50 to-transparent h-1/2 w-full absolute bottom-0" />
+          }
           <div>
             <div className="bg-[#4D6182] xl:w-[350px] w-full h-max p-4 rounded-xl grid gap-2">
               <h2 className="text-xl xl:text-2xl font-GothicSemiBold">Don&apos;t Have TavernCoin</h2>
@@ -247,7 +284,26 @@ function BuyTemplate({ name }: BuyProps) {
         </div>
         <div className="xl:w-[70%] w-full break-words element-4">
           <div>
-            <h1 className="text-xl xl:text-2xl font-GothicExtraBold my-5">{Heading}</h1>
+            <h1 className="text-xl xl:text-2xl font-GothicExtraBold mt-5 mb-2">
+              {Heading}
+            </h1>
+            {data?.price && (
+              <h3 className="flex items-center w-max mb-5 gap-1">
+                Price:
+                <AnimatedGradientText>
+                  IDR :
+                  <span
+                    className="inline px-1 animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent"
+                  >
+                    {data?.price}
+                    <span className="text-white px-1">/</span>
+                    Coin 1
+                  </span>
+                  {/* <ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" /> */}
+
+                </AnimatedGradientText>
+              </h3>
+            )}
             <p className="xl:text-sm text-xs text-[12px] font-GothicRegular">{data?.desc}</p>
           </div>
           {data && "commands" in data &&
@@ -277,6 +333,30 @@ function BuyTemplate({ name }: BuyProps) {
                 />
                 <input type="text" inputMode="numeric" min={0} className="flex w-max px-5 py-2 border bg-transparent text-white" value={Level} onChange={(e) => setLevel(Number(e.target.value))} />
               </form>
+            </div>
+          }
+          {
+            data && data?.href === "Gems" &&
+            <div>
+              <h1 className="text-xl xl:text-2xl font-GothicExtraBold my-5">Select Amount 💎</h1>
+              <div className="flex items-center gap-3 flex-wrap mt-5">
+                {
+                  data["items"].map((items, index) => (
+                    <div key={index} className="relative w-40">
+                      <button key={index} onClick={() => HandleSelectAmount(index, items.amount)}>
+                        <Image src={items.image} alt={items.title} width={100} height={100} className="w-full object-contain" quality={100} sizes="100vw" />
+                      </button>
+                      <div className={clsx('absolute overflow-hidden invisible top-0 right-0 w-full h-full rounded-xl bg-[rgba(217,209,255,0.54)] border-2 border-blue-500', {
+                        "!visible": index === GemsAmount.id
+                      })}>
+                        <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733143870/gems-select_rjrjvi.webp" alt="Gems" quality={100} sizes="100vw" className="w-52 absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-10" width={100} height={100} />
+                        <h2 className="relative w-max h-max top-0 right-0 bg-blue-500 text-sm px-2 py-1 rounded-br-xl rounded-tl-xl">IDR {items.price}</h2>
+                        <h2 className="relative z-20 w-max h-max top-0 right-0 bg-orange-500 text-xs px-3 py-1 rounded-br-xl rounded-bl-xl ">Coin 1</h2>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
           }
 

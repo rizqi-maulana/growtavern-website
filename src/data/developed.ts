@@ -1,4 +1,4 @@
-import Mining from '@/assets/image/Tavern_basic.png'
+// import Mining from '@/assets/image/Tavern_basic.png'
 import { StaticImageData } from 'next/image';
 import winter from '@/assets/image/winter3.jpg'
 import winter2 from '@/assets/image/winter2.jpg'
