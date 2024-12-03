@@ -5,7 +5,7 @@ import SubmitBtn from "../atoms/SubmitBtn";
 import SignPass from "../molecules/SignPass";
 import SignEmail from "../molecules/SignEmail";
 import SignGender from "../molecules/SignGender";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "@/context";
 import SignVerifyPass from "../molecules/SignVerifyPass";
 import EmailOTP from "../molecules/EmailOTP";
