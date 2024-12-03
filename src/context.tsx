@@ -1,6 +1,6 @@
 "use client"
-import React, { createContext, Fragment, useState } from "react";
-// import toast, { Toaster } from "react-hot-toast";
+import React, { createContext, Fragment, useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 // import Loading from "./components/template/Loading";
 type gender = "man" | "woman"
 
@@ -8,8 +8,8 @@ interface PlayerDataProps {
   name: string;
   email: string;
   level: string,
-  adminlevel: number;
-  inventory: number[]
+  // adminlevel: number;
+  // inventory: number[]
 }
 
 interface UserContextProps {
@@ -61,37 +61,37 @@ const AppContext = ({ children }: AppContextProps) => {
   const [OtpCode, setOtpCode] = useState<string | undefined>(undefined)
   const [VerifyEmail, setVerifyEmail] = useState<boolean>(false)
 
-  // useEffect(() => {
-  //   const CheckLogin = async () => {
-  //     if (typeof window !== "undefined") {
-  //       const name = localStorage.getItem("log");
-  //       if (name) {
-  //         const res = await fetch("https://api.growtavern.site:1515/player/validate", {
-  //           // const res = await fetch("http://localhost:1515/player/validate", {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify({
-  //             name
-  //           }),
-  //         })
-  //         const dataserver = await res.json()
-  //         if (dataserver.type === 'success') {
-  //           setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level, adminlevel: dataserver.data.adminlevel, inventory: dataserver.data.inventory })
-  //           setIsLoggedIn(true)
-  //         } else {
-  //           toast.error(dataserver.message)
-  //         }
-  //       }
-  //     }
-  //   }
-  //   CheckLogin()
-  // }, [])
+  useEffect(() => {
+    const CheckLogin = async () => {
+      if (typeof window !== "undefined") {
+        const name = localStorage.getItem("log");
+        if (name) {
+          // const res = await fetch("https://api.growtavern.site:1515/player/validate", {
+          const res = await fetch("http://localhost:1515/player/validate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name
+            }),
+          })
+          const dataserver = await res.json()
+          if (dataserver.type === 'success') {
+            setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level })
+            setIsLoggedIn(true)
+          } else {
+            toast.error(dataserver.message)
+          }
+        }
+      }
+    }
+    CheckLogin()
+  }, [])
 
   return (
     <Fragment>
-      {/* <Toaster /> */}
+      <Toaster />
       <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, IsLoggedIn, setIsLoggedIn, OtpCode, setOtpCode, VerifyEmail, setVerifyEmail, RecoveryPass, setRecoveryPass }} >
         {/* <Loading /> */}
         {children}

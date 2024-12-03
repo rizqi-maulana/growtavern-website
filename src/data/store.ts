@@ -19,6 +19,7 @@ interface Role {
   roles: string;
   color: string;
   icon: string | StaticImageData;
+  special?: string[]
   image: string;
   desc: string;
   commands: string;
@@ -56,7 +57,6 @@ interface Other {
   href: string;
   price?: number
   items?: {
-    title: string;
     image: string;
     price: number;
     amount: number
@@ -108,8 +108,12 @@ export const StoreData: StoreData = {
       commands: "warpto,destructo,noclip,fixworld,searchuser,summon,freeze,info,p,warp,banworld,nuke,mute,curse,unmute,uncurse,hide,radio2,togglemods,skin,invis,copyset,msb,m,magic,nohands,nobody,unequip,warn,dropall,eff,pban,color,checkid,find,nick,freezeall,ghost,fakeban,fakewarn,fl,banall,1hit,pullall,dsummon,logs,setmag,setmagseed,scan,gsm,setvend,clearvend,clearmag,clearmagseed,blacklist,ggems,glevel,online,saveworld,spk,asb,removedrop,spl,rpl,growall,infoex,banrid,banip",
       href: "Developer",
       price: 250000,
-      category: "roles"
-
+      category: "roles",
+      special: [
+        "Bisa Terbang",
+        "bisa mandi",
+        "bisa makan"
+      ],
     },
     {
       roles: "Admin",
@@ -237,48 +241,104 @@ export const StoreData: StoreData = {
       href: "Gems",
       items: [
         {
-          title: "5.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067978/gems-5k_znlxz4.webp",
           price: 500,
           amount: 5000
         },
         {
-          title: "10.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067915/gems-10k_zl48bt.webp",
           price: 1000,
           amount: 10000
         },
         {
-          title: "50.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067918/gems-50k_thutas.webp",
           price: 5000,
           amount: 50000
         },
         {
-          title: "100.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067914/gems-100k_iahvsz.webp",
           price: 10000,
           amount: 100000
         },
         {
-          title: "500.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067917/gems-500k_utrf6y.webp",
           price: 50000,
           amount: 500000
         },
         {
-          title: "1.000.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067918/gems-1jt_zjv1n6.webp",
           price: 100000,
           amount: 1000000
         },
         {
-          title: "500.000.000",
           image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067922/gems-500jt_pdye7h.webp",
-          price: 5000,
+          price: 500000,
           amount: 5000000
         },
       ],
+      category: "other"
+    },
+    {
+      name: "GrowToken",
+      color: "#b758e0",
+      desc: "Welcome to the Gems purchase page on the GrowTavern private server! Here, you’ll find various Gems packages to enhance your gameplay. Whether you need a small boost or a massive amount, we offer packages tailored to your needs.",
+      image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733063963/hems-banner_djz36n.webp",
+      href: "GrowToken",
+      items: [
+        {
+          image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067978/gems-5k_znlxz4.webp",
+          price: 50000,
+          amount: 10
+        },
+        {
+          image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067915/gems-10k_zl48bt.webp",
+          price: 50000,
+          amount: 100
+        },
+      ],
+      category: "other"
+    },
+    {
+      name: "GrowPass",
+      color: "#b758e0",
+      desc: "Welcome to the Gems purchase page on the GrowTavern private server! Here, you’ll find various Gems packages to enhance your gameplay. Whether you need a small boost or a massive amount, we offer packages tailored to your needs.",
+      image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733063963/hems-banner_djz36n.webp",
+      href: "GrowPass",
+      price: 30000,
+      category: "other"
+    },
+    {
+      name: "GrowTaverCoin",
+      color: "#b758e0",
+      desc: "Welcome to the Gems purchase page on the GrowTavern private server! Here, you’ll find various Gems packages to enhance your gameplay. Whether you need a small boost or a massive amount, we offer packages tailored to your needs.",
+      image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733063963/hems-banner_djz36n.webp",
+      href: "GrowTaverCoin",
+      items: [
+        {
+          image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067978/gems-5k_znlxz4.webp",
+          price: 5000,
+          amount: 100
+        },
+        {
+          image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067978/gems-5k_znlxz4.webp",
+          price: 10000,
+          amount: 500
+        },
+        {
+          image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067978/gems-5k_znlxz4.webp",
+          price: 100000,
+          amount: 5000
+        },
+      ],
+      category: "other"
+    },
+    {
+      name: "Glory",
+      color: "#b758e0",
+      desc: "Welcome to the Gems purchase page on the GrowTavern private server! Here, you’ll find various Gems packages to enhance your gameplay. Whether you need a small boost or a massive amount, we offer packages tailored to your needs.",
+      image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733063963/hems-banner_djz36n.webp",
+      href: "Glory",
+      price: 25000,
       category: "other"
     },
   ]

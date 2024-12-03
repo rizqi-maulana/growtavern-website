@@ -4,6 +4,7 @@ import { StoreData } from "@/data/store";
 import { useCallback, useEffect, useMemo, useState, useContext } from "react";
 import { UserContext } from "@/context";
 import toast, { Toaster } from "react-hot-toast";
+import SparklesText from "../ui/sparkles-text";
 import Image from "next/image";
 import StoreModal from "@/components/organisms/StoreModal";
 import { v4 as uuidv4 } from 'uuid';
@@ -11,6 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import { AnimatedGradientText } from "../ui/animated-gradient-text";
+import Loading from "./Loading";
 
 interface BuyProps {
   name: string
@@ -89,12 +91,16 @@ function BuyTemplate({ name }: BuyProps) {
 
   const AdminLevel = useMemo(() => {
     if (pathname.includes('Developer')) {
-      return 20
-    } else if (pathname.includes('Super%20Developer')) {
-      return 30
+      return 4
+    } else if (pathname.includes('Admin')) {
+      return 3
+    } else if (pathname.includes('Owner')) {
+      return 5
+    } else if (pathname.includes('Cheater')) {
+      return 6
     } else if (pathname.includes('Moderator')) {
-      return 10
-    } else if (pathname.includes('vip')) {
+      return 2
+    } else if (pathname.includes('VIP')) {
       return 1
     }
   }, [])
@@ -142,15 +148,15 @@ function BuyTemplate({ name }: BuyProps) {
         window.snap.pay(token, {
           onSuccess: async function () {
             if (category === "roles") {
-              const res = await fetch("https://api.growtavern.site:1515/buy/roles", {
-                // const res = await fetch("http://localhost:1515/buy/roles", {
+              const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                // const res = await fetch("http://localhost:1515/purchase", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  name,
-                  adminlevel: AdminLevel
+                  type: "roles",
+                  value: AdminLevel
                 }),
               })
               const reqdata = await res.json()
@@ -235,6 +241,7 @@ function BuyTemplate({ name }: BuyProps) {
 
   return (
     <>
+      <Loading />
       <Toaster />
       <section className="mt-10">
         <div className="flex items-start xl:flex-row flex-col gap-5 justify-between">
@@ -284,9 +291,10 @@ function BuyTemplate({ name }: BuyProps) {
         </div>
         <div className="xl:w-[70%] w-full break-words element-4">
           <div>
-            <h1 className="text-xl xl:text-2xl font-GothicExtraBold mt-5 mb-2">
+            <SparklesText className="text-xl xl:text-3xl font-GothicExtraBold mt-5 mb-2" text={Heading} />
+            {/* <h1 className="text-xl xl:text-2xl font-GothicExtraBold mt-5 mb-2">
               {Heading}
-            </h1>
+            </h1> */}
             {data?.price && (
               <h3 className="flex items-center w-max mb-5 gap-1">
                 Price:
@@ -306,6 +314,13 @@ function BuyTemplate({ name }: BuyProps) {
             )}
             <p className="xl:text-sm text-xs text-[12px] font-GothicRegular">{data?.desc}</p>
           </div>
+          {
+            data && "special" in data &&
+            <div>
+              <h1 className="text-xl xl:text-2xl font-GothicExtraBold my-5">WHATS SPECIAL? ✨</h1>
+              <StoreModal special={data?.special as string[]} />
+            </div>
+          }
           {data && "commands" in data &&
             <div>
               <h1 className="text-xl xl:text-2xl font-GothicExtraBold my-5">Commands 💬</h1>
@@ -336,15 +351,15 @@ function BuyTemplate({ name }: BuyProps) {
             </div>
           }
           {
-            data && data?.href === "Gems" &&
+            data && "items" in data &&
             <div>
               <h1 className="text-xl xl:text-2xl font-GothicExtraBold my-5">Select Amount 💎</h1>
               <div className="flex items-center gap-3 flex-wrap mt-5">
                 {
-                  data["items"].map((items, index) => (
+                  data["items"]?.map((items, index) => (
                     <div key={index} className="relative w-40">
                       <button key={index} onClick={() => HandleSelectAmount(index, items.amount)}>
-                        <Image src={items.image} alt={items.title} width={100} height={100} className="w-full object-contain" quality={100} sizes="100vw" />
+                        <Image src={items.image} alt={index.toString()} width={100} height={100} className="w-full object-contain" quality={100} sizes="100vw" />
                       </button>
                       <div className={clsx('absolute overflow-hidden invisible top-0 right-0 w-full h-full rounded-xl bg-[rgba(217,209,255,0.54)] border-2 border-blue-500', {
                         "!visible": index === GemsAmount.id
@@ -361,13 +376,7 @@ function BuyTemplate({ name }: BuyProps) {
           }
 
         </div>
-        {
-          data && "special" in data &&
-          <div>
-            <h1 className="text-xl xl:text-2xl font-GothicExtraBold my-5">WHATS SPECIAL? ✨</h1>
-            <StoreModal special={data?.special as string[]} />
-          </div>
-        }
+
       </section>
     </>
   );

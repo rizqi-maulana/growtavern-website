@@ -1,34 +1,34 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import UploadPrice from "../molecules/UploadPrice";
-import UploadAmount from "../molecules/UploadAmount";
-import ItemSell from "../molecules/ItemSell";
+// import UploadAmount from "../molecules/UploadAmount";
+// import ItemSell from "../molecules/ItemSell";
 import SubmitBtn from "../atoms/SubmitBtn";
 import { UserContext } from "@/context";
-import { sellItems } from "@/data/SellItem";
+// import { sellItems } from "@/data/SellItem";
 interface FormSignUpProps {
   Loading: boolean;
   setShowFormSell: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-interface SellItemTypeData {
-  id: number
-  amount: number
-  price: number
-}
+// interface SellItemTypeData {
+//   id: number
+//   amount: number
+//   price: number
+// }
 
 const FormSell = ({ Loading, setShowFormSell }: FormSignUpProps) => {
-  const [ItemsData, setItemsData] = useState<number[]>()
-  const [SellData, setSelldata] = useState<SellItemTypeData>({ id: 0, amount: 0, price: 0 })
+  // const [ItemsData, setItemsData] = useState<number[]>()
+  // const [SellData, setSelldata] = useState<SellItemTypeData>({ id: 0, amount: 0, price: 0 })
   const context = useContext(UserContext);
   if (!context) {
     throw new Error('UserContext must be used within a UserProvider');
   }
-  const { PlayerData } = context
+  // const { PlayerData } = context
   useEffect(() => {
-    const FilterItems = sellItems.map((items) => parseInt(items))
-    const FilterInventory = PlayerData?.inventory.map((data) => data)
-    const FilterItemsInventory = FilterInventory?.filter((data) => FilterItems.includes(data[0]))
-    setItemsData(FilterItemsInventory)
+    // const FilterItems = sellItems.map((items) => parseInt(items))
+    // const FilterInventory = PlayerData?.inventory.map((data) => data)
+    // const FilterItemsInventory = FilterInventory?.filter((data) => FilterItems.includes(data[0]))
+    // setItemsData(FilterItemsInventory)
   }, [])
 
   return (
@@ -42,8 +42,8 @@ const FormSell = ({ Loading, setShowFormSell }: FormSignUpProps) => {
         </p>
       </div>
       <div className="flex flex-col gap-2">
-        <ItemSell ItemsData={ItemsData as number[]} setSelldata={setSelldata} />
-        <UploadAmount ItemsData={ItemsData as number[]} SellData={SellData} setSelldata={setSelldata} />
+        {/* <ItemSell ItemsData={ItemsData as number[]} setSelldata={setSelldata} /> */}
+        {/* <UploadAmount ItemsData={ItemsData as number[]} SellData={SellData} setSelldata={setSelldata} /> */}
         <UploadPrice />
       </div>
       {
