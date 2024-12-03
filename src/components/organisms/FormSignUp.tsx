@@ -5,7 +5,7 @@ import SubmitBtn from "../atoms/SubmitBtn";
 import SignPass from "../molecules/SignPass";
 import SignEmail from "../molecules/SignEmail";
 import SignGender from "../molecules/SignGender";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context";
 import SignVerifyPass from "../molecules/SignVerifyPass";
 import EmailOTP from "../molecules/EmailOTP";
@@ -14,10 +14,11 @@ import { bouncy } from 'ldrs'
 
 interface FormSignUpProps {
   Loading: boolean;
+  Click: boolean;
+  setClick: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const FormSignUp = ({ Loading }: FormSignUpProps) => {
-  const [Click, setClick] = useState<boolean>(true);
+const FormSignUp = ({ Loading, Click, setClick }: FormSignUpProps) => {
   const context = useContext(UserContext);
   useEffect(() => {
     if (typeof window !== "undefined" && bouncy) {

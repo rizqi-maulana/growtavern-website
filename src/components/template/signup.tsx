@@ -16,6 +16,7 @@ function SignUp() {
   }
 
   const { Name, Password, Email, Gender, setSignUpForm, OtpCode } = context;
+  const [Click, setClick] = useState<boolean>(true);
   const [ShowSuccess, setShowSuccess] = useState<boolean>(false);
   const [Loading, setLoading] = useState<boolean>(false);
 
@@ -68,6 +69,7 @@ function SignUp() {
       }
       if (data.type === "email_exist") {
         toast.error(data.message);
+        await setClick(false);
       }
       if (data.type === "server_error") {
         toast.error(data.message);
@@ -87,7 +89,7 @@ function SignUp() {
         onSubmit={HandleSignUp}
         autoComplete="off"
       >
-        <FormSignUp Loading={Loading} />
+        <FormSignUp Loading={Loading} Click={Click} setClick={setClick} />
         {ShowSuccess && (
           <Confetti
             ref={confettiRef}
