@@ -33,7 +33,7 @@ function SignIn() {
         element: '.element-2', popover: {
           title: 'View to Buy', description: 'Choose what you want to buy, see Preview images and Details for more details.', side: "top", align: 'center',
           onNextClick: () => {
-            Router.push('store/buy/Super%20Developer?category=roles')
+            Router.push('store/buy/Developer?category=roles')
             setTimeout(() => {
               driverObj.moveNext();
             }, 500);
@@ -56,8 +56,8 @@ function SignIn() {
   const HandleLogin = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // const res = await fetch("https://api.growtavern.site:1515/player/login", {
-      const res = await fetch("http://localhost:1515/player/login", {
+      const res = await fetch("https://api.growtavern.site:1515/player/login", {
+        // const res = await fetch("http://localhost:1515/player/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

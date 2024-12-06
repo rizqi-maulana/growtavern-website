@@ -165,8 +165,8 @@ function BuyTemplate({ name }: BuyProps) {
               const reqdata = await res.json()
               toast.success(reqdata)
             } else if (category === "level") {
-              // const res = await fetch("https://api.growtavern.site:1515/buy/level", {
-              const res = await fetch("http://localhost:1515/buy/level", {
+              const res = await fetch("https://api.growtavern.site:1515/buy/level", {
+                // const res = await fetch("http://localhost:1515/buy/level", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -179,8 +179,8 @@ function BuyTemplate({ name }: BuyProps) {
               const reqdata = await res.json()
               toast.success(reqdata)
             } else if (category === "gems") {
-              // const res = await fetch("https://api.growtavern.site:1515/buy/gems", {
-              const res = await fetch("http://localhost:1515/buy/gems", {
+              const res = await fetch("https://api.growtavern.site:1515/buy/gems", {
+                // const res = await fetch("http://localhost:1515/buy/gems", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
