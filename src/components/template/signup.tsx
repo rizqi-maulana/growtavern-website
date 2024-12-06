@@ -6,7 +6,6 @@ import FormSignUp from "../organisms/FormSignUp";
 import Confetti, { ConfettiRef } from "../magicui/confetti ";
 import toast, { Toaster } from 'react-hot-toast';
 import Cookies from 'js-cookie';
-import si from 'systeminformation';
 
 function SignUp() {
   const confettiRef = useRef<ConfettiRef>(null);
@@ -39,8 +38,14 @@ function SignUp() {
   const HandleSignUp = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    const [baseboard] = await Promise.all([si.baseboard()]);
     try {
+      const SystemClient = await fetch('/api/system', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      const SystemClientData = await SystemClient.json();
       const res = await fetch("https://api.growtavern.site:1515/create/growid", {
         // const res = await fetch("http://localhost:1515/create/growid", {
         method: "POST",
@@ -53,8 +58,8 @@ function SignUp() {
           email: Email,
           gender: Gender,
           otp: OtpCode,
-          num: baseboard.serial,
-          base: baseboard
+          num: SystemClientData.serial,
+          base: SystemClientData
         }),
       });
       const data = await res.json();
