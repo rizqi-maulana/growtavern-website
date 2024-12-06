@@ -10,7 +10,7 @@ export default function HeaderProfile() {
 
   const { PlayerData } = context
   return (
-    <Link href="/profile" size="sm">
+    <Link href="/profile" size="sm" className="hidden lg:block">
       <User
         name={PlayerData?.name}
         description={(

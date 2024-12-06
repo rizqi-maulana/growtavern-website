@@ -8,7 +8,14 @@ interface PlayerDataProps {
   name: string;
   email: string;
   level: string,
-  // adminlevel: number;
+  IsLoggedIn: boolean,
+  owner: boolean
+  admin: boolean
+  developer: boolean
+  moderator: boolean
+  vip: boolean
+  cheats: boolean
+  taverncoin: number
   // inventory: number[]
 }
 
@@ -48,9 +55,25 @@ interface AppContextProps {
 
 
 const AppContext = ({ children }: AppContextProps) => {
-  const [PlayerData, setPlayerData] = useState<PlayerDataProps | undefined>(undefined);
+  const [PlayerData, setPlayerData] = useState<PlayerDataProps | undefined>(() => {
+    if (typeof window !== "undefined") {
+      const PlayerData = localStorage.getItem("PlayerData");
+      if (PlayerData) {
+        return JSON.parse(PlayerData);
+      }
+    }
+    return undefined;
+  });
   const [RecoveryPass, setRecoveryPass] = useState<boolean>(false);
-  const [IsLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [IsLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const PlayerData = localStorage.getItem("PlayerData");
+      if (PlayerData) {
+        return true;
+      }
+    }
+    return false;
+  });
   const [SignUpForm, setSignUpForm] = useState<boolean>(false);
   const [SignInForm, setSignInForm] = useState<boolean>(false);
   const [Name, setName] = useState<string | undefined>(undefined);
@@ -78,21 +101,37 @@ const AppContext = ({ children }: AppContextProps) => {
           })
           const dataserver = await res.json()
           if (dataserver.type === 'success') {
-            setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level })
+            setPlayerData({
+              name: dataserver.data.name,
+              email: dataserver.data.email,
+              level: dataserver.data.level,
+              IsLoggedIn: dataserver.data.IsLoggedIn,
+              owner: dataserver.data.owner,
+              admin: dataserver.data.admin,
+              developer: dataserver.data.developer,
+              moderator: dataserver.data.moderator,
+              vip: dataserver.data.vip,
+              cheats: dataserver.data.cheats,
+              taverncoin: dataserver.data.taverncoin
+            })
             setIsLoggedIn(true)
+            if (typeof window !== "undefined") {
+              await localStorage.setItem("PlayerData", JSON.stringify(dataserver.data))
+            }
           } else {
             toast.error(dataserver.message)
           }
         }
       }
     }
-    CheckLogin()
-  }, [])
+    if (!PlayerData)
+      CheckLogin()
+  }, [PlayerData])
 
   return (
     <Fragment>
       <Toaster />
-      <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, IsLoggedIn, setIsLoggedIn, OtpCode, setOtpCode, VerifyEmail, setVerifyEmail, RecoveryPass, setRecoveryPass }} >
+      <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, OtpCode, setOtpCode, VerifyEmail, setVerifyEmail, RecoveryPass, setRecoveryPass, IsLoggedIn, setIsLoggedIn }} >
         {/* <Loading /> */}
         {children}
       </UserContext.Provider >

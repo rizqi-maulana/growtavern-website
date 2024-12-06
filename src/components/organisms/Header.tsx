@@ -19,13 +19,12 @@ export function Header() {
   if (!context) {
     throw new Error("UserContext must be used within a UserProvider");
   }
-  const { SignUpForm, SignInForm, IsLoggedIn, setIsLoggedIn, setSignUpForm, RecoveryPass } = context;
+  const { SignUpForm, SignInForm, setSignUpForm, RecoveryPass, setSignInForm, PlayerData, IsLoggedIn } = context;
   const HandleLogout = useCallback(async () => {
-    setIsLoggedIn(false)
     if (typeof window !== "undefined") {
       localStorage.clear()
     }
-  }, [setIsLoggedIn])
+  }, [PlayerData])
 
 
 
@@ -70,33 +69,16 @@ export function Header() {
           </div>
         </NavbarContent>
         <NavbarContent justify="end">
-          {/* <NavbarItem className={clsx({
-            'hidden': IsLoggedIn
-          })}>
-            {
-              IsLoggedIn ?
-                <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => HandleLogout()}>
-                  SIGN OUT
-                </Button>
-                :
-                <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => setSignInForm(true)}>
-                  SIGN IN
-                </Button>
-            }
-          </NavbarItem> */}
           <NavbarItem className={clsx({
             'hidden': IsLoggedIn
           })}>
-            {/* {
-              IsLoggedIn ?
-                <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => HandleLogout()}>
-                  SIGN OUT
-                </Button>
-                :
-                <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => setSignInForm(true)}>
-                  SIGN IN
-                </Button>
-            } */}
+            <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => setSignInForm(true)}>
+              SIGN IN
+            </Button>
+          </NavbarItem>
+          <NavbarItem className={clsx({
+            'hidden': IsLoggedIn
+          })}>
             <Button onClick={() => setSignUpForm(!SignUpForm)} className="bg-[#179BE6] text-white font-GothicBold" variant="flat">
               SIGN UP
             </Button>
@@ -104,17 +86,13 @@ export function Header() {
           <NavbarItem className={clsx({
             'hidden': !IsLoggedIn
           })}>
-            {
-              IsLoggedIn &&
-              (
-                <div className="flex items-center gap-3">
-                  <HeaderProfile />
-                  <Button className="bg-danger text-white w-max" onClick={() => HandleLogout()}>
-                    SIGN OUT
-                  </Button>
-                </div>
-              )
-            }
+
+            <div className="flex items-center gap-3">
+              <HeaderProfile />
+              <Button className="bg-danger text-white w-max" onClick={() => HandleLogout()}>
+                SIGN OUT
+              </Button>
+            </div>
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu>
@@ -130,6 +108,9 @@ export function Header() {
               </Link>
             </NavbarMenuItem>
           ))}
+          <NavbarMenuItem>
+            <Link href="/profile" size="lg">Profile</Link>
+          </NavbarMenuItem>
 
         </NavbarMenu>
       </Navbar>

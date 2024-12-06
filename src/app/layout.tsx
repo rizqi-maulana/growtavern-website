@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen dark">
+      <body className="min-h-screen dark ">
         <AppContext>
           <Header />
           <div className="xl:px-20 px-5">

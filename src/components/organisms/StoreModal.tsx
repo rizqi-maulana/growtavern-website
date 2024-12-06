@@ -1,5 +1,6 @@
 "use client"
 
+import SparklesText from "../ui/sparkles-text";
 import {
   Modal,
   ModalBody,
@@ -11,16 +12,17 @@ import Image from "next/image";
 
 interface Props {
   special: string[]
+  specialImage: string[]
 }
 
-const StoreModal = ({ special }: Props) => {
-  const images = [
-    "https://i.pinimg.com/564x/01/1c/ab/011cabc337c29a4780a1829e89018e49.jpg",
-    "https://i.pinimg.com/736x/3b/11/d8/3b11d8c53b4c6f74f99eb55e04cb5b5c.jpg",
-    "https://i.pinimg.com/564x/bb/c6/77/bbc67786884b5b23f4b8be79764d9adb.jpg",
-    "https://i.pinimg.com/564x/e0/1c/f8/e01cf839ace25a10bf9525975b3e05d4.jpg",
-    "https://i.pinimg.com/564x/61/e0/05/61e0051e438124441c058c42a3c48694.jpg",
-  ];
+const StoreModal = ({ special, specialImage }: Props) => {
+  // const images = [
+  //   "https://i.pinimg.com/564x/01/1c/ab/011cabc337c29a4780a1829e89018e49.jpg",
+  //   "https://i.pinimg.com/736x/3b/11/d8/3b11d8c53b4c6f74f99eb55e04cb5b5c.jpg",
+  //   "https://i.pinimg.com/564x/bb/c6/77/bbc67786884b5b23f4b8be79764d9adb.jpg",
+  //   "https://i.pinimg.com/564x/e0/1c/f8/e01cf839ace25a10bf9525975b3e05d4.jpg",
+  //   "https://i.pinimg.com/564x/61/e0/05/61e0051e438124441c058c42a3c48694.jpg",
+  // ];
   return (
     <Modal>
       <ModalTrigger className="bg-white text-black flex justify-center group/modal-btn rounded-xl">
@@ -33,15 +35,12 @@ const StoreModal = ({ special }: Props) => {
       </ModalTrigger>
       <ModalBody>
         <ModalContent>
-          <h4 className="text-lg md:text-2xl text-neutral-100 font-bold text-center mb-8">
-            How{" "}
-            <span className="px-1 py-0.5 rounded-md bg-neutral-800 border-neutral-700 border ">
-              Amazing
-            </span>{" "}
-            are these items? ✨
+          <h4 className="text-lg md:text-2xl flex items-center text-neutral-100 font-bold text-center mb-8 mx-auto">
+            What are the{" "}
+            <SparklesText text="Specials?" className="ml-2 text-lg md:text-2xl" />
           </h4>
           <div className="flex justify-center items-center">
-            {images.map((image, idx) => (
+            {specialImage.map((image, idx) => (
               <motion.div
                 key={"images" + idx}
                 style={{
@@ -69,12 +68,12 @@ const StoreModal = ({ special }: Props) => {
               </motion.div>
             ))}
           </div>
-          <div className="py-10 flex flex-wrap gap-x-4 gap-y-6 items-start justify-start max-w-sm mx-auto">
+          <div className="py-10 pb-3 flex flex-wrap gap-x-4 gap-y-3  items-start justify-start mx-auto">
             {
               special.map((items: string, id: number) => (
-                <div className="flex items-center justify-center" key={id}>
+                <div className="flex items-center justify-between" key={id}>
                   <span className="text-neutral-300 text-sm">
-                    {items}
+                    • {items}
                   </span>
                 </div>
               ))

@@ -70,14 +70,27 @@ function SignIn() {
       const dataserver = await res.json();
       if (dataserver.type === "success") {
         toast.success(dataserver.message);
-        setPlayerData({ name: dataserver.data.name, email: dataserver.data.email, level: dataserver.data.level });
+        setPlayerData({
+          name: dataserver.data.name,
+          email: dataserver.data.email,
+          level: dataserver.data.level,
+          IsLoggedIn: dataserver.data.IsLoggedIn,
+          owner: dataserver.data.owner,
+          admin: dataserver.data.admin,
+          developer: dataserver.data.developer,
+          moderator: dataserver.data.moderator,
+          vip: dataserver.data.vip,
+          cheats: dataserver.data.cheats,
+          taverncoin: dataserver.data.taverncoin
+        })
         if (typeof window !== "undefined") {
-          localStorage.setItem("log", dataserver.data.name);
+          await localStorage.setItem("log", dataserver.data.name);
+          await localStorage.setItem("PlayerData", JSON.stringify(dataserver.data));
         }
-        setTimeout(() => {
-          setSignInForm(false);
-          driverObj.drive();
-        }, 3000);
+        // setTimeout(() => {
+        //   setSignInForm(false);
+        //   driverObj.drive();
+        // }, 3000);
       } else {
         toast.error(dataserver.message);
       }

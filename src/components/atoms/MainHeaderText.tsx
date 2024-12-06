@@ -12,7 +12,7 @@ interface Props {
 
 const MainHeaderText = ({ title, logo, desc, descPosition }: Props) => {
   return (
-    <div className="z-10 relative">
+    <div className="z-10 relative bg-black/50 p-3 rounded-xl">
       <div className={clsx('flex items-center', {
         'justify-center': descPosition === "center",
         'justify-start': descPosition === "left",

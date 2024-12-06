@@ -3,6 +3,7 @@
 import { StoreData } from "@/data/store";
 import { useCallback, useEffect, useMemo, useState, useContext } from "react";
 import { UserContext } from "@/context";
+import { RainbowButton } from "../ui/rainbow-button";
 import toast, { Toaster } from "react-hot-toast";
 import SparklesText from "../ui/sparkles-text";
 import Image from "next/image";
@@ -61,6 +62,7 @@ function BuyTemplate({ name }: BuyProps) {
   const { IsLoggedIn, setSignInForm, PlayerData } = context
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const [PaymentOptions, setPaymentOptions] = useState<string>('')
   const [Loaded, setLoaded] = useState<boolean>(false)
   const [Level, setLevel] = useState<number>(0)
   const [GemsAmount, setGemsAmount] = useState<{ id: number, amount: number }>({ id: 0, amount: 0 })
@@ -108,24 +110,25 @@ function BuyTemplate({ name }: BuyProps) {
 
 
   const HandlePay = useCallback(async () => {
-    const FuncPurchaseItem = async () => {
-      const formdata = new FormData();
-      const PurchaseItem = StoreCategory()
-      formdata.append('order_id', uuidv4() as string);
-      const price = PurchaseItem?.price?.toString();
-      if (price) {
-        formdata.append('gross_amount', price);
-      } else {
-        console.error("Price is undefined for the selected item.");
-        return;
-      }
-
-      formdata.append('email', PlayerData?.email as string);
-      return formdata
-    }
     if (IsLoggedIn === false) {
       setSignInForm(true)
-    } else {
+    }
+    if (PaymentOptions === "ewallet") {
+      const FuncPurchaseItem = async () => {
+        const formdata = new FormData();
+        const PurchaseItem = StoreCategory()
+        formdata.append('order_id', uuidv4() as string);
+        const price = PurchaseItem?.price?.toString();
+        if (price) {
+          formdata.append('gross_amount', price);
+        } else {
+          console.error("Price is undefined for the selected item.");
+          return;
+        }
+
+        formdata.append('email', PlayerData?.email as string);
+        return formdata
+      }
       const formdata = await FuncPurchaseItem()
       const res = await fetch('/api/pay', {
         method: "POST",
@@ -196,8 +199,10 @@ function BuyTemplate({ name }: BuyProps) {
           onClose: function () { alert('customer closed the popup without finishing the payment'); }
         });
       }
+    } else if (PaymentOptions === "coin") {
+
     }
-  }, [name, IsLoggedIn, AdminLevel, Level, PlayerData, category, setSignInForm]);
+  }, [name, IsLoggedIn, AdminLevel, Level, PlayerData, category, setSignInForm, PaymentOptions]);
 
 
   const HandleSelectAmount = useCallback(async (id: number, amount: number) => {
@@ -286,7 +291,19 @@ function BuyTemplate({ name }: BuyProps) {
               <h2 className="text-xl xl:text-2xl font-GothicSemiBold">Don&apos;t Have TavernCoin</h2>
               <p className="xl:text-sm text-xs text-[12px]">If you haven&apos;t purchased TavernCoin, you can make a purchase with w-wallet without purchasing TavernCoin. Payment without TavernCoin uses QR Payment where you will be asked to Scan the QR to complete the Payment.</p>
             </div>
-            <button onClick={HandlePay} className="w-full bg-[#179BE6] rounded-xl py-2 mt-5 element-5">Pay Now</button>
+            <div className="flex justify-evenly mt-5">
+              <label htmlFor="ewallet" className="flex gap-1">
+                <input type="radio" name="payment" value="ewallet" id="ewallet" onChange={({ target }) => setPaymentOptions(target.value)} />
+                E-Wallet
+              </label>
+              <label htmlFor="coin" className="flex gap-1">
+                <input type="radio" name="payment" value="coin" id="coin" onChange={({ target }) => setPaymentOptions(target.value)} />
+                TavernCoin
+              </label>
+            </div>
+            <RainbowButton className="w-full text-black mt-5" onClick={HandlePay}>
+              Pay Now</RainbowButton>
+            {/* <button onClick={HandlePay} className="w-full bg-[#179BE6] rounded-xl py-2 mt-5 element-5">Pay Now</button> */}
           </div>
         </div>
         <div className="xl:w-[70%] w-full break-words element-4">
@@ -305,7 +322,13 @@ function BuyTemplate({ name }: BuyProps) {
                   >
                     {data?.price}
                     <span className="text-white px-1">/</span>
-                    Coin 1
+                    {
+                      data && "coin" in data && (
+                        <span>
+                          Coin {data?.coin}
+                        </span>
+                      )
+                    }
                   </span>
                   {/* <ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" /> */}
 
@@ -318,7 +341,7 @@ function BuyTemplate({ name }: BuyProps) {
             data && "special" in data &&
             <div>
               <h1 className="text-xl xl:text-2xl font-GothicExtraBold my-5">WHATS SPECIAL? ✨</h1>
-              <StoreModal special={data?.special as string[]} />
+              <StoreModal special={data?.special as string[]} specialImage={data?.specialImage as string[]} />
             </div>
           }
           {data && "commands" in data &&
@@ -364,7 +387,7 @@ function BuyTemplate({ name }: BuyProps) {
                       <div className={clsx('absolute overflow-hidden invisible top-0 right-0 w-full h-full rounded-xl bg-[rgba(217,209,255,0.54)] border-2 border-blue-500', {
                         "!visible": index === GemsAmount.id
                       })}>
-                        <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733143870/gems-select_rjrjvi.webp" alt="Gems" quality={100} sizes="100vw" className="w-52 absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-10" width={100} height={100} />
+                        <Image src={data?.selectedImage as string} alt="Gems" quality={100} sizes="100vw" className="w-52 absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-10" width={100} height={100} />
                         <h2 className="relative w-max h-max top-0 right-0 bg-blue-500 text-sm px-2 py-1 rounded-br-xl rounded-tl-xl">IDR {items.price}</h2>
                         <h2 className="relative z-20 w-max h-max top-0 right-0 bg-orange-500 text-xs px-3 py-1 rounded-br-xl rounded-bl-xl ">Coin 1</h2>
                       </div>
