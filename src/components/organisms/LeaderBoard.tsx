@@ -32,7 +32,7 @@ const LeaderBoard = () => {
   return (
     <div className="w-full lg:w-3/4 mx-auto h-screen">
       {
-        Top3.length > 0 && AllUser.length > 0 ? (
+        Top3.length <= 0 && AllUser.length <= 0 ? (
           <Loading />
         ) : (
           <>
