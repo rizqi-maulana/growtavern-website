@@ -12,6 +12,7 @@ interface PlayerType {
 const LeaderBoard = () => {
   const [Top3, setTop3] = useState<PlayerType[]>([]);
   const [AllUser, setAllUser] = useState<PlayerType[]>([]);
+  const [IsClient, setIsClient] = useState<boolean>(true)
 
   useEffect(() => {
     const FetchLeaderBoard = async () => {
@@ -27,19 +28,24 @@ const LeaderBoard = () => {
       setAllUser(resdata.data.slice(3))
     }
     FetchLeaderBoard()
+    setIsClient(false)
   }, []);
 
   return (
     <div className="w-full lg:w-3/4 mx-auto h-screen">
       {
-        Top3.length > 0 && AllUser.length > 0 ? (
+        IsClient ? (
+          <Loading />
+        ) : (
           <>
             <Top3LeaderBoard data={Top3} />
             <AllLeaderBoard data={AllUser} />
           </>
-        ) : (
-          <Loading />
+
         )
+        // Top3.length > 0 && AllUser.length > 0 ? (
+        // ) : (
+        // )
       }
     </div>
   );
