@@ -4,19 +4,33 @@ import toast, { Toaster } from "react-hot-toast";
 // import Loading from "./components/template/Loading";
 type gender = "man" | "woman"
 
-interface PlayerDataProps {
+export interface PlayerDataProps {
   name: string;
+  gems: number;
   email: string;
-  level: string,
+  level: number,
   IsLoggedIn: boolean,
   owner: boolean
   admin: boolean
   developer: boolean
   moderator: boolean
   vip: boolean
+  token: string,
   cheats: boolean
   taverncoin: number
-  // inventory: number[]
+  last_online: string
+  guild_id: number
+  guild_name: string,
+  redeem_code: {
+    code: string,
+    expired: number,
+    created: number
+  }[]
+}
+
+interface ServerStatusProps {
+  IsServerUp: boolean
+  PlayerCount: number
 }
 
 interface UserContextProps {
@@ -44,7 +58,7 @@ interface UserContextProps {
   setVerifyEmail: React.Dispatch<React.SetStateAction<boolean>>
   RecoveryPass: boolean,
   setRecoveryPass: React.Dispatch<React.SetStateAction<boolean>>
-
+  ServerStatus: ServerStatusProps | undefined
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined)
@@ -83,6 +97,15 @@ const AppContext = ({ children }: AppContextProps) => {
   const [Gender, setGender] = useState<gender | undefined>('man');
   const [OtpCode, setOtpCode] = useState<string | undefined>(undefined)
   const [VerifyEmail, setVerifyEmail] = useState<boolean>(false)
+  const [ServerStatus, setServerStatus] = useState<ServerStatusProps | undefined>(() => {
+    if (typeof window !== "undefined") {
+      const ServerStatus = localStorage.getItem("ServerStatus");
+      if (ServerStatus) {
+        return JSON.parse(ServerStatus);
+      }
+    }
+    return { IsServerUp: false, PlayerCount: 0 };
+  })
 
   useEffect(() => {
     const CheckLogin = async () => {
@@ -103,6 +126,7 @@ const AppContext = ({ children }: AppContextProps) => {
           if (dataserver.type === 'success') {
             setPlayerData({
               name: dataserver.data.name,
+              gems: dataserver.data.gems,
               email: dataserver.data.email,
               level: dataserver.data.level,
               IsLoggedIn: dataserver.data.IsLoggedIn,
@@ -112,7 +136,13 @@ const AppContext = ({ children }: AppContextProps) => {
               moderator: dataserver.data.moderator,
               vip: dataserver.data.vip,
               cheats: dataserver.data.cheats,
-              taverncoin: dataserver.data.taverncoin
+              token: dataserver.data.token,
+              taverncoin: dataserver.data.taverncoin,
+              last_online: dataserver.data.last_online,
+              guild_id: dataserver.data.guild_id,
+              guild_name: dataserver.data.guild_name,
+              redeem_code: dataserver.data.redeem_code
+
             })
             setIsLoggedIn(true)
             if (typeof window !== "undefined") {
@@ -124,14 +154,35 @@ const AppContext = ({ children }: AppContextProps) => {
         }
       }
     }
-    if (!PlayerData)
-      CheckLogin()
-  }, [PlayerData])
+    // if (!PlayerData)
+    CheckLogin()
+  }, [])
 
+  useEffect(() => {
+    const check = async () => {
+      const res = await fetch('https://api.growtavern.site:1515/checkserver', {
+        // const res = await fetch('http://localhost:1515/checkserver', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
+      const resdata = await res.json()
+      if (typeof window !== "undefined") {
+        await localStorage.setItem("ServerStatus", JSON.stringify(resdata))
+      }
+      setServerStatus(resdata)
+    }
+    if (!ServerStatus?.IsServerUp)
+      check()
+    setInterval(() => {
+      check()
+    }, 60000);
+  }, [])
   return (
     <Fragment>
       <Toaster />
-      <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, OtpCode, setOtpCode, VerifyEmail, setVerifyEmail, RecoveryPass, setRecoveryPass, IsLoggedIn, setIsLoggedIn }} >
+      <UserContext.Provider value={{ SignUpForm, setSignUpForm, SignInForm, setSignInForm, Name, setName, Password, setPassword, Email, setEmail, Gender, setGender, VerifyPassword, setVerifyPassword, PlayerData, setPlayerData, OtpCode, setOtpCode, VerifyEmail, setVerifyEmail, RecoveryPass, setRecoveryPass, IsLoggedIn, setIsLoggedIn, ServerStatus }} >
         {/* <Loading /> */}
         {children}
       </UserContext.Provider >

@@ -6,7 +6,7 @@ import Vip from '@/assets/image/vip.png'
 import { StaticImageData } from 'next/image'
 
 interface Item {
-  title: string;
+  name: string;
   image: string;
   desc: string;
   // coin?: number;
@@ -18,7 +18,7 @@ interface Item {
 }
 
 interface Role {
-  roles: string;
+  name: string;
   color: string;
   icon: string | StaticImageData;
   specialImage?: string[]
@@ -34,7 +34,7 @@ interface Role {
 }
 
 interface Title {
-  title: string;
+  name: string;
   color: string;
   desc: string;
   image: string;
@@ -85,7 +85,7 @@ interface StoreData {
 export const StoreData: StoreData = {
   items: [
     {
-      title: "Diamond Pickaxe of Celestial Might",
+      name: "Diamond Pickaxe of Celestial Might",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726074579/Untitled-2_v9rabv.webp",
       desc: "Eclipsebane, the Diamond Pickaxe of Celestial Might Forged in a dying star's heart, Eclipsebane glows with celestial radiance. This enchanted pickaxe cleaves stone and ore with a single strike and mines blocks from two paces away, bending reality itself. Its legendary origins whisper of a blacksmith who channeled the heavens' power into mortal hands. Now, that power is yours to wield.",
       href: "Diamond Pickaxe of Celestial Might",
@@ -105,7 +105,7 @@ export const StoreData: StoreData = {
       category: "items"
     },
     {
-      title: "Diamond Pickaxe of Celestial Mights",
+      name: "Diamond Pickaxe of Celestial Mights",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726074579/Untitled-2_v9rabv.webp",
       desc: "Eclipsebane, the Diamond Pickaxe of Celestial Might Forged in a dying star's heart, Eclipsebane glows with celestial radiance. This enchanted pickaxe cleaves stone and ore with a single strike and mines blocks from two paces away, bending reality itself. Its legendary origins whisper of a blacksmith who channeled the heavens' power into mortal hands. Now, that power is yours to wield.",
       href: "Diamond Pickaxe of Celestial Might",
@@ -116,7 +116,7 @@ export const StoreData: StoreData = {
   ],
   roles: [
     {
-      roles: "Developer",
+      name: "Developer",
       color: "#7E00FA",
       icon: SDeveloper,
       coin: 5000,
@@ -145,7 +145,7 @@ export const StoreData: StoreData = {
       ],
     },
     {
-      roles: "Admin",
+      name: "Admin",
       color: "#00BEFA",
       coin: 3000,
       icon: Developer,
@@ -173,7 +173,7 @@ export const StoreData: StoreData = {
       ],
     },
     {
-      roles: "Owner",
+      name: "Owner",
       coin: 7000,
       color: "#00BEFA",
       icon: Developer,
@@ -203,7 +203,7 @@ export const StoreData: StoreData = {
       ],
     },
     {
-      roles: "Cheater",
+      name: "Cheater",
       color: "#00BEFA",
       coin: 300,
       icon: Developer,
@@ -225,7 +225,7 @@ export const StoreData: StoreData = {
       ],
     },
     {
-      roles: "Moderator",
+      name: "Moderator",
       color: "#FB047B",
       coin: 1000,
       icon: Mod,
@@ -251,7 +251,7 @@ export const StoreData: StoreData = {
       ],
     },
     {
-      roles: "VIP",
+      name: "VIP",
       color: "#04CFFB",
       icon: Vip,
       coin: 300,
@@ -283,7 +283,7 @@ export const StoreData: StoreData = {
   // },
   titles: [
     {
-      title: "DrTitle",
+      name: "DrTitle",
       color: "#F71A1A",
       desc: `t counts as an Angelic Healing). This will add "Dr." before the player's name and change the color to red.`,
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061665/Screenshot_2024-09-11_205604_k8hvvv.webp",
@@ -293,7 +293,7 @@ export const StoreData: StoreData = {
       category: "titles"
     },
     {
-      title: "Grow4Good",
+      name: "Grow4Good",
       color: "#108E24",
       desc: "Players with a Grow4Good Title can toggle this on and off by wrenching oneself and clicking title. Once toggled, it changes the player's name into a mix of colors for every letter. The colors, however, does not carry over when one Broadcasts, Chats, nor private messages.",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061665/Screenshot_2024-09-11_205802_jrgb4a.webp",
@@ -305,7 +305,7 @@ export const StoreData: StoreData = {
 
     },
     {
-      title: "Legendary of Legend",
+      name: "Legendary of Legend",
       color: "#E3B43E",
       desc: `The Legendary Title is a legendary item that gives the player a larger name with a legendary orb replacing the flag icon. It also adds "of Legend" to the end of the player's name. It is obtained by completing the Quest of Honor and can be temporarily removed for 24 hours by consuming a Golden Apple or by unchecking 'of Legend' from the Title window which can be found by wrenching oneself.`,
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061665/Screenshot_2024-09-11_205843_srcj8w.webp",
@@ -317,7 +317,7 @@ export const StoreData: StoreData = {
 
     },
     {
-      title: "Mentor",
+      name: "Mentor",
       color: "#04CEFB",
       desc: "Is it true? We have to wait until 500-2000 days to get the mentor title? i thought it was a long time",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726061665/Screenshot_2024-09-11_205818_dz3zaw.webp",
@@ -403,13 +403,13 @@ export const StoreData: StoreData = {
       href: "GrowToken",
       items: [
         {
-          image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067978/gems-5k_znlxz4.webp",
+          image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733415407/growtoken_10_cy47j7.webp",
           price: 50000,
           coin: 1000,
           amount: 10
         },
         {
-          image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733067915/gems-10k_zl48bt.webp",
+          image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733415421/growtoken_100_lh9rw8.webp",
           price: 500000,
           coin: 10000,
           amount: 100
@@ -455,13 +455,33 @@ export const StoreData: StoreData = {
       category: "other"
     },
     {
-      name: "Glory",
+      name: "Road To Glory",
       color: "#b758e0",
       desc: "Welcome to the Gems purchase page on the GrowTavern private server! Here, you’ll find various Gems packages to enhance your gameplay. Whether you need a small boost or a massive amount, we offer packages tailored to your needs.",
       image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733408024/gto_glory_azr0qy.webp",
-      href: "Glory",
+      href: "Road%20To%20Glory",
       price: 25000,
       coin: 500,
+      amount: 1,
+      category: "other"
+    },
+    {
+      name: "Platinum Gem Lock",
+      color: "#b758e0",
+      desc: "Welcome to the Gems purchase page on the GrowTavern private server! Here, you’ll find various Gems packages to enhance your gameplay. Whether you need a small boost or a massive amount, we offer packages tailored to your needs.",
+      image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733583522/platinum_lock_ek0qz3.webp",
+      href: "Platinum%20Gem%20Lock",
+      price: 500,
+      amount: 1,
+      category: "other"
+    },
+    {
+      name: "Ruthenium Gem Lock",
+      color: "#b758e0",
+      desc: "Welcome to the Gems purchase page on the GrowTavern private server! Here, you’ll find various Gems packages to enhance your gameplay. Whether you need a small boost or a massive amount, we offer packages tailored to your needs.",
+      image: "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733583523/thenium_lock_lt3efg.webp",
+      href: "Ruthenium%20Gem%20Lock",
+      price: 50000,
       amount: 1,
       category: "other"
     },

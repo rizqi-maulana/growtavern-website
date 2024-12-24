@@ -20,7 +20,7 @@ interface Other {
 }
 
 interface Role {
-  roles: string;
+  name: string;
   color: string;
   icon: string | StaticImageData;
   image: string;
@@ -51,13 +51,13 @@ const StorePlayer = () => {
               // <LinkPreview url={`${pathname}/buy/${item.href}?category=${item.category}`} isStatic imageSrc={item.image} key={index} quality={100}>
               <Link key={index} href={`${pathname}/buy/${item.href}?category=${item.category}`}>
                 {/* <StoreCard color={item.color} icon={item.icon} text={item.roles} /> */}
-                <div className="rounded-xl overflow-hidden relative" style={{
+                <div className={`rounded-xl overflow-hidden relative ${item.href === "Developer" && "element-5"}`} style={{
                   border: `2px solid ${item.color}`
                 }} >
                   <h2 className="absolute top-0 right-0 px-2 py-1 rounded-bl-xl z-10 text-sm" style={{
                     backgroundColor: item.color
-                  }}>{item.roles}</h2>
-                  <Image src={item.image} alt={item.roles} width={100} height={100} className="w-80 object-contain" quality={100} sizes="100vw" />
+                  }}>{item.name}</h2>
+                  <Image src={item.image} alt={item.name} width={100} height={100} className="w-80 object-contain" quality={100} sizes="100vw" />
                 </div>
               </Link>
               // </LinkPreview>

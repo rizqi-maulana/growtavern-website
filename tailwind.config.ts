@@ -76,6 +76,11 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
+        },
         rainbow: {
           "0%": { "background-position": "0%" },
           "100%": { "background-position": "200%" },
@@ -95,6 +100,7 @@ const config = {
         },
       },
       animation: {
+        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
         rainbow: "rainbow var(--speed, 2s) infinite linear",
         gradient: "gradient 8s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",

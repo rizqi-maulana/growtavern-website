@@ -3,7 +3,7 @@ import { StoreData } from "@/data/store";
 
 const ItemsCardContainer = () => {
   interface Item {
-    title: string;
+    name: string;
     image: string;
     desc: string;
     href: string;
@@ -15,7 +15,7 @@ const ItemsCardContainer = () => {
         StoreData.items.map((item: Item, index: number) => (
           <ItemsCard
             key={index}
-            title={item.title}
+            title={item.name}
             image={item.image}
             desc={item.desc}
             href={item.href}

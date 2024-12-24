@@ -1,42 +1,12 @@
 "use client"
 
-// import { useSearchParams } from "next/navigation";
-import RecoveryTemp from "@/components/template/recovery";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-function Recovery() {
+import React, { useEffect, useState } from "react";
+function Validate() {
   const [token, setToken] = useState<string>("");
-  const [NewPassword, setNewPassword] = useState<string>('');
-  const [ConfirmPass, setConfirmPass] = useState<string>('');
   const [EnableRecovery, setEnableRecovery] = useState<boolean>(false)
-  const [EnableSend, setEnableSend] = useState<boolean>(true)
-  const HandleChange = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (NewPassword === ConfirmPass) {
-      const res = await fetch('https://api.growtavern.site:1515/player/recovery/password', {
-        // const res = await fetch('http://localhost:1515/player/recovery/password', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          token,
-          newpassword: NewPassword
-        }),
-      })
-      const resdata = await res.json()
-      if (resdata.type === "success") {
-        await toast.success(resdata.message)
-        if (typeof window !== "undefined") {
-          window.location.href = "/"
-        }
-      } else {
-        await toast.error(resdata.message)
-      }
-    }
-  }, [NewPassword, token, ConfirmPass])
+  const [IsClient, setIsClient] = useState<boolean>(false)
 
   useEffect(() => {
     // Ambil token dari URL menggunakan URLSearchParams
@@ -47,8 +17,8 @@ function Recovery() {
 
   useEffect(() => {
     const ValidateToken = async () => {
-      const res = await fetch('https://api.growtavern.site:1515/player/validate/recovery/token', {
-        // const res = await fetch('http://localhost:1515/player/validate/recovery/token', {
+      const res = await fetch('https://api.growtavern.site:1515/account/validate', {
+        // const res = await fetch('http://localhost:1515/account/validate', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,19 +35,16 @@ function Recovery() {
         setEnableRecovery(true)
       }
     }
-    ValidateToken()
+    if (IsClient)
+      ValidateToken()
+    setIsClient(true)
   }, [token])
 
-  const HandleCaptcha = useCallback(() => {
-    setEnableSend(false)
-  }, [EnableSend])
-
   return (
-    <>
-      <Toaster />
+    <section className="h-96">
       {
         !EnableRecovery ? (
-          <section className="mt-10">
+          <div className="mt-10 ">
             <div className="flex flex-col items-center">
               <Link href="/" className="mb-8 inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
                 <Image
@@ -97,15 +64,15 @@ function Recovery() {
 
               <Link href="/" className="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">Go home</Link>
             </div>
-          </section>
+          </div>
         ) : (
-          <form onSubmit={HandleChange}>
-            <RecoveryTemp HandleCaptcha={HandleCaptcha} setNewPassword={setNewPassword} EnableSend={EnableSend} setConfirmPass={setConfirmPass} />
-          </form>
+          <div className="flex flex-col items-center h-96 justify-center">
+            <h1 className="text-2xl font-GothicExtraBold">Account Validated</h1>
+          </div>
         )
       }
-    </>
+    </section>
   );
 }
 
-export default Recovery;
+export default Validate;

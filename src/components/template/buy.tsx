@@ -65,17 +65,17 @@ function BuyTemplate({ name }: BuyProps) {
   const [PaymentOptions, setPaymentOptions] = useState<string>('')
   const [Loaded, setLoaded] = useState<boolean>(false)
   const [Level, setLevel] = useState<number>(0)
-  const [GemsAmount, setGemsAmount] = useState<{ id: number, amount: number }>({ id: 0, amount: 0 })
+  const [SelectAmount, setSelectAmount] = useState<{ id: number, amount: number, price: number, coin: number }>({ id: -1, amount: -1, price: 0, coin: 0 })
   const category = searchParams.get('category')
   const StoreCategory = () => {
     // if (pathname.includes('level')) {
     //   return StoreData.other.find(item => item.name === name)
     // }
     if (category === "items") {
-      return StoreData.items.find(item => item.title === name)
+      return StoreData.items.find(item => item.name === name)
     }
     if (category === "roles") {
-      return StoreData.roles.find(item => item.roles === name)
+      return StoreData.roles.find(item => item.name === name)
     }
     // if (category === "titles") {
     //   return StoreData.titles.find(item => item.title === name)
@@ -89,7 +89,6 @@ function BuyTemplate({ name }: BuyProps) {
   const data = useMemo(() => {
     return StoreCategory()
   }, [])
-
 
   const AdminLevel = useMemo(() => {
     if (pathname.includes('Developer')) {
@@ -110,6 +109,8 @@ function BuyTemplate({ name }: BuyProps) {
 
 
   const HandlePay = useCallback(async () => {
+    // const PurchaseItem = StoreCategory()
+    // console.log(PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin)
     if (IsLoggedIn === false) {
       setSignInForm(true)
     }
@@ -118,12 +119,19 @@ function BuyTemplate({ name }: BuyProps) {
         const formdata = new FormData();
         const PurchaseItem = StoreCategory()
         formdata.append('order_id', uuidv4() as string);
-        const price = PurchaseItem?.price?.toString();
+        PurchaseItem && "name" in PurchaseItem &&
+          formdata.append('item_name', PurchaseItem?.name as string);
+        formdata.append('category', category as string);
+        let price;
+        if (PurchaseItem && "price" in PurchaseItem) {
+          price = PurchaseItem.price
+        } else {
+          price = SelectAmount.price
+        }
         if (price) {
           formdata.append('gross_amount', price);
         } else {
-          console.error("Price is undefined for the selected item.");
-          return;
+          return toast.error("Select the quantity you want to purchase.");
         }
 
         formdata.append('email', PlayerData?.email as string);
@@ -159,39 +167,177 @@ function BuyTemplate({ name }: BuyProps) {
                 },
                 body: JSON.stringify({
                   type: "roles",
-                  value: AdminLevel
+                  role_number: AdminLevel,
+                  player_token: PlayerData?.token,
+
                 }),
               })
               const reqdata = await res.json()
-              toast.success(reqdata)
-            } else if (category === "level") {
-              const res = await fetch("https://api.growtavern.site:1515/buy/level", {
-                // const res = await fetch("http://localhost:1515/buy/level", {
+              if (reqdata.type === "success") {
+                toast.success(reqdata.message)
+              } else {
+                toast.error(reqdata.message)
+              }
+            } else if (pathname.includes('Level') && category === "other") {
+              const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                // const res = await fetch("http://localhost:1515/purchase", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  name,
-                  level: Level
+                  type: "level",
+                  level_number: Level,
+                  player_token: PlayerData?.token,
+
                 }),
               })
               const reqdata = await res.json()
-              toast.success(reqdata)
-            } else if (category === "gems") {
-              const res = await fetch("https://api.growtavern.site:1515/buy/gems", {
-                // const res = await fetch("http://localhost:1515/buy/gems", {
+              if (reqdata.type === "success") {
+                toast.success(reqdata.message)
+              } else {
+                toast.error(reqdata.message)
+              }
+            } else if (pathname.includes('Gems') && category === "other") {
+              const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                // const res = await fetch("http://localhost:1515/purchase", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  name,
-                  amount: GemsAmount.amount
+                  type: "gems",
+                  select_amount: SelectAmount.amount,
+                  player_token: PlayerData?.token,
+
                 }),
               })
               const reqdata = await res.json()
-              toast.success(reqdata)
+              if (reqdata.type === "success") {
+                toast.success(reqdata.message)
+              } else {
+                toast.error(reqdata.message)
+              }
+            } else if (pathname.includes('GrowTaverCoin') && category === "other") {
+              const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                // const res = await fetch("http://localhost:1515/purchase", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  type: "growtaverncoin",
+                  GrowTaverCoin: SelectAmount.amount,
+                  player_token: PlayerData?.token,
+
+                }),
+              })
+              const reqdata = await res.json()
+              if (reqdata.type === "success") {
+                toast.success(reqdata.message)
+              } else {
+                toast.error(reqdata.message)
+              }
+            } else if (pathname.includes('GrowPass') && category === "other") {
+              const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                // const res = await fetch("http://localhost:1515/purchase", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  type: "growpass",
+                  GrowPass: true,
+                  player_token: PlayerData?.token,
+
+                }),
+              })
+              const reqdata = await res.json()
+              if (reqdata.type === "success") {
+                toast.success(reqdata.message)
+              } else {
+                toast.error(reqdata.message)
+              }
+            } else if (pathname.includes('Road%20To%20Glory') && category === "other") {
+              const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                // const res = await fetch("http://localhost:1515/purchase", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  type: "roadtoglory",
+                  RoadToGlory: true,
+                  player_token: PlayerData?.token,
+
+                }),
+              })
+              const reqdata = await res.json()
+              if (reqdata.type === "success") {
+                toast.success(reqdata.message)
+              } else {
+                toast.error(reqdata.message)
+              }
+            } else if (pathname.includes('Platinum%20Gem%20Lock') && category === "other") {
+              const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                // const res = await fetch("http://localhost:1515/purchase", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  type: "items",
+                  items: [7188, 1],
+                  player_token: PlayerData?.token,
+
+                }),
+              })
+              const reqdata = await res.json()
+              if (reqdata.type === "success") {
+                toast.success(reqdata.message)
+              } else {
+                toast.error(reqdata.message)
+              }
+            } else if (pathname.includes('Ruthenium%20Gem%20Lock') && category === "other") {
+              const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                // const res = await fetch("http://localhost:1515/purchase", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  type: "items",
+                  items: [8470, 1],
+                  player_token: PlayerData?.token,
+
+                }),
+              })
+              const reqdata = await res.json()
+              if (reqdata.type === "success") {
+                toast.success(reqdata.message)
+              } else {
+                toast.error(reqdata.message)
+              }
+            } else if (pathname.includes('GrowToken') && category === "other") {
+              const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                // const res = await fetch("http://localhost:1515/purchase", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  type: "items",
+                  items: [SelectAmount.amount === 10 ? 1486 : 6802, SelectAmount.amount],
+                  player_token: PlayerData?.token,
+
+                }),
+              })
+              const reqdata = await res.json()
+              if (reqdata.type === "success") {
+                toast.success(reqdata.message)
+              } else {
+                toast.error(reqdata.message)
+              }
             }
           },
           onPending: function (result) { console.log('pending'); console.log(result); },
@@ -200,26 +346,155 @@ function BuyTemplate({ name }: BuyProps) {
         });
       }
     } else if (PaymentOptions === "coin") {
-
+      // toast.error("Payment method not available")
+      const PurchaseItem = StoreCategory()
+      if (category === "roles") {
+        const res = await fetch("https://api.growtavern.site:1515/purchase", {
+          // const res = await fetch("http://localhost:1515/purchase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            payment: "coin",
+            player_token: PlayerData?.token,
+            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+            type: "roles",
+            role_number: AdminLevel
+          }),
+        })
+        const reqdata = await res.json()
+        if (reqdata.type === "success") {
+          toast.success(reqdata.message)
+        } else {
+          toast.error(reqdata.message)
+        }
+      } else if (pathname.includes('Level') && category === "other") {
+        const res = await fetch("https://api.growtavern.site:1515/purchase", {
+          // const res = await fetch("http://localhost:1515/purchase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            payment: "coin",
+            player_token: PlayerData?.token,
+            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+            type: "level",
+            level_number: Level
+          }),
+        })
+        const reqdata = await res.json()
+        if (reqdata.type === "success") {
+          toast.success(reqdata.message)
+        } else {
+          toast.error(reqdata.message)
+        }
+      } else if (pathname.includes('Gems') && category === "other") {
+        const res = await fetch("https://api.growtavern.site:1515/purchase", {
+          // const res = await fetch("http://localhost:1515/purchase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            payment: "coin",
+            player_token: PlayerData?.token,
+            coin_amount: SelectAmount?.coin,
+            type: "gems",
+            select_amount: SelectAmount.amount
+          }),
+        })
+        const reqdata = await res.json()
+        if (reqdata.type === "success") {
+          toast.success(reqdata.message)
+        } else {
+          toast.error(reqdata.message)
+        }
+      } else if (pathname.includes('GrowPass') && category === "other") {
+        const res = await fetch("https://api.growtavern.site:1515/purchase", {
+          // const res = await fetch("http://localhost:1515/purchase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            payment: "coin",
+            player_token: PlayerData?.token,
+            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+            type: "growpass",
+            GrowPass: true
+          }),
+        })
+        const reqdata = await res.json()
+        if (reqdata.type === "success") {
+          toast.success(reqdata.message)
+        } else {
+          toast.error(reqdata.message)
+        }
+      } else if (pathname.includes('Road%20To%20Glory') && category === "other") {
+        const res = await fetch("https://api.growtavern.site:1515/purchase", {
+          // const res = await fetch("http://localhost:1515/purchase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            payment: "coin",
+            player_token: PlayerData?.token,
+            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+            type: "roadtoglory",
+            RoadToGlory: true
+          }),
+        })
+        const reqdata = await res.json()
+        if (reqdata.type === "success") {
+          toast.success(reqdata.message)
+        } else {
+          toast.error(reqdata.message)
+        }
+      } else if (pathname.includes('GrowToken') && category === "other") {
+        const res = await fetch("https://api.growtavern.site:1515/purchase", {
+          // const res = await fetch("http://localhost:1515/purchase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            type: "items",
+            player_token: PlayerData?.token,
+            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+            payment: "coin",
+            items: [SelectAmount.amount === 10 ? 1486 : 6802, SelectAmount.amount]
+          }),
+        })
+        const reqdata = await res.json()
+        if (reqdata.type === "success") {
+          toast.success(reqdata.message)
+        } else {
+          toast.error(reqdata.message)
+        }
+      }
+    } else {
+      toast.error("Payment method not available")
     }
-  }, [name, IsLoggedIn, AdminLevel, Level, PlayerData, category, setSignInForm, PaymentOptions]);
+  }, [name, IsLoggedIn, AdminLevel, Level, PlayerData, category, setSignInForm, PaymentOptions, SelectAmount]);
 
 
-  const HandleSelectAmount = useCallback(async (id: number, amount: number) => {
-    console.log(id, amount)
-    await setGemsAmount({ id, amount })
-  }, [GemsAmount])
+  const HandleSelectAmount = useCallback(async (id: number, amount: number, price: number, coin: number) => {
+    await setSelectAmount({ id, amount, price, coin })
+  }, [SelectAmount])
 
 
   const Heading = useMemo(() => {
-    if (category === "items" && data && 'title' in data) {
-      return data.title;
+    if (category === "items" && data && 'name' in data) {
+      return data.name;
     }
-    if (category === "roles" && data && 'roles' in data) {
-      return data.roles;
+    if (category === "roles" && data && 'name' in data) {
+      return data.name;
     }
-    if (category === "titles" && data && 'title' in data) {
-      return data.title;
+    if (category === "titles" && data && 'name' in data) {
+      return data.name;
     }
     if (category === "other" && data && 'name' in data) {
       return data.name;
@@ -234,8 +509,8 @@ function BuyTemplate({ name }: BuyProps) {
 
   useEffect(() => {
     const script = document.createElement('script')
-    script.src = "https://app.midtrans.com/snap/snap.js"
-    script.setAttribute('data-client-key', 'Mid-client-1hMh_5qrnjKQxJ0o')
+    script.src = "https://app.sandbox.midtrans.com/snap/snap.js"
+    script.setAttribute('data-client-key', 'SB-Mid-client-FzN0SMkj0ZifwdwI')
     script.async = true
     document.body.appendChild(script)
     setLoaded(!Loaded)
@@ -272,41 +547,50 @@ function BuyTemplate({ name }: BuyProps) {
               }
             </div>
           </Skeleton> */}
-          {
-            category === "items" &&
-            <Image src={data?.image as string} alt={Heading} width={300} height={300} quality={100} sizes="100vw" className="relative z-10 w-full h-full" />
-          }
-          {
-            data?.image &&
-            <Image src={category === "items" ? "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726555717/WM_P_d2apdd.webp" : data?.image} alt={Heading} width={100} height={100} quality={100} sizes="100vw" className={clsx('h-max xl:w-[70%] w-full element-3 rounded-xl grid place-content-center relative', {
-              '!object-contain !relative': category !== "items"
-            })} />
-          }
-          {
+          <div className="relative w-full">
+            {
+              category === "items" &&
+              <Image src={data?.image as string} alt={Heading} width={300} height={300} quality={100} sizes="100vw" className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-24 h-24" />
+            }
+            {
+              data?.image &&
+              <Image src={category === "items" ? "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1733758364/item_bg_upscaled_y5vyiz.webp" : data?.image} alt={Heading} width={100} height={100} quality={100} sizes="100vw" className={clsx('h-full w-full rounded-xl grid place-content-center relative', {
+                '!object-contain !relative': category !== "items"
+              })} />
+            }
+          </div>
+          {/* {
             category === "items" &&
             <div className="bg-gradient-to-t from-[#FFD700]/50 to-transparent h-1/2 w-full absolute bottom-0" />
-          }
+          } */}
           <div>
             <div className="bg-[#4D6182] xl:w-[350px] w-full h-max p-4 rounded-xl grid gap-2">
               <h2 className="text-xl xl:text-2xl font-GothicSemiBold">Don&apos;t Have TavernCoin</h2>
               <p className="xl:text-sm text-xs text-[12px]">If you haven&apos;t purchased TavernCoin, you can make a purchase with w-wallet without purchasing TavernCoin. Payment without TavernCoin uses QR Payment where you will be asked to Scan the QR to complete the Payment.</p>
             </div>
-            <div className="flex justify-evenly mt-5">
+            <div className="flex justify-evenly mt-5 element-7">
               <label htmlFor="ewallet" className="flex gap-1">
                 <input type="radio" name="payment" value="ewallet" id="ewallet" onChange={({ target }) => setPaymentOptions(target.value)} />
                 E-Wallet
               </label>
-              <label htmlFor="coin" className="flex gap-1">
-                <input type="radio" name="payment" value="coin" id="coin" onChange={({ target }) => setPaymentOptions(target.value)} />
-                TavernCoin
-              </label>
+              {
+                data && (
+                  (data && "coin" in data) || (data && "items" in data && data.items && "coin" in data.items[0])
+                )
+                && (
+                  <label htmlFor="coin" className="flex gap-1">
+                    <input type="radio" name="payment" value="coin" id="coin" onChange={({ target }) => setPaymentOptions(target.value)} />
+                    TavernCoin
+                  </label>
+                )
+              }
             </div>
-            <RainbowButton className="w-full text-black mt-5" onClick={HandlePay}>
-              Pay Now</RainbowButton>
+            <RainbowButton className="w-full text-black mt-5 element-8" onClick={HandlePay}>
+              Purchase Now</RainbowButton>
             {/* <button onClick={HandlePay} className="w-full bg-[#179BE6] rounded-xl py-2 mt-5 element-5">Pay Now</button> */}
           </div>
         </div>
-        <div className="xl:w-[70%] w-full break-words element-4">
+        <div className="xl:w-[70%] w-full break-words element-6">
           <div>
             <SparklesText className="text-xl xl:text-3xl font-GothicExtraBold mt-5 mb-2" text={Heading} />
             {/* <h1 className="text-xl xl:text-2xl font-GothicExtraBold mt-5 mb-2">
@@ -321,12 +605,14 @@ function BuyTemplate({ name }: BuyProps) {
                     className="inline px-1 animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent"
                   >
                     {data?.price}
-                    <span className="text-white px-1">/</span>
                     {
                       data && "coin" in data && (
-                        <span>
-                          Coin {data?.coin}
-                        </span>
+                        <>
+                          <span className="text-white px-1">/</span>
+                          <span>
+                            Coin {data?.coin}
+                          </span>
+                        </>
                       )
                     }
                   </span>
@@ -348,7 +634,7 @@ function BuyTemplate({ name }: BuyProps) {
             <div>
               <h1 className="text-xl xl:text-2xl font-GothicExtraBold my-5">Commands 💬</h1>
               <div className="bg-[#1E293B] p-2 rounded-xl">
-                <code className="xl:text-sm text-xs text-[12px]">{data?.commands}</code>
+                <code className="xl:text-sm text-xs text-[12px]">{data.commands as string}</code>
               </div>
             </div>
           }
@@ -363,7 +649,7 @@ function BuyTemplate({ name }: BuyProps) {
                   type="range"
                   name="level"
                   id="level"
-                  max={150}
+                  max={1000}
                   step={1}
                   min={PlayerData?.level}
                   value={Level}
@@ -381,15 +667,17 @@ function BuyTemplate({ name }: BuyProps) {
                 {
                   data["items"]?.map((items, index) => (
                     <div key={index} className="relative w-40">
-                      <button key={index} onClick={() => HandleSelectAmount(index, items.amount)}>
+                      <button key={index} onClick={() => HandleSelectAmount(index, items.amount, items.price, items.coin || 0)}>
                         <Image src={items.image} alt={index.toString()} width={100} height={100} className="w-full object-contain" quality={100} sizes="100vw" />
                       </button>
                       <div className={clsx('absolute overflow-hidden invisible top-0 right-0 w-full h-full rounded-xl bg-[rgba(217,209,255,0.54)] border-2 border-blue-500', {
-                        "!visible": index === GemsAmount.id
+                        "!visible": index === SelectAmount.id
                       })}>
                         <Image src={data?.selectedImage as string} alt="Gems" quality={100} sizes="100vw" className="w-52 absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-10" width={100} height={100} />
                         <h2 className="relative w-max h-max top-0 right-0 bg-blue-500 text-sm px-2 py-1 rounded-br-xl rounded-tl-xl">IDR {items.price}</h2>
-                        <h2 className="relative z-20 w-max h-max top-0 right-0 bg-orange-500 text-xs px-3 py-1 rounded-br-xl rounded-bl-xl ">Coin 1</h2>
+                        {items && items.coin &&
+                          <h2 className="relative z-20 w-max h-max top-0 right-0 bg-orange-500 text-xs px-3 py-1 rounded-br-xl rounded-bl-xl ">Coin {items.coin}</h2>
+                        }
                       </div>
                     </div>
                   ))
