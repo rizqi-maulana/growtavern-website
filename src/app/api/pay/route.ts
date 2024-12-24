@@ -8,8 +8,8 @@ export const POST = async (req: NextRequest) => {
   const order_id = formdata.get('order_id')
   const gross_amount = formdata.get('gross_amount')
   const snap = new midtransClient.Snap({
-    isProduction: false,
-    serverKey: 'SB-Mid-server-g6o4cDm1kVlk6Sqe71gflMp0'
+    isProduction: true,
+    serverKey: 'Mid-server-M4o7jRT4Jg9c8zJ0d7Jw6bJe'
   });
 
   const parameter = {
