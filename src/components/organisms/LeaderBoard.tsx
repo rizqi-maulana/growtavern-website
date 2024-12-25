@@ -24,13 +24,13 @@ const LeaderBoard = () => {
       })
       const resdata = await res.json()
       setTop3(resdata.data.slice(0, 3))
-      setAllUser(resdata.data.slice(3))
+      setAllUser(resdata.data.slice(3, 10))
     }
     FetchLeaderBoard()
   }, []);
 
   return (
-    <div className="w-full lg:w-3/4 mx-auto h-screen">
+    <div className="w-full lg:w-3/4 mx-auto h-full">
       {
         Top3.length <= 0 && AllUser.length <= 0 ? (
           <Loading />

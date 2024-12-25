@@ -14,7 +14,7 @@ interface Props {
   setClick: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const PhoneOTP = ({ Click, setClick }: Props) => {
+const EmailOTP = ({ Click, setClick }: Props) => {
   const context = useContext(UserContext);
   const [CountDown, setCountDown] = useState<number>(() => {
     // Initialize countdown from localStorage if available
@@ -136,4 +136,4 @@ const PhoneOTP = ({ Click, setClick }: Props) => {
   );
 };
 
-export default PhoneOTP;
+export default EmailOTP;

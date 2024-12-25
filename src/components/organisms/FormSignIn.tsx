@@ -2,15 +2,19 @@
 import SubmitBtn from "../atoms/SubmitBtn";
 import SignPass from "../molecules/SignPass";
 import SignEmail from "../molecules/SignEmail";
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "@/context";
 import { bouncy } from "ldrs";
+import EmailOTP from "../molecules/EmailOTP";
+
 
 interface FormSignInProps {
   Loading: boolean;
+  Click: boolean;
+  setClick: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const FormSignIn = ({ Loading }: FormSignInProps) => {
+const FormSignIn = ({ Loading, Click, setClick }: FormSignInProps) => {
   useEffect(() => {
     if (typeof window !== "undefined" && bouncy) {
       bouncy.register()
@@ -36,6 +40,7 @@ const FormSignIn = ({ Loading }: FormSignInProps) => {
       </div>
       <SignEmail />
       <SignPass label="Enter your Password" id="signinpass" />
+      <EmailOTP Click={Click} setClick={setClick} />
       {
         Loading ?
           <div className="w-full grid place-content-center">
@@ -46,7 +51,7 @@ const FormSignIn = ({ Loading }: FormSignInProps) => {
             ></l-bouncy>
           </div>
           :
-          <SubmitBtn className="mt-4" Title="Sign In" />
+          <SubmitBtn Title="Sign In" />
       }
       <button onClick={() => setSignInForm(false)} className="w-full bg-[#0F172A] rounded-2xl p-2 mt-2 text-sm font-GothicBold text-white">
         Close

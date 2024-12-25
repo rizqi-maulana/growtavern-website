@@ -1,5 +1,5 @@
-178.128.21.229 growtopia1.com
-178.128.21.229 growtopia2.com
-178.128.21.229 www.growtopia1.com
-178.128.21.229 www.growtopia2.com
-178.128.21.229 RvLnd.here
+188.166.231.135 growtopia1.com
+188.166.231.135 growtopia2.com
+188.166.231.135 www.growtopia1.com
+188.166.231.135 www.growtopia2.com
+188.166.231.135 RvLnd.here

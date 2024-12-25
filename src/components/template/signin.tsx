@@ -4,8 +4,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { UserContext } from "@/context";
 import { useRouter } from "next/navigation";
 import { driver } from "driver.js";
+import { createClient } from "@/utils/supabase/client";
 import "driver.js/dist/driver.css";
 function SignIn() {
+  const [Click, setClick] = useState<boolean>(true);
   const Router = useRouter()
   const context = useContext(UserContext);
   const [Loading, setLoading] = useState<boolean>(false);
@@ -13,7 +15,8 @@ function SignIn() {
     throw new Error("UserContext must be used within a UserProvider");
   }
 
-  const { Email, Password, setSignInForm, setPlayerData } = context;
+  const { Email, Password, setSignInForm, setPlayerData, OtpCode } = context;
+  const supabase = createClient();
 
   const driverObj = driver({
     popoverClass: 'driverjs-theme',
@@ -76,50 +79,58 @@ function SignIn() {
   const HandleLogin = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://api.growtavern.site:1515/player/login", {
-        // const res = await fetch("http://localhost:1515/player/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: Email,
-          pass: Password,
-        }),
-      });
-      const dataserver = await res.json();
-      if (dataserver.type === "success") {
-        toast.success(dataserver.message);
-        setPlayerData({
-          name: dataserver.data.name,
-          gems: dataserver.data.gems,
-          email: dataserver.data.email,
-          level: dataserver.data.level,
-          IsLoggedIn: dataserver.data.IsLoggedIn,
-          owner: dataserver.data.owner,
-          admin: dataserver.data.admin,
-          developer: dataserver.data.developer,
-          moderator: dataserver.data.moderator,
-          vip: dataserver.data.vip,
-          cheats: dataserver.data.cheats,
-          token: dataserver.data.token,
-          taverncoin: dataserver.data.taverncoin,
-          last_online: dataserver.data.last_online,
-          guild_id: dataserver.data.guild_id,
-          guild_name: dataserver.data.guild_name,
-          redeem_code: dataserver.data.redeem_code
-        })
-        if (typeof window !== "undefined") {
-          await localStorage.setItem("log", dataserver.data.name);
-          await localStorage.setItem("PlayerData", JSON.stringify(dataserver.data));
+      if (Email && OtpCode) {
+        const { data } = await supabase.auth.verifyOtp({ email: Email, token: OtpCode, type: 'email' })
+        if (data) {
+          const res = await fetch("https://api.growtavern.site:1515/player/login", {
+            // const res = await fetch("http://localhost:1515/player/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: Email,
+              pass: Password,
+            }),
+          });
+          const dataserver = await res.json();
+          if (dataserver.type === "success") {
+            toast.success(dataserver.message);
+            setPlayerData({
+              name: dataserver.data.name,
+              gems: dataserver.data.gems,
+              email: dataserver.data.email,
+              level: dataserver.data.level,
+              IsLoggedIn: dataserver.data.IsLoggedIn,
+              owner: dataserver.data.owner,
+              admin: dataserver.data.admin,
+              developer: dataserver.data.developer,
+              moderator: dataserver.data.moderator,
+              vip: dataserver.data.vip,
+              cheats: dataserver.data.cheats,
+              token: dataserver.data.token,
+              taverncoin: dataserver.data.taverncoin,
+              last_online: dataserver.data.last_online,
+              guild_name: dataserver.data.guild_name,
+              redeem_code: dataserver.data.redeem_code
+            })
+            if (typeof window !== "undefined") {
+              await localStorage.setItem("log", dataserver.data.name);
+              await localStorage.setItem("PlayerData", JSON.stringify(dataserver.data));
+            }
+            setTimeout(() => {
+              setSignInForm(false);
+              driverObj.drive();
+            }, 3000);
+          } else {
+            toast.error(dataserver.message);
+          }
+        } else {
+          toast.error("OTP verification failed. Please try again.");
         }
-        setTimeout(() => {
-          setSignInForm(false);
-          driverObj.drive();
-        }, 3000);
-      } else {
-        toast.error(dataserver.message);
+
       }
+      // const res = await fetch("https://api.growtavern.site:1515/player/login", {
     } catch (error) {
       console.error("Error during signup:", error);
     } finally {
@@ -131,7 +142,7 @@ function SignIn() {
     <>
       <Toaster />
       <form onSubmit={HandleLogin} className="w-full h-screen fixed backdrop-blur-lg bg-black/50 z-[99] flex flex-col justify-center">
-        <FormSignIn Loading={Loading} />
+        <FormSignIn Loading={Loading} setClick={setClick} Click={Click} />
       </form>
     </>
   );

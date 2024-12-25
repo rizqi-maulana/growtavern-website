@@ -10,7 +10,7 @@ interface AllPlayer {
 }
 const AllLeaderBoard = ({ data }: AllPlayer) => {
   return (
-    <section className="flex flex-col overflow-auto h-screen mx-auto place-content-center lg:px-20">
+    <section className="flex flex-col mx-auto place-content-center lg:px-20">
       {
         data.map((data, index) => (
           <div key={index + 4}>

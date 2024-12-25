@@ -26,8 +26,8 @@ const Top3LeaderBoard = ({ data }: Top3Player) => {
     <>
       {/* Mobile */}
       <div className="grid lg:hidden relative">
-        <div className="grid  w-full rounded-xl bg-[#ffbf00]/40 border border-[#ffbf00] justify-between px-5 py-3 my-5 mb-0">
-          <div className="flex items-start gap-8">
+        <div className="grid  w-full rounded-xl relative bg-[#ffbf00]/40 border border-[#ffbf00] justify-between px-5 py-3 my-5 mb-0">
+          <div className="flex items-start gap-5">
             <h3 className="text-xl font-GothicSemiBold">#1</h3>
             <div>
               <div className="flex items-center gap-3 relative">
@@ -37,7 +37,7 @@ const Top3LeaderBoard = ({ data }: Top3Player) => {
                   <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1729004112/growtopia_ygtebn.webp" alt="profile" width={100} height={100} sizes="100vw" quality={100} className="w-11 h-11 rounded-full" />
                   {/* <BorderBeam size={100} duration={12} delay={9} borderWidth={3} /> */}
                 </div>
-                <h1 className="font-GothicBold text-xl text-center">{data[0]?.name}</h1>
+                <h1 className="font-GothicBold text-base text-center">{data[0]?.name}</h1>
               </div>
               <div className="text-base text-center relative z-10 mt-4">
                 <p>
@@ -47,16 +47,16 @@ const Top3LeaderBoard = ({ data }: Top3Player) => {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-1 relative">
+            <div className="flex items-center gap-1 absolute top-3 right-3">
               {/* <PiMedalFill size={25} /> */}
               <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1734503407/rgl_gc63ss.webp" alt="RGL" width={50} height={50} sizes="100vw" quality={100} className="w-5 h-5" />
-              <p>{data[0]?.rgl}</p>
+              <p className="font-GothicSemiBold text-xs">{data[0]?.rgl}</p>
             </div>
           </div>
 
         </div>
-        <div className="grid  w-full rounded-xl bg-[#c0c0c0]/40 border border-[#c0c0c0] justify-between px-5 py-3 my-5 mb-0">
-          <div className="flex items-start gap-8">
+        <div className="grid  w-full rounded-xl relative bg-[#c0c0c0]/40 border border-[#c0c0c0] justify-between px-5 py-3 my-5 mb-0">
+          <div className="flex items-start gap-5">
             <h3 className="text-xl font-GothicSemiBold">#2</h3>
             <div>
               <div className="flex items-center gap-3 relative">
@@ -65,9 +65,9 @@ const Top3LeaderBoard = ({ data }: Top3Player) => {
                   <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1729004112/growtopia_ygtebn.webp" alt="profile" width={100} height={100} sizes="100vw" quality={100} className="w-11 h-11 rounded-full" />
                   {/* <BorderBeam size={100} duration={12} delay={9} borderWidth={3} /> */}
                 </div>
-                <h1 className="font-GothicBold text-xl text-center">{data[1]?.name}</h1>
+                <h1 className="font-GothicBold text-base text-center">{data[1]?.name}</h1>
               </div>
-              <div className="text-base text-center relative z-10 mt-4">
+              <div className="text-base text-center relative w-max z-10 mt-4">
                 <p>
                   <NumberTicker value={data[1]?.lock} />
                   {" "}
@@ -75,15 +75,15 @@ const Top3LeaderBoard = ({ data }: Top3Player) => {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-1 relative">
+            <div className="flex items-center gap-1 absolute top-3 right-3">
               {/* <PiMedalFill size={25} /> */}
               <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1734503407/rgl_gc63ss.webp" alt="RGL" width={50} height={50} sizes="100vw" quality={100} className="w-5 h-5" />
-              <p>{data[1]?.rgl}</p>
+              <p className="font-GothicSemiBold text-xs">{data[1]?.rgl}</p>
             </div>
           </div>
         </div>
-        <div className="grid  w-full rounded-xl bg-[#CD7F32]/40 border border-[#CD7F32] justify-between px-5 py-3 my-5 mb-0">
-          <div className="flex items-start gap-8">
+        <div className="grid  w-full rounded-xl relative bg-[#CD7F32]/40 border border-[#CD7F32] justify-between px-5 py-3 my-5 mb-0">
+          <div className="flex items-start gap-5">
             <h3 className="text-xl font-GothicSemiBold">#3</h3>
             <div>
               <div className="flex items-center gap-3 relative">
@@ -92,7 +92,7 @@ const Top3LeaderBoard = ({ data }: Top3Player) => {
                   <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1729004112/growtopia_ygtebn.webp" alt="profile" width={100} height={100} sizes="100vw" quality={100} className="w-11 h-11 rounded-full" />
                   {/* <BorderBeam size={100} duration={12} delay={9} borderWidth={3} /> */}
                 </div>
-                <h1 className="font-GothicBold text-xl text-center">{data[2]?.name}</h1>
+                <h1 className="font-GothicBold text-base text-center">{data[2]?.name}</h1>
               </div>
               <div className="text-base text-center relative z-10 mt-4">
                 <p>
@@ -102,10 +102,10 @@ const Top3LeaderBoard = ({ data }: Top3Player) => {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-1 relative">
+            <div className="flex items-center gap-1 absolute top-3 right-3">
               {/* <PiMedalFill size={25} /> */}
               <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1734503407/rgl_gc63ss.webp" alt="RGL" width={50} height={50} sizes="100vw" quality={100} className="w-5 h-5" />
-              <p>{data[2]?.rgl}</p>
+              <p className="font-GothicSemiBold text-xs">{data[2]?.rgl}</p>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ const Top3LeaderBoard = ({ data }: Top3Player) => {
         />
       </div>
       {/* desktop */}
-      <div className="lg:flex justify-center h-2/5 gap-1 relative hidden">
+      <div className="lg:flex justify-center h-2/5 gap-1 relative hidden mb-2">
         <div className="flex flex-col items-center gap-1  w-72 relative h-[280px] -bottom-8">
           <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1734674844/border_2_f01g0q.webp" alt="border#2" width={100} height={100} sizes="100vw" quality={100} className="w-36 z-20 absolute -top-6" />
           <div className="grid gap-3 relative z-10">
@@ -143,7 +143,7 @@ const Top3LeaderBoard = ({ data }: Top3Player) => {
           </div>
           <div className="w-56 h-56 rounded-full blur-3xl absolute z-0 bottom-20 bg-[#c0c0c0]/55" />
         </div>
-        <div className="flex flex-col items-center gap-1 relative h-full w-72">
+        <div className="flex flex-col items-center gap-1 relative h-[320px] w-72">
           <Image src="https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1734674843/border_1_sbyeoq.webp" alt="border#1" width={100} height={100} sizes="100vw" quality={100} className="w-36 z-20 absolute -top-6" />
           <div className="grid gap-3 relative z-10">
             <div className="relative rounded-full">

@@ -19,7 +19,6 @@ export interface PlayerDataProps {
   cheats: boolean
   taverncoin: number
   last_online: string
-  guild_id: number
   guild_name: string,
   redeem_code: {
     code: string,
@@ -139,7 +138,6 @@ const AppContext = ({ children }: AppContextProps) => {
               token: dataserver.data.token,
               taverncoin: dataserver.data.taverncoin,
               last_online: dataserver.data.last_online,
-              guild_id: dataserver.data.guild_id,
               guild_name: dataserver.data.guild_name,
               redeem_code: dataserver.data.redeem_code
 

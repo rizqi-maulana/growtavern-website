@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState, useContext } from "react";
 import { UserContext } from "@/context";
 import { RainbowButton } from "../ui/rainbow-button";
 import toast, { Toaster } from "react-hot-toast";
+import { bouncy } from "ldrs";
 import SparklesText from "../ui/sparkles-text";
 import Image from "next/image";
 import StoreModal from "@/components/organisms/StoreModal";
@@ -54,6 +55,7 @@ declare global {
 }
 
 function BuyTemplate({ name }: BuyProps) {
+  const [PayLoading, setPayLoading] = useState<boolean>(false)
   const context = useContext(UserContext)
   if (!context) {
     throw new Error("Context is undefined");
@@ -109,374 +111,379 @@ function BuyTemplate({ name }: BuyProps) {
 
 
   const HandlePay = useCallback(async () => {
-    // const PurchaseItem = StoreCategory()
-    // console.log(PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin)
-    if (IsLoggedIn === false) {
-      setSignInForm(true)
-    }
-    if (PaymentOptions === "ewallet") {
-      const FuncPurchaseItem = async () => {
-        const formdata = new FormData();
-        const PurchaseItem = StoreCategory()
-        formdata.append('order_id', uuidv4() as string);
-        PurchaseItem && "name" in PurchaseItem &&
-          formdata.append('item_name', PurchaseItem?.name as string);
-        formdata.append('category', category as string);
-        let price;
-        if (PurchaseItem && "price" in PurchaseItem) {
-          price = PurchaseItem.price
-        } else {
-          price = SelectAmount.price
-        }
-        if (price) {
-          formdata.append('gross_amount', price);
-        } else {
-          return toast.error("Select the quantity you want to purchase.");
-        }
-
-        formdata.append('email', PlayerData?.email as string);
-        return formdata
+    setPayLoading(true)
+    try {
+      if (IsLoggedIn === false) {
+        setSignInForm(true)
       }
-      const formdata = await FuncPurchaseItem()
-      const res = await fetch('/api/pay', {
-        method: "POST",
-        body: formdata,
-      });
+      if (PaymentOptions === "ewallet") {
+        const FuncPurchaseItem = async () => {
+          const formdata = new FormData();
+          const PurchaseItem = StoreCategory()
+          formdata.append('order_id', uuidv4() as string);
+          PurchaseItem && "name" in PurchaseItem &&
+            formdata.append('item_name', PurchaseItem?.name as string);
+          formdata.append('category', category as string);
+          let price;
+          if (PurchaseItem && "price" in PurchaseItem) {
+            price = PurchaseItem.price
+          } else {
+            price = SelectAmount.price
+          }
+          if (price) {
+            formdata.append('gross_amount', price);
+          } else {
+            return toast.error("Select the quantity you want to purchase.");
+          }
 
-      const data = await res.json();
-      if (data.token) {
-        const token = data.token
-        const formdata = new FormData()
-        formdata.append('name', PlayerData?.name as string)
-        if (category === "roles") {
-          formdata.append('type', "roles")
-          if (AdminLevel)
-            formdata.append('role', AdminLevel?.toString())
-        } else {
-          formdata.append('type', "level")
-          formdata.append('level', Level.toString())
+          formdata.append('email', PlayerData?.email as string);
+          return formdata
         }
-        window.snap.pay(token, {
-          onSuccess: async function () {
-            if (category === "roles") {
-              const res = await fetch("https://api.growtavern.site:1515/purchase", {
-                // const res = await fetch("http://localhost:1515/purchase", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  type: "roles",
-                  role_number: AdminLevel,
-                  player_token: PlayerData?.token,
-
-                }),
-              })
-              const reqdata = await res.json()
-              if (reqdata.type === "success") {
-                toast.success(reqdata.message)
-              } else {
-                toast.error(reqdata.message)
-              }
-            } else if (pathname.includes('Level') && category === "other") {
-              const res = await fetch("https://api.growtavern.site:1515/purchase", {
-                // const res = await fetch("http://localhost:1515/purchase", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  type: "level",
-                  level_number: Level,
-                  player_token: PlayerData?.token,
-
-                }),
-              })
-              const reqdata = await res.json()
-              if (reqdata.type === "success") {
-                toast.success(reqdata.message)
-              } else {
-                toast.error(reqdata.message)
-              }
-            } else if (pathname.includes('Gems') && category === "other") {
-              const res = await fetch("https://api.growtavern.site:1515/purchase", {
-                // const res = await fetch("http://localhost:1515/purchase", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  type: "gems",
-                  select_amount: SelectAmount.amount,
-                  player_token: PlayerData?.token,
-
-                }),
-              })
-              const reqdata = await res.json()
-              if (reqdata.type === "success") {
-                toast.success(reqdata.message)
-              } else {
-                toast.error(reqdata.message)
-              }
-            } else if (pathname.includes('GrowTaverCoin') && category === "other") {
-              const res = await fetch("https://api.growtavern.site:1515/purchase", {
-                // const res = await fetch("http://localhost:1515/purchase", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  type: "growtaverncoin",
-                  GrowTaverCoin: SelectAmount.amount,
-                  player_token: PlayerData?.token,
-
-                }),
-              })
-              const reqdata = await res.json()
-              if (reqdata.type === "success") {
-                toast.success(reqdata.message)
-              } else {
-                toast.error(reqdata.message)
-              }
-            } else if (pathname.includes('GrowPass') && category === "other") {
-              const res = await fetch("https://api.growtavern.site:1515/purchase", {
-                // const res = await fetch("http://localhost:1515/purchase", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  type: "growpass",
-                  GrowPass: true,
-                  player_token: PlayerData?.token,
-
-                }),
-              })
-              const reqdata = await res.json()
-              if (reqdata.type === "success") {
-                toast.success(reqdata.message)
-              } else {
-                toast.error(reqdata.message)
-              }
-            } else if (pathname.includes('Road%20To%20Glory') && category === "other") {
-              const res = await fetch("https://api.growtavern.site:1515/purchase", {
-                // const res = await fetch("http://localhost:1515/purchase", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  type: "roadtoglory",
-                  RoadToGlory: true,
-                  player_token: PlayerData?.token,
-
-                }),
-              })
-              const reqdata = await res.json()
-              if (reqdata.type === "success") {
-                toast.success(reqdata.message)
-              } else {
-                toast.error(reqdata.message)
-              }
-            } else if (pathname.includes('Platinum%20Gem%20Lock') && category === "other") {
-              const res = await fetch("https://api.growtavern.site:1515/purchase", {
-                // const res = await fetch("http://localhost:1515/purchase", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  type: "items",
-                  items: [7188, 1],
-                  player_token: PlayerData?.token,
-
-                }),
-              })
-              const reqdata = await res.json()
-              if (reqdata.type === "success") {
-                toast.success(reqdata.message)
-              } else {
-                toast.error(reqdata.message)
-              }
-            } else if (pathname.includes('Ruthenium%20Gem%20Lock') && category === "other") {
-              const res = await fetch("https://api.growtavern.site:1515/purchase", {
-                // const res = await fetch("http://localhost:1515/purchase", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  type: "items",
-                  items: [8470, 1],
-                  player_token: PlayerData?.token,
-
-                }),
-              })
-              const reqdata = await res.json()
-              if (reqdata.type === "success") {
-                toast.success(reqdata.message)
-              } else {
-                toast.error(reqdata.message)
-              }
-            } else if (pathname.includes('GrowToken') && category === "other") {
-              const res = await fetch("https://api.growtavern.site:1515/purchase", {
-                // const res = await fetch("http://localhost:1515/purchase", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  type: "items",
-                  items: [SelectAmount.amount === 10 ? 1486 : 6802, SelectAmount.amount],
-                  player_token: PlayerData?.token,
-
-                }),
-              })
-              const reqdata = await res.json()
-              if (reqdata.type === "success") {
-                toast.success(reqdata.message)
-              } else {
-                toast.error(reqdata.message)
-              }
-            }
-          },
-          onPending: function (result) { console.log('pending'); console.log(result); },
-          onError: function (result) { console.log('error'); alert(result); },
-          onClose: function () { alert('customer closed the popup without finishing the payment'); }
+        const formdata = await FuncPurchaseItem()
+        const res = await fetch('/api/pay', {
+          method: "POST",
+          body: formdata,
         });
+
+        const data = await res.json();
+        if (data.token) {
+          const token = data.token
+          const formdata = new FormData()
+          formdata.append('name', PlayerData?.name as string)
+          if (category === "roles") {
+            formdata.append('type', "roles")
+            if (AdminLevel)
+              formdata.append('role', AdminLevel?.toString())
+          } else {
+            formdata.append('type', "level")
+            formdata.append('level', Level.toString())
+          }
+          window.snap.pay(token, {
+            onSuccess: async function () {
+              if (category === "roles") {
+                const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                  // const res = await fetch("http://localhost:1515/purchase", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    type: "roles",
+                    role_number: AdminLevel,
+                    player_token: PlayerData?.token,
+
+                  }),
+                })
+                const reqdata = await res.json()
+                if (reqdata.type === "success") {
+                  toast.success(reqdata.message)
+                } else {
+                  toast.error(reqdata.message)
+                }
+              } else if (pathname.includes('Level') && category === "other") {
+                const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                  // const res = await fetch("http://localhost:1515/purchase", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    type: "level",
+                    level_number: Level,
+                    player_token: PlayerData?.token,
+
+                  }),
+                })
+                const reqdata = await res.json()
+                if (reqdata.type === "success") {
+                  toast.success(reqdata.message)
+                } else {
+                  toast.error(reqdata.message)
+                }
+              } else if (pathname.includes('Gems') && category === "other") {
+                const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                  // const res = await fetch("http://localhost:1515/purchase", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    type: "gems",
+                    select_amount: SelectAmount.amount,
+                    player_token: PlayerData?.token,
+
+                  }),
+                })
+                const reqdata = await res.json()
+                if (reqdata.type === "success") {
+                  toast.success(reqdata.message)
+                } else {
+                  toast.error(reqdata.message)
+                }
+              } else if (pathname.includes('GrowTaverCoin') && category === "other") {
+                const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                  // const res = await fetch("http://localhost:1515/purchase", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    type: "growtaverncoin",
+                    GrowTaverCoin: SelectAmount.amount,
+                    player_token: PlayerData?.token,
+
+                  }),
+                })
+                const reqdata = await res.json()
+                if (reqdata.type === "success") {
+                  toast.success(reqdata.message)
+                } else {
+                  toast.error(reqdata.message)
+                }
+              } else if (pathname.includes('GrowPass') && category === "other") {
+                const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                  // const res = await fetch("http://localhost:1515/purchase", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    type: "growpass",
+                    GrowPass: true,
+                    player_token: PlayerData?.token,
+
+                  }),
+                })
+                const reqdata = await res.json()
+                if (reqdata.type === "success") {
+                  toast.success(reqdata.message)
+                } else {
+                  toast.error(reqdata.message)
+                }
+              } else if (pathname.includes('Road%20To%20Glory') && category === "other") {
+                const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                  // const res = await fetch("http://localhost:1515/purchase", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    type: "roadtoglory",
+                    RoadToGlory: true,
+                    player_token: PlayerData?.token,
+
+                  }),
+                })
+                const reqdata = await res.json()
+                if (reqdata.type === "success") {
+                  toast.success(reqdata.message)
+                } else {
+                  toast.error(reqdata.message)
+                }
+              } else if (pathname.includes('Platinum%20Gem%20Lock') && category === "other") {
+                const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                  // const res = await fetch("http://localhost:1515/purchase", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    type: "items",
+                    items: [7188, 1],
+                    player_token: PlayerData?.token,
+
+                  }),
+                })
+                const reqdata = await res.json()
+                if (reqdata.type === "success") {
+                  toast.success(reqdata.message)
+                } else {
+                  toast.error(reqdata.message)
+                }
+              } else if (pathname.includes('Ruthenium%20Gem%20Lock') && category === "other") {
+                const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                  // const res = await fetch("http://localhost:1515/purchase", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    type: "items",
+                    items: [8470, 1],
+                    player_token: PlayerData?.token,
+
+                  }),
+                })
+                const reqdata = await res.json()
+                if (reqdata.type === "success") {
+                  toast.success(reqdata.message)
+                } else {
+                  toast.error(reqdata.message)
+                }
+              } else if (pathname.includes('GrowToken') && category === "other") {
+                const res = await fetch("https://api.growtavern.site:1515/purchase", {
+                  // const res = await fetch("http://localhost:1515/purchase", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    type: "items",
+                    items: [SelectAmount.amount === 10 ? 1486 : 6802, SelectAmount.amount],
+                    player_token: PlayerData?.token,
+
+                  }),
+                })
+                const reqdata = await res.json()
+                if (reqdata.type === "success") {
+                  toast.success(reqdata.message)
+                } else {
+                  toast.error(reqdata.message)
+                }
+              }
+            },
+            onPending: function (result) { console.log('pending'); console.log(result); },
+            onError: function (result) { console.log('error'); alert(result); },
+            onClose: function () { alert('customer closed the popup without finishing the payment'); }
+          });
+        }
+      } else if (PaymentOptions === "coin") {
+        // toast.error("Payment method not available")
+        const PurchaseItem = StoreCategory()
+        if (category === "roles") {
+          const res = await fetch("https://api.growtavern.site:1515/purchase", {
+            // const res = await fetch("http://localhost:1515/purchase", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              payment: "coin",
+              player_token: PlayerData?.token,
+              coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+              type: "roles",
+              role_number: AdminLevel
+            }),
+          })
+          const reqdata = await res.json()
+          if (reqdata.type === "success") {
+            toast.success(reqdata.message)
+          } else {
+            toast.error(reqdata.message)
+          }
+        } else if (pathname.includes('Level') && category === "other") {
+          const res = await fetch("https://api.growtavern.site:1515/purchase", {
+            // const res = await fetch("http://localhost:1515/purchase", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              payment: "coin",
+              player_token: PlayerData?.token,
+              coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+              type: "level",
+              level_number: Level
+            }),
+          })
+          const reqdata = await res.json()
+          if (reqdata.type === "success") {
+            toast.success(reqdata.message)
+          } else {
+            toast.error(reqdata.message)
+          }
+        } else if (pathname.includes('Gems') && category === "other") {
+          const res = await fetch("https://api.growtavern.site:1515/purchase", {
+            // const res = await fetch("http://localhost:1515/purchase", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              payment: "coin",
+              player_token: PlayerData?.token,
+              coin_amount: SelectAmount?.coin,
+              type: "gems",
+              select_amount: SelectAmount.amount
+            }),
+          })
+          const reqdata = await res.json()
+          if (reqdata.type === "success") {
+            toast.success(reqdata.message)
+          } else {
+            toast.error(reqdata.message)
+          }
+        } else if (pathname.includes('GrowPass') && category === "other") {
+          const res = await fetch("https://api.growtavern.site:1515/purchase", {
+            // const res = await fetch("http://localhost:1515/purchase", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              payment: "coin",
+              player_token: PlayerData?.token,
+              coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+              type: "growpass",
+              GrowPass: true
+            }),
+          })
+          const reqdata = await res.json()
+          if (reqdata.type === "success") {
+            toast.success(reqdata.message)
+          } else {
+            toast.error(reqdata.message)
+          }
+        } else if (pathname.includes('Road%20To%20Glory') && category === "other") {
+          const res = await fetch("https://api.growtavern.site:1515/purchase", {
+            // const res = await fetch("http://localhost:1515/purchase", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              payment: "coin",
+              player_token: PlayerData?.token,
+              coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+              type: "roadtoglory",
+              RoadToGlory: true
+            }),
+          })
+          const reqdata = await res.json()
+          if (reqdata.type === "success") {
+            toast.success(reqdata.message)
+          } else {
+            toast.error(reqdata.message)
+          }
+        } else if (pathname.includes('GrowToken') && category === "other") {
+          const res = await fetch("https://api.growtavern.site:1515/purchase", {
+            // const res = await fetch("http://localhost:1515/purchase", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              type: "items",
+              player_token: PlayerData?.token,
+              coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
+              payment: "coin",
+              items: [SelectAmount.amount === 10 ? 1486 : 6802, SelectAmount.amount]
+            }),
+          })
+          const reqdata = await res.json()
+          if (reqdata.type === "success") {
+            toast.success(reqdata.message)
+          } else {
+            toast.error(reqdata.message)
+          }
+        }
+      } else {
+        toast.error("Payment method not available")
       }
-    } else if (PaymentOptions === "coin") {
-      // toast.error("Payment method not available")
-      const PurchaseItem = StoreCategory()
-      if (category === "roles") {
-        const res = await fetch("https://api.growtavern.site:1515/purchase", {
-          // const res = await fetch("http://localhost:1515/purchase", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            payment: "coin",
-            player_token: PlayerData?.token,
-            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
-            type: "roles",
-            role_number: AdminLevel
-          }),
-        })
-        const reqdata = await res.json()
-        if (reqdata.type === "success") {
-          toast.success(reqdata.message)
-        } else {
-          toast.error(reqdata.message)
-        }
-      } else if (pathname.includes('Level') && category === "other") {
-        const res = await fetch("https://api.growtavern.site:1515/purchase", {
-          // const res = await fetch("http://localhost:1515/purchase", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            payment: "coin",
-            player_token: PlayerData?.token,
-            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
-            type: "level",
-            level_number: Level
-          }),
-        })
-        const reqdata = await res.json()
-        if (reqdata.type === "success") {
-          toast.success(reqdata.message)
-        } else {
-          toast.error(reqdata.message)
-        }
-      } else if (pathname.includes('Gems') && category === "other") {
-        const res = await fetch("https://api.growtavern.site:1515/purchase", {
-          // const res = await fetch("http://localhost:1515/purchase", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            payment: "coin",
-            player_token: PlayerData?.token,
-            coin_amount: SelectAmount?.coin,
-            type: "gems",
-            select_amount: SelectAmount.amount
-          }),
-        })
-        const reqdata = await res.json()
-        if (reqdata.type === "success") {
-          toast.success(reqdata.message)
-        } else {
-          toast.error(reqdata.message)
-        }
-      } else if (pathname.includes('GrowPass') && category === "other") {
-        const res = await fetch("https://api.growtavern.site:1515/purchase", {
-          // const res = await fetch("http://localhost:1515/purchase", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            payment: "coin",
-            player_token: PlayerData?.token,
-            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
-            type: "growpass",
-            GrowPass: true
-          }),
-        })
-        const reqdata = await res.json()
-        if (reqdata.type === "success") {
-          toast.success(reqdata.message)
-        } else {
-          toast.error(reqdata.message)
-        }
-      } else if (pathname.includes('Road%20To%20Glory') && category === "other") {
-        const res = await fetch("https://api.growtavern.site:1515/purchase", {
-          // const res = await fetch("http://localhost:1515/purchase", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            payment: "coin",
-            player_token: PlayerData?.token,
-            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
-            type: "roadtoglory",
-            RoadToGlory: true
-          }),
-        })
-        const reqdata = await res.json()
-        if (reqdata.type === "success") {
-          toast.success(reqdata.message)
-        } else {
-          toast.error(reqdata.message)
-        }
-      } else if (pathname.includes('GrowToken') && category === "other") {
-        const res = await fetch("https://api.growtavern.site:1515/purchase", {
-          // const res = await fetch("http://localhost:1515/purchase", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            type: "items",
-            player_token: PlayerData?.token,
-            coin_amount: PurchaseItem && "coin" in PurchaseItem && PurchaseItem.coin,
-            payment: "coin",
-            items: [SelectAmount.amount === 10 ? 1486 : 6802, SelectAmount.amount]
-          }),
-        })
-        const reqdata = await res.json()
-        if (reqdata.type === "success") {
-          toast.success(reqdata.message)
-        } else {
-          toast.error(reqdata.message)
-        }
-      }
-    } else {
-      toast.error("Payment method not available")
+    } catch (error) {
+      toast.error("Payment failed")
+    } finally {
+      setPayLoading(false)
     }
   }, [name, IsLoggedIn, AdminLevel, Level, PlayerData, category, setSignInForm, PaymentOptions, SelectAmount]);
 
@@ -508,6 +515,9 @@ function BuyTemplate({ name }: BuyProps) {
 
 
   useEffect(() => {
+    if (typeof window !== "undefined" && bouncy) {
+      bouncy.register()
+    }
     const script = document.createElement('script')
     script.src = "https://app.midtrans.com/snap/snap.js"
     // script.src = "https://app.sandbox.midtrans.com/snap/snap.js"
@@ -586,8 +596,15 @@ function BuyTemplate({ name }: BuyProps) {
                 )
               }
             </div>
-            <RainbowButton className="w-full text-black mt-5 element-8" onClick={HandlePay}>
-              Purchase Now</RainbowButton>
+            {
+              PayLoading ? (
+                <div className="w-full grid place-content-center mt-5">
+                  <l-bouncy size={50} speed={1.4} color="white" />
+                </div>
+              ) :
+                <RainbowButton className="w-full text-black mt-5 element-8" onClick={HandlePay}>
+                  Purchase Now</RainbowButton>
+            }
             {/* <button onClick={HandlePay} className="w-full bg-[#179BE6] rounded-xl py-2 mt-5 element-5">Pay Now</button> */}
           </div>
         </div>

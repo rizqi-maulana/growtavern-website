@@ -5,7 +5,7 @@ interface Props {
 
 const BoardScore = ({ Amount, Category }: Props) => {
   return (
-    <h1 className="font-GothicSemiBold text-lg">({Amount}) {Category}</h1>
+    <h1 className="font-GothicSemiBold text-xs">({Amount}) {Category}</h1>
   );
 }
 
