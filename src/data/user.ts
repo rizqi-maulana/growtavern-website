@@ -21,7 +21,7 @@ export const UserData: Array<User> = [
   },
   {
     id: 3,
-    name: "only_maulana",
+    name: ".mauln",
     role: "Developer",
     position: "Full stack",
     image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1731382265/picture_wforzu.webp',
