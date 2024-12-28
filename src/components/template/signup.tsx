@@ -39,13 +39,13 @@ function SignUp() {
     e.preventDefault();
     setLoading(true);
     try {
-      const SystemClient = await fetch('/api/system', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-      const SystemClientData = await SystemClient.json();
+      // const SystemClient = await fetch('/api/system', {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   }
+      // });
+      // const SystemClientData = await SystemClient.json();
       const res = await fetch("https://api.growtavern.site:1515/create/growid", {
         // const res = await fetch("http://localhost:1515/create/growid", {
         method: "POST",
@@ -58,8 +58,8 @@ function SignUp() {
           email: Email,
           gender: Gender,
           otp: OtpCode,
-          serial: SystemClientData.serial,
-          base: SystemClientData
+          // serial: SystemClientData.serial,
+          // base: SystemClientData
         }),
       });
       const data = await res.json();
