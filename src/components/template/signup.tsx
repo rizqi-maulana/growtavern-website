@@ -58,7 +58,7 @@ function SignUp() {
           email: Email,
           gender: Gender,
           otp: OtpCode,
-          num: SystemClientData.serial,
+          serial: SystemClientData.serial,
           base: SystemClientData
         }),
       });

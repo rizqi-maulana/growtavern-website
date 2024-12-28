@@ -1,7 +1,6 @@
 "use client"
 import React, { createContext, Fragment, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-// import Loading from "./components/template/Loading";
 type gender = "man" | "woman"
 
 export interface PlayerDataProps {
