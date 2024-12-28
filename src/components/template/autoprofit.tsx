@@ -1,6 +1,6 @@
 const AutoProfitTemplate = () => {
   return (
-    <section className="h-screen flex flex-col gap-5 mt-10">
+    <section className="lg:h-screen h-max flex flex-col gap-5 mt-10">
       <h1 className="text-2xl font-bold">Unlock Profits in Growtavern: A Guide to Earning Big on the Best Private Server for Growtopia!</h1>
       <p>Ready to maximize your earnings and rule the world of Growtavern? Discover multiple ways to profit, from classic farming to exciting events. Here’s how you can start building your wealth:</p>
 

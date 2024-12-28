@@ -76,7 +76,7 @@ export function Header() {
         <NavbarContent justify="center">
           {
             isClient && (
-              <h1 className="font-GothicSemiBold text-sm lg:text-base">
+              <h1 className="font-GothicSemiBold text-xs lg:text-base">
                 {
                   ServerStatus?.IsServerUp ?
                     "Server Is up" : "Server Is down"
@@ -100,14 +100,15 @@ export function Header() {
                   <Button className="font-GothicBold text-sm text-[#179BE6] bg-transparent w-max h-max" onClick={() => setSignInForm(true)}>
                     SIGN IN
                   </Button>
-                </NavbarItem>
-                <NavbarItem className={clsx({
-                  'hidden': IsLoggedIn
-                })}>
                   <Button onClick={() => setSignUpForm(!SignUpForm)} className="bg-[#179BE6] text-white font-GothicBold" variant="flat">
                     SIGN UP
                   </Button>
                 </NavbarItem>
+                {/* <NavbarItem className={clsx({
+                  'hidden': IsLoggedIn
+                })}>
+                  
+                </NavbarItem> */}
                 <NavbarItem className={clsx({
                   'hidden': !IsLoggedIn
                 })}>
