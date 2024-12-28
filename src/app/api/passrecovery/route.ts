@@ -10,7 +10,7 @@ export const POST = async (req: NextRequest) => {
   const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const { data, error } = await resend.emails.send({
-      from: 'team@growtavern.site',
+      from: 'support@growtavern.site',
       to: email,
       subject: 'GrowTavern Password Recovery',
       react: EmailTemplate({ token, name })
