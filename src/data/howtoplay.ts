@@ -52,8 +52,7 @@ Enjoy !.`
     Icon: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726022232/mac-os-logo_olbca9.webp',
     Image: 'https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726023034/Characters_wsvcpp.webp',
     Host: `
-    www.growtopia1.com = 188.166.231.135
-www.growtopia2.com = 188.166.231.135`,
+   https://growtavern.site/growtavern`,
     Content: ` • Go to the App Store and download/install "Surge 5".
     • Once installed. Open the application.
     • Once it opens. Click the "Start" or "Setup" Button on top right.

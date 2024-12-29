@@ -42,10 +42,10 @@ interface Role {
 const StorePlayer = () => {
   const pathname = usePathname()
   return (
-    <section className="element-2 ">
-      <div className="mt-10 ">
+    <section className="element-2">
+      <div className="mt-10">
         <StoreHeading text="Roles" icon={RolesImage} />
-        <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex items-center justify-center lg:justify-start gap-4 flex-wrap">
           {
             StoreData.roles.map((item: Role, index: number) => (
               // <LinkPreview url={`${pathname}/buy/${item.href}?category=${item.category}`} isStatic imageSrc={item.image} key={index} quality={100}>

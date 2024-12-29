@@ -74,7 +74,7 @@ function Recovery() {
   }, [EnableSend])
 
   return (
-    <section className="h-96">
+    <section className="lg:h-96 h-max">
       <Toaster />
       {Loading && (
         <div className={clsx('w-full fixed left-0 top-0 h-screen bg-[#0f172a] z-50 grid place-content-center ')}>

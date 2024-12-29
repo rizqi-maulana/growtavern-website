@@ -52,7 +52,7 @@ export function Header() {
             aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
             className="sm:hidden"
           />
-          <Link href="/" className="flex items-center gap-5">
+          <Link href="/" className="lg:flex hidden items-center gap-5">
             <Image
               width={70}
               height={70}
