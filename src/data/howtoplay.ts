@@ -54,16 +54,16 @@ Enjoy !.`
     Host: `
     www.growtopia1.com = 188.166.231.135
 www.growtopia2.com = 188.166.231.135`,
-    Content: `Play GrowTavern on IOS
-   1 - Download surge 5 on appstore 
-2 - Cick on " default " at the left top 
-3 - click the " Edit in Text Mode " 
-4 - delete all the text and copy this : 
-[General]
-[Rule]
-FINAL,DIRECT
-[Host]
-www.growtopia1.com=188.166.231.135
-www.growtopia2.com=188.166.231.135`
+    Content: ` • Go to the App Store and download/install "Surge 5".
+    • Once installed. Open the application.
+    • Once it opens. Click the "Start" or "Setup" Button on top right.
+• If it prompts privacy policy. click OK
+• If it prompts "Surge Would Like to Add VPN Configurations". Click Allow.
+• Click "Default" OR "Default.conf" In Surge Icon in TOP LEFT.
+• Click on "Download Profile From URL".
+• Write "https://growtavern.site/growtavern" And Click OK
+• Click Done on top right
+• And Click "START" on Top Right
+• Done! Now you can open Growtopia!!`
   },
 ]
