@@ -23,7 +23,6 @@ const PendingPayment = () => {
 
   return (
     <div>
-      <h1 className="font-GothicExtraBold mb-3">Continue Payment:</h1>
       {
         PendingData.map((data, index) => (
           <div key={index}>
