@@ -31,10 +31,7 @@ const PlayerProfile = ({ name, email, level, owner, admin, developer, moderator,
       <div className="grid gap-3 w-full lg:w-max">
         <PlayerDetails name={name} email={email} level={level} owner={owner} admin={admin} developer={developer} moderator={moderator} vip={vip} cheats={cheats} last_online={last_online} guild_name={guild_name} />
         {/* <PlayerAction /> */}
-        <div>
-          <h1 className="font-GothicExtraBold mb-3">Continue Payment:</h1>
-          <PendingPayment />
-        </div>
+        <PendingPayment />
         <PlayerRedeemCode redeem_code={redeem_code} />
       </div>
     </section>

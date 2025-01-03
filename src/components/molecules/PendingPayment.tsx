@@ -24,6 +24,11 @@ const PendingPayment = () => {
   return (
     <div>
       {
+        PendingData.length !== 0 && (
+          <h1 className="font-GothicExtraBold mb-3">Continue Payment:</h1>
+        )
+      }
+      {
         PendingData.map((data, index) => (
           <div key={index}>
             <PendingCard token={data.token} order_id={data.order_id} amount={data.gross_amount} payment={data.payment_type} />
