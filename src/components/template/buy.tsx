@@ -342,7 +342,13 @@ function BuyTemplate({ name }: BuyProps) {
                 }
               }
             },
-            onPending: function (result) { console.log('pending'); console.log(result); },
+            onPending: function (result) {
+              console.log('pending'); console.log(result);
+              if (typeof window !== "undefined") {
+                localStorage.setItem("pendings", JSON.stringify(result))
+                localStorage.setItem("pending", JSON.stringify([...JSON.parse(localStorage.getItem("pending") || "[]"), { order_id: result.order_id, payment_type: result.payment_type, gross_amount: result.gross_amount }]))
+              }
+            },
             onError: function (result) { console.log('error'); alert(result); },
             onClose: function () { alert('customer closed the popup without finishing the payment'); }
           });
@@ -521,7 +527,7 @@ function BuyTemplate({ name }: BuyProps) {
     const script = document.createElement('script')
     script.src = "https://app.midtrans.com/snap/snap.js"
     // script.src = "https://app.sandbox.midtrans.com/snap/snap.js"
-    script.setAttribute('data-client-key', 'Mid-client-1hMh_5qrnjKQxJ0o')
+    script.setAttribute('data-client-key', process.env.NEXT_PUBLIC_CLIENT_KEY_MIDTRANS as string)
     script.async = true
     document.body.appendChild(script)
     setLoaded(!Loaded)

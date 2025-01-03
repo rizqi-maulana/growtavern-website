@@ -2,6 +2,7 @@ import PlayerPicture from "../molecules/PlayerPicture";
 // import PlayerAction from "../molecules/PlayerAction";
 import PlayerDetails from "../molecules/PlayerDetails";
 import PlayerRedeemCode from "./PlayerRedeemCode";
+import PendingPayment from "../molecules/PendingPayment";
 
 export interface PlayerDetailsProps {
   name: string;
@@ -30,6 +31,7 @@ const PlayerProfile = ({ name, email, level, owner, admin, developer, moderator,
       <div className="grid gap-3 w-full lg:w-max">
         <PlayerDetails name={name} email={email} level={level} owner={owner} admin={admin} developer={developer} moderator={moderator} vip={vip} cheats={cheats} last_online={last_online} guild_name={guild_name} />
         {/* <PlayerAction /> */}
+        <PendingPayment />
         <PlayerRedeemCode redeem_code={redeem_code} />
       </div>
     </section>
