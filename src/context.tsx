@@ -175,6 +175,19 @@ const AppContext = ({ children }: AppContextProps) => {
     setInterval(() => {
       check()
     }, 60000);
+
+
+    const script = document.createElement('script')
+    // script.src = "https://app.midtrans.com/snap/snap.js"
+    script.src = "https://app.sandbox.midtrans.com/snap/snap.js"
+    // script.setAttribute('data-client-key', "Mid-client-1hMh_5qrnjKQxJ0o")
+    script.setAttribute('data-client-key', "SB-Mid-client-FzN0SMkj0ZifwdwI")
+    script.async = true
+    document.body.appendChild(script)
+    return () => {
+      document.body.removeChild(script)
+    }
+
   }, [])
   return (
     <Fragment>

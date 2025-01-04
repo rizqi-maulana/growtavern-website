@@ -82,8 +82,9 @@ function SignIn() {
       if (Email && OtpCode) {
         const { data } = await supabase.auth.verifyOtp({ email: Email, token: OtpCode, type: 'email' })
         if (data) {
-          // const res = await fetch("https://api.growtavern.site:1515/player/login", {
-          const res = await fetch("http://localhost:1515/player/login", {
+          const res = await fetch("https://api.growtavern.site:1515/player/login", {
+
+            // const res = await fetch("http://localhost:1515/player/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

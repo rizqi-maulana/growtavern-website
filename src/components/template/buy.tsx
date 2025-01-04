@@ -65,7 +65,7 @@ function BuyTemplate({ name }: BuyProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [PaymentOptions, setPaymentOptions] = useState<string>('')
-  const [Loaded, setLoaded] = useState<boolean>(false)
+  // const [Loaded, setLoaded] = useState<boolean>(false)
   const [Level, setLevel] = useState<number>(0)
   const [SelectAmount, setSelectAmount] = useState<{ id: number, amount: number, price: number, coin: number }>({ id: -1, amount: -1, price: 0, coin: 0 })
   const category = searchParams.get('category')
@@ -343,10 +343,54 @@ function BuyTemplate({ name }: BuyProps) {
               }
             },
             onPending: function (result) {
-              console.log('pending'); console.log(result);
               if (typeof window !== "undefined") {
                 localStorage.setItem("pendings", JSON.stringify(result))
-                localStorage.setItem("pending", JSON.stringify([...JSON.parse(localStorage.getItem("pending") || "[]"), { order_id: result.order_id, payment_type: result.payment_type, gross_amount: result.gross_amount }]))
+                localStorage.setItem("pending", JSON.stringify([...JSON.parse(localStorage.getItem("pending") || "[]"), {
+                  order_id: result.order_id,
+                  payment_type: result.payment_type,
+                  gross_amount: result.gross_amount,
+                  token,
+                  category,
+                  name: pathname,
+                  itemdata: pathname.includes("roles") ? {
+                    type: "roles",
+                    role_number: AdminLevel,
+                    player_token: PlayerData?.token,
+                  } : pathname.includes("Level") ? {
+                    type: "level",
+                    level_number: Level,
+                    player_token: PlayerData?.token,
+                  } : pathname.includes("Gems") ? {
+                    type: "gems",
+                    select_amount: SelectAmount.amount,
+                    player_token: PlayerData?.token,
+                  } : pathname.includes("GrowTaverCoin") ? {
+                    type: "growtaverncoin",
+                    GrowTaverCoin: SelectAmount.amount,
+                    player_token: PlayerData?.token,
+                  } :
+                    pathname.includes("Growpass") ? {
+                      type: "growpass",
+                      GrowPass: true,
+                      player_token: PlayerData?.token,
+                    } : pathname.includes("Road%20To%20Glory") ? {
+                      type: "roadtoglory",
+                      RoadToGlory: true,
+                      player_token: PlayerData?.token,
+                    } : pathname.includes("Platinum%20Gem%20Lock") ? {
+                      type: "items",
+                      items: [7188, 1],
+                      player_token: PlayerData?.token,
+                    } : pathname.includes("Ruthenium%20Gem%20Lock") ? {
+                      type: "items",
+                      items: [8470, 1],
+                      player_token: PlayerData?.token,
+                    } : pathname.includes("GrowToken") ? {
+                      type: "items",
+                      items: [SelectAmount.amount === 10 ? 1486 : 6802, SelectAmount.amount],
+                      player_token: PlayerData?.token,
+                    } : null
+                }]))
               }
             },
             onError: function (result) { console.log('error'); alert(result); },
@@ -524,16 +568,6 @@ function BuyTemplate({ name }: BuyProps) {
     if (typeof window !== "undefined" && bouncy) {
       bouncy.register()
     }
-    const script = document.createElement('script')
-    script.src = "https://app.midtrans.com/snap/snap.js"
-    // script.src = "https://app.sandbox.midtrans.com/snap/snap.js"
-    script.setAttribute('data-client-key', "Mid-client-1hMh_5qrnjKQxJ0o")
-    script.async = true
-    document.body.appendChild(script)
-    setLoaded(!Loaded)
-    return () => {
-      document.body.removeChild(script)
-    }
   }, [])
 
   return (
@@ -542,28 +576,7 @@ function BuyTemplate({ name }: BuyProps) {
       <Toaster />
       <section className="mt-10">
         <div className="flex items-start xl:flex-row flex-col gap-5 justify-between">
-          {/* <Skeleton isLoaded={Loaded} className={clsx('!overflow-hidden xl:h-72 h-max xl:w-[70%] w-full border element-3 border-white rounded-xl grid place-content-center relative', {
-            'border-none': Loaded
-          })}>
-            <div className={clsx('overflow-hidden h-72  w-screen border border-white rounded-xl grid place-content-center relative', {
-              '!w-max !h-max mx-auto': category !== "items"
-            })}>
-              {
-                category === "items" &&
-                <Image src={data?.image as string} alt={Heading} width={300} height={300} quality={100} sizes="100vw" className="relative z-10 w-full h-full" />
-              }
-              {
-                data?.image &&
-                <Image src={category === "items" ? "https://res.cloudinary.com/dju3jontk/image/upload/q_100/v1726555717/WM_P_d2apdd.webp" : data?.image} alt={Heading} width={100} height={100} quality={100} sizes="100vw" className={clsx('absolute w-full h-full object-cover', {
-                  '!object-contain !relative': category !== "items"
-                })} />
-              }
-              {
-                category === "items" &&
-                <div className="bg-gradient-to-t from-[#FFD700]/50 to-transparent h-1/2 w-full absolute bottom-0" />
-              }
-            </div>
-          </Skeleton> */}
+
           <div className="relative w-full">
             {
               category === "items" &&

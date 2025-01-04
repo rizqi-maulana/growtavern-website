@@ -92,7 +92,8 @@ const StorePlayer = () => {
 
       <div className="mt-10">
         <StoreHeading text="Other" />
-        <div className="flex items-center gap-4 flex-wrap">
+        <div className="flex items-center justify-center lg:justify-start gap-4 flex-wrap">
+
           {
             StoreData.other.map((item: Other, index: number) => (
               // <LinkPreview url={`${pathname}/buy/${item.href}?category=${item.category}`} isStatic imageSrc={item.image} key={index} quality={100}>

@@ -1,13 +1,29 @@
 import { useCallback } from "react";
 import { IoMdTime } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
+// import { v4 as uuidv4 } from 'uuid'
 
 interface PendingCardProps {
   order_id: string;
   amount: string;
   payment: string;
   token: string;
+  category: string,
+  name: string,
+  itemdata: {
+    type: string,
+    role_number?: number,
+    level_number?: number,
+    select_amount?: number,
+    GrowTaverCoin?: number,
+    GrowPass?: boolean,
+    RoadToGlory?: boolean,
+    items?: Array<number>[]
+    player_token: string,
+  }
 }
+
+
 interface SnapTransactionResult {
   transaction_id: string;
   order_id: string;
@@ -42,45 +58,157 @@ declare global {
 }
 
 
-const PendingCard = ({ amount, payment, order_id }: PendingCardProps) => {
+const PendingCard = ({ amount, payment, order_id, token, category, name, itemdata }: PendingCardProps) => {
   const HandlePay = useCallback(async () => {
-    // const playeremail = JSON.parse(localStorage.getItem('PlayerData') || '{}').email;
-    // const formdata = new FormData();
-    // formdata.append('order_id', uuidv4() as string);
-    // formdata.append('gross_amount', amount as string);
-    // formdata.append('email', playeremail as string);
-    // formdata.append('item_name', 'GrowTavern');
-    // formdata.append('category', 'Pending Payment');
-    // const res = await fetch('/api/pay', {
-    //   method: 'POST',
-    //   body: formdata
-    // })
-    // const data = await res.json()
-    // console.log(data)
-    // if (token) {
-    //   window.snap.pay(token, {
-    //     onSuccess: function (result: any) {
-    //       console.log('success');
-    //     },
-    //     onPending: function (result: any) {
-    //       console.log('pending');
-    //     },
-    //     onError: function (result: any) {
-    //       console.log('error');
-    //     },
-    //     onClose: function () {
-    //       console.log('customer closed the popup without finishing the payment');
-    //     }
-    //   });
-    // } else {
-    //   console.log('token not found')
-    // }
-    toast('Contact Support to Confirm your payment')
-  }, [])
+    if (token && window.snap)
+      window.snap.pay(token, {
+        onSuccess: async function () {
+          if (category === "roles") {
+            const res = await fetch("https://api.growtavern.site:1515/purchase", {
+              // const res = await fetch("http://localhost:1515/purchase", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(itemdata),
+            })
+            const reqdata = await res.json()
+            if (reqdata.type === "success") {
+              toast.success(reqdata.message)
+            } else {
+              toast.error(reqdata.message)
+            }
+          } else if (name === 'Level' && category === "other") {
+            const res = await fetch("https://api.growtavern.site:1515/purchase", {
+              // const res = await fetch("http://localhost:1515/purchase", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(itemdata),
+            })
+            const reqdata = await res.json()
+            if (reqdata.type === "success") {
+              toast.success(reqdata.message)
+            } else {
+              toast.error(reqdata.message)
+            }
+          } else if (name === 'Gems' && category === "other") {
+            const res = await fetch("https://api.growtavern.site:1515/purchase", {
+              // const res = await fetch("http://localhost:1515/purchase", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(itemdata),
+            })
+            const reqdata = await res.json()
+            if (reqdata.type === "success") {
+              toast.success(reqdata.message)
+            } else {
+              toast.error(reqdata.message)
+            }
+          } else if (name === 'GrowTaverCoin' && category === "other") {
+            const res = await fetch("https://api.growtavern.site:1515/purchase", {
+              // const res = await fetch("http://localhost:1515/purchase", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(itemdata),
+            })
+            const reqdata = await res.json()
+            if (reqdata.type === "success") {
+              toast.success(reqdata.message)
+            } else {
+              toast.error(reqdata.message)
+            }
+          } else if (name === 'GrowPass' && category === "other") {
+            const res = await fetch("https://api.growtavern.site:1515/purchase", {
+              // const res = await fetch("http://localhost:1515/purchase", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(itemdata),
+            })
+            const reqdata = await res.json()
+            if (reqdata.type === "success") {
+              toast.success(reqdata.message)
+            } else {
+              toast.error(reqdata.message)
+            }
+          } else if (name === 'Road%20To%20Glory' && category === "other") {
+            const res = await fetch("https://api.growtavern.site:1515/purchase", {
+              // const res = await fetch("http://localhost:1515/purchase", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(itemdata),
+            })
+            const reqdata = await res.json()
+            if (reqdata.type === "success") {
+              toast.success(reqdata.message)
+            } else {
+              toast.error(reqdata.message)
+            }
+          } else if (name === 'Platinum%20Gem%20Lock' && category === "other") {
+            const res = await fetch("https://api.growtavern.site:1515/purchase", {
+              // const res = await fetch("http://localhost:1515/purchase", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(itemdata),
+            })
+            const reqdata = await res.json()
+            if (reqdata.type === "success") {
+              toast.success(reqdata.message)
+            } else {
+              toast.error(reqdata.message)
+            }
+          } else if (name === 'Ruthenium%20Gem%20Lock' && category === "other") {
+            const res = await fetch("https://api.growtavern.site:1515/purchase", {
+              // const res = await fetch("http://localhost:1515/purchase", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(itemdata),
+            })
+            const reqdata = await res.json()
+            if (reqdata.type === "success") {
+              toast.success(reqdata.message)
+            } else {
+              toast.error(reqdata.message)
+            }
+          } else if (name === 'GrowToken' && category === "other") {
+            const res = await fetch("https://api.growtavern.site:1515/purchase", {
+              // const res = await fetch("http://localhost:1515/purchase", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(itemdata),
+            })
+            const reqdata = await res.json()
+            if (reqdata.type === "success") {
+              toast.success(reqdata.message)
+            } else {
+              toast.error(reqdata.message)
+            }
+          }
+        },
+        onPending: function (result) { console.log('pending'); console.log(result); },
+        onError: function (result) { console.log('error'); console.log(result); },
+        onClose: function () { console.log('customer closed the popup without finishing the payment'); }
+      })
+  }, [token])
   return (
     <>
       <Toaster />
-      <button onClick={HandlePay} className="h-16 w-full flex items-center justify-between px-3 py-8 text-xs bg-blue-400/50 border border-blue-400 rounded-xl">
+      <button onClick={HandlePay} className="h-16 w-full flex items-center justify-between my-3 px-3 py-8 text-xs bg-blue-400/50 border border-blue-400 rounded-xl">
         <div>
           <div className="flex items-center gap-1 text-sm">
             <IoMdTime size={20} />

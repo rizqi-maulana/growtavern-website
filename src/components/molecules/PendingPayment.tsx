@@ -5,9 +5,22 @@ import PendingCard from "./PendingCard";
 
 interface PendingData {
   order_id: string;
-  payment_type: string;
   gross_amount: string;
-  token: string
+  payment_type: string;
+  token: string;
+  category: string,
+  name: string,
+  itemdata: {
+    type: string,
+    role_number?: number,
+    level_number?: number,
+    select_amount?: number,
+    GrowTaverCoin?: number,
+    GrowPass?: boolean,
+    RoadToGlory?: boolean,
+    items?: Array<number>[]
+    player_token: string,
+  }
 }
 
 const PendingPayment = () => {
@@ -31,7 +44,7 @@ const PendingPayment = () => {
       {
         PendingData.map((data, index) => (
           <div key={index}>
-            <PendingCard token={data.token} order_id={data.order_id} amount={data.gross_amount} payment={data.payment_type} />
+            <PendingCard token={data.token} order_id={data.order_id} amount={data.gross_amount} payment={data.payment_type} category={data.category} name={data.name} itemdata={data.itemdata} />
           </div>
         ))
       }
