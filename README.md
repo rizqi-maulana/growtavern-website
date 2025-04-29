@@ -26,6 +26,16 @@
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+### Environment
+
+To start the development server, run:
+
+```bash
+RESEND_API_KEY=
+NEXT_PUBLIC_SERVER_KEY_MIDTRANS=
+NEXT_PUBLIC_CLIENT_KEY_MIDTRANS=
+```
+
 ### Development
 
 To start the development server, run:
